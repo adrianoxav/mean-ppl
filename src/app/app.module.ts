@@ -19,11 +19,13 @@ import { PreguntaAssessmentComponent } from './pregunta-assessment/pregunta-asse
 import { PreguntaComponent } from './pregunta/pregunta.component';
 import { VideoCursoComponent } from './video-curso/video-curso.component';
 import { VideoComponent } from './video/video.component';
-
+import { AssessmentCreateComponent } from './assessments/assessment-create/assessment-create.component';
+import { AssessmentDetailComponent } from './assessments/assessment-detail/assessment-detail.component';
+import { AssessmentEditComponent } from './assessments/assessment-edit/assessment-edit.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AssessmentsModule } from './assessments/assessments.module';
 import { AssessmentsComponent } from './assessments/assessments.component';
-import { routing } from './app.routing';
+//import { routing } from './app.routing';
 
 
 const appRoutes: Routes = [
@@ -32,6 +34,34 @@ const appRoutes: Routes = [
     component: InicioComponent,
     data: { title: 'Inicio' }
   },
+  { path: 'assessments', component: AssessmentsComponent, children: [
+       {path: '', component: AssessmentsComponent},
+       {path: 'crear', component: AssessmentCreateComponent, outlet: 'assessment-create'},
+       {path: 'detalle:id', component: AssessmentDetailComponent, outlet: 'assessment-detail'},
+       {path: 'editar:id', component: AssessmentEditComponent, outlet: 'assessment-edit'}
+   ]  },
+  {path: '', component: AppComponent, pathMatch: 'full'},
+  {
+    path: 'assessments',
+    component: AssessmentsComponent,
+    data: { title: 'Assessments' }
+  },
+  {
+    path: 'assessment-details/:id',
+    component: AssessmentDetailComponent,
+    data: { title: 'Assessment Details' }
+  },
+  {
+    path: 'assessment-create',
+    component: AssessmentCreateComponent,
+    data: { title: 'Create Assessment' }
+  },
+  {
+    path: 'assessment-edit/:id',
+    component: AssessmentEditComponent,
+    data: { title: 'Edit Assessment' }
+  },
+
 /*  {
     path: 'assessments',
     component: AssessmentsComponent,
@@ -72,10 +102,14 @@ const appRoutes: Routes = [
     VideoCursoComponent,
     VideoComponent,
     AssessmentsComponent,
+    AssessmentCreateComponent,
+    AssessmentEditComponent,
+    AssessmentDetailComponent,
     InicioComponent  ],
   imports: [
     BrowserModule,
-    routing,
+    
+  //  routing,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(

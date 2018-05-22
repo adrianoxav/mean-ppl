@@ -18,7 +18,7 @@ export class AssessmentCreateComponent implements OnInit {
   }
 
   saveAssessment() {
-    this.http.post('/assessment', this.assessment)
+    this.http.post('http://localhost:3000/assessment', this.assessment)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/assessment-details', id]);

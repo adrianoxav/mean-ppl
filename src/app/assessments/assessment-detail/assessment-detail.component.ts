@@ -19,13 +19,13 @@ import { ActivatedRoute, Router } from '@angular/router';
     }
 
     getAssessmentDetail(id) {
-      this.http.get('/assessment/'+id).subscribe(data => {
+      this.http.get('http://localhost:3000/assessment/'+id).subscribe(data => {
         this.assessment = data;
       });
     }
 
     deleteAssessment(id) {
-      this.http.delete('/assessment/'+id)
+      this.http.delete('http://localhost:3000/assessment/'+id)
         .subscribe(res => {
             this.router.navigate(['/assessments']);
           }, (err) => {
