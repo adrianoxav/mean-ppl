@@ -15,11 +15,51 @@ mongoose.connect('mongodb://localhost/mean-angular5', { useMongoClient: true, pr
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({'extended':'false'}));
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/books', express.static(path.join(__dirname, 'dist')));
-app.use('/book', book);
 
+var originsWhitelist = [
+  'http://localhost:4200'
+];
+var corsOptions = {
+  origin: function(origin, callback){
+    var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+    callback(null, isWhitelisted);
+  },
+  credentials:true
+};
+//here is the magic
+
+//app.use(cors(corsOptions)); //se quito esto 27 de Abril
+app.options('*',cors()); // se puso esto 27 de Abril
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+
+
+app.use(express.static(path.join(__dirname, 'dist')));
+//app.use('/books', express.static(path.join(__dirname, 'dist')));
+//app.use('/book', book);
+// Set our api routes
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Length, X-Requested-With, Content-Type, Accept, Authorization, x-access-token, X-HTTP-Method-Override");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  next();
+});
+
+require('./routes/index.js')(app);
+
+// Catch all other routes and return the index file
+app.get('*', function(req, res){
+  res.json({title: "Error 404 - Route not found", message: "The specified path doesn`t exist."})
+});
+
+
+
+
+//app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'html');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -9,14 +9,35 @@ import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
+import { AssignationComponent } from './assignation/assignation.component';
+import { CuestionarioComponent } from './cuestionario/cuestionario.component';
+import { CursoComponent } from './curso/curso.component';
+import { EvaluacionEstudianteComponent } from './evaluacion-estudiante/evaluacion-estudiante.component';
+import { EvaluacionComponent } from './evaluacion/evaluacion.component';
+import { PersonaComponent } from './persona/persona.component';
+import { PreguntaAssessmentComponent } from './pregunta-assessment/pregunta-assessment.component';
+import { PreguntaComponent } from './pregunta/pregunta.component';
+import { VideoCursoComponent } from './video-curso/video-curso.component';
+import { VideoComponent } from './video/video.component';
+
+import { InicioComponent } from './inicio/inicio.component';
+import { AssessmentsModule } from './assessments/assessments.module';
+import { AssessmentsComponent } from './assessments/assessments.component';
+import { routing } from './app.routing';
+
 
 const appRoutes: Routes = [
   {
-    path: 'books',
-    component: BookComponent,
-    data: { title: 'Book List' }
+    path: 'inicio',
+    component: InicioComponent,
+    data: { title: 'Inicio' }
   },
-  {
+/*  {
+    path: 'assessments',
+    component: AssessmentsComponent,
+    data: { title: 'Assessment List' }
+  }
+/*  {
     path: 'book-details/:id',
     component: BookDetailComponent,
     data: { title: 'Book Details' }
@@ -30,11 +51,8 @@ const appRoutes: Routes = [
     path: 'book-edit/:id',
     component: BookEditComponent,
     data: { title: 'Edit Book' }
-  },
-  { path: '',
-    redirectTo: '/books',
-    pathMatch: 'full'
-  }
+  },*/
+
 ];
 @NgModule({
   declarations: [
@@ -42,10 +60,22 @@ const appRoutes: Routes = [
     BookComponent,
     BookDetailComponent,
     BookCreateComponent,
-    BookEditComponent
-  ],
+    BookEditComponent,
+    AssignationComponent,
+    CuestionarioComponent,
+    CursoComponent,
+    EvaluacionEstudianteComponent,
+    EvaluacionComponent,
+    PersonaComponent,
+    PreguntaAssessmentComponent,
+    PreguntaComponent,
+    VideoCursoComponent,
+    VideoComponent,
+    AssessmentsComponent,
+    InicioComponent  ],
   imports: [
     BrowserModule,
+    routing,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(

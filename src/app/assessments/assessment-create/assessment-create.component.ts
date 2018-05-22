@@ -1,0 +1,30 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-assessment-create',
+  templateUrl: './assessment-create.component.html',
+  styleUrls: ['./assessment-create.component.css'],
+  encapsulation: ViewEncapsulation.None
+})
+export class AssessmentCreateComponent implements OnInit {
+
+  assessment = {};
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  saveAssessment() {
+    this.http.post('/assessment', this.assessment)
+      .subscribe(res => {
+          let id = res['_id'];
+          this.router.navigate(['/assessment-details', id]);
+        }, (err) => {
+          console.log(err);
+        }
+      );
+  }
+}
