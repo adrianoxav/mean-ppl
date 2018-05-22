@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>{{ curso.title }}</h1>
+  <dl class="list">
+    <dt>Nombre de Materia</dt>
+    <dd>{{ curso.nombre }}</dd>
+    <dt>Año</dt>
+    <dd>{{ curso.anio }}</dd>
+    <dt>Término</dt>
+    <dd>{{ curso.termino }}</dd>
+    <dt>Código de Materia</dt>
+    <dd>{{ curso.cod_materia }}</dd>
+
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/curso-edit', curso._id]" class="btn btn-success">EDIT</a>
+    <button class="btn btn-danger" type="button" (click)="deleteCurso(curso._id)">DELETE</button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Edit curso</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateCurso(curso._id)" #cursoForm="ngForm">
+        <
+        <div class="form-group">
+          <label for="name">Nombre de Materia</label>
+          <input type="text" class="form-control" [(ngModel)]="curso.nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Año</label>
+          <input type="text" class="form-control" [(ngModel)]="curso.anio" name="anio" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Término</label>
+          <input type="text" class="form-control" [(ngModel)]="curso.termino" name="termino" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Código de Materia</label>
+          <input type="text" class="form-control" [(ngModel)]="curso.cod_materia" name="cod_materia" required>
+        </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!cursoForm.form.valid">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

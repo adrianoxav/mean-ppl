@@ -1,3 +1,22 @@
-<p>
-  cuestionario works!
-</p>
+<div class="container">
+  <h1>Cuestionarios
+    <a [routerLink]="['/cuestionario-create']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Creado</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuestionario of cuestionarios">
+        <td>{{ cuestionario.creado }}</td>
+
+        <td><a [routerLink]="['/cuestionario-details', cuestionario._id]">Show Detail</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

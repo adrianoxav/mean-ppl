@@ -1,3 +1,29 @@
-<p>
-  curso works!
-</p>
+<div class="container">
+  <h1>Cursos
+    <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Año</th>
+        <th>Término</th>
+        <th>Código de Materia</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of cursos">
+        <td>{{ curso.nombre }}</td>
+        <td>{{ curso.anio }}</td>
+        <td>{{ curso.termino }}</td>
+        <td>{{ curso.cod_materia }}</td>
+
+
+        <td><a [routerLink]="['/curso-details', curso._id]">Show Detail</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

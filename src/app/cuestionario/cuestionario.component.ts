@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-cuestionario',
   templateUrl: './cuestionario.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CuestionarioComponent implements OnInit {
 
-  constructor() { }
+  cuestionarios: any;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('http://localhost:3000/cuestionario').subscribe(data => {
+      console.log(data);
+      this.cuestionarios = data;
+    });
   }
-
 }

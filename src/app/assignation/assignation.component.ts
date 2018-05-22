@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-assignation',
   templateUrl: './assignation.component.html',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignationComponent implements OnInit {
 
-  constructor() { }
+  assignations: any;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('http://localhost:3000/asignacion').subscribe(data => {
+      console.log(data);
+      this.assignations = data;
+    });
   }
 
 }
