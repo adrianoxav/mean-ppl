@@ -47,7 +47,35 @@ import { EvaluacionEditComponent } from './evaluacion/evaluacion-edit/evaluacion
 import { EvaluacionCreateComponent } from './evaluacion/evaluacion-create/evaluacion-create.component';
 import { EvaluacionDetailComponent } from './evaluacion/evaluacion-detail/evaluacion-detail.component';
 
+
+import { Evaluacion_estudianteModule } from './evaluacion-estudiante/evaluacion-estudiante.module';
+import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evaluacion-estudiante-edit/evaluacion-estudiante-edit.component';
+import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
+import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
+
+
+import { PersonaModule } from './persona/persona.module';
+import { PersonaEditComponent } from './persona/persona-edit/persona-edit.component';
+import { PersonaCreateComponent } from './persona/persona-create/persona-create.component';
+import { PersonaDetailComponent } from './persona/persona-detail/persona-detail.component';
+
+import { PreguntaModule } from './pregunta/pregunta.module';
+import { PreguntaEditComponent } from './pregunta/pregunta-edit/pregunta-edit.component';
+import { PreguntaCreateComponent } from './pregunta/pregunta-create/pregunta-create.component';
+import { PreguntaDetailComponent } from './pregunta/pregunta-detail/pregunta-detail.component';
+
+import { PreguntaAssessmentModule } from './pregunta-assessment/pregunta-assessment.module';
+import { PreguntaAssessmentCreateComponent } from './pregunta-assessment/pregunta-assessment-create/pregunta-assessment-create.component';
+import { PreguntaAssessmentEditComponent } from './pregunta-assessment/pregunta-assessment-edit/pregunta-assessment-edit.component';
+import { PreguntaAssessmentDetailComponent } from './pregunta-assessment/pregunta-assessment-detail/pregunta-assessment-detail.component';
+
+import { VideoModule } from './video/video.module';
+import { VideoEditComponent } from './video/video-edit/video-edit.component';
+import { VideoCreateComponent } from './video/video-create/video-create.component';
+import { VideoDetailComponent } from './video/video-detail/video-detail.component';
+
 //import { routing } from './app.routing';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 
 
 const appRoutes: Routes = [
@@ -122,10 +150,7 @@ const appRoutes: Routes = [
   component: CuestionarioEditComponent,
   data: { title: 'Edit cuestionario' }
 },
-{ path: '',
-  redirectTo: '/cuestionarios',
-  pathMatch: 'full'
-},
+
 
 //Cursos
 {
@@ -148,10 +173,7 @@ const appRoutes: Routes = [
   component: CursoEditComponent,
   data: { title: 'Edit curso' }
 },
-{ path: '',
-  redirectTo: '/cursos',
-  pathMatch: 'full'
-},
+
 
 //Evaluaciones
 {
@@ -174,14 +196,137 @@ const appRoutes: Routes = [
   component: EvaluacionEditComponent,
   data: { title: 'Edit evaluacion' }
 },
+
+
+//evaluacion-estudiantes
+{
+  path: 'evaluacion_estudiantes',
+  component: EvaluacionEstudianteComponent,
+  data: { title: 'evaluacion_estudiantes' }
+},
+{
+  path: 'evaluacion_estudiante-details/:id',
+  component: EvaluacionEstudianteDetailComponent,
+  data: { title: 'evaluacion_estudiante Details' }
+},
+{
+  path: 'evaluacion_estudiante-create',
+  component: EvaluacionEstudianteCreateComponent,
+  data: { title: 'Create evaluacion_estudiante' }
+},
+{
+  path: 'evaluacion_estudiante-edit/:id',
+  component: EvaluacionEstudianteEditComponent,
+  data: { title: 'Edit evaluacion_estudiante' }
+},
+
+
+//PersonaS
+{
+  path: 'personas',
+  component: PersonaComponent,
+  data: { title: 'personas' }
+},
+{
+  path: 'persona-details/:id',
+  component: PersonaDetailComponent,
+  data: { title: 'persona Details' }
+},
+{
+  path: 'persona-create',
+  component: PersonaCreateComponent,
+  data: { title: 'Create persona' }
+},
+{
+  path: 'persona-edit/:id',
+  component: PersonaEditComponent,
+  data: { title: 'Edit persona' }
+},
+
+
+  { path: '',
+    redirectTo: '/personas',
+    pathMatch: 'full'
+  },
+//Preguntas
+
+{
+  path: 'preguntas',
+  component: PreguntaComponent,
+  data: { title: 'preguntas' }
+},
+{
+  path: 'pregunta-details/:id',
+  component: PreguntaDetailComponent,
+  data: { title: 'pregunta Details' }
+},
+{
+  path: 'pregunta-create',
+  component: PreguntaCreateComponent,
+  data: { title: 'Create pregunta' }
+},
+{
+  path: 'pregunta-edit/:id',
+  component: PreguntaEditComponent,
+  data: { title: 'Edit pregunta' }
+},
 { path: '',
-  redirectTo: '/evaluaciones',
+  redirectTo: '/preguntas',
   pathMatch: 'full'
 },
-  { path: '',
-    redirectTo: '/assignations',
-    pathMatch: 'full'
-  }
+
+//pregunta_assessments
+{
+  path: 'pregunta_assessments',
+  component: PreguntaAssessmentComponent,
+  data: { title: 'pregunta_assessments' }
+},
+{
+  path: 'pregunta_assessment-details/:id',
+  component: PreguntaAssessmentDetailComponent,
+  data: { title: 'pregunta_assessment Details' }
+},
+{
+  path: 'pregunta_assessment-create',
+  component: PreguntaAssessmentCreateComponent,
+  data: { title: 'Create pregunta_assessment' }
+},
+{
+  path: 'pregunta_assessment-edit/:id',
+  component: PreguntaAssessmentEditComponent,
+  data: { title: 'Edit pregunta_assessment' }
+},
+{ path: '',
+  redirectTo: '/preguntas',
+  pathMatch: 'full'
+},
+
+//videos
+
+{
+  path: 'videos',
+  component: VideoComponent,
+  data: { title: 'videos' }
+},
+{
+  path: 'video-details/:id',
+  component: VideoDetailComponent,
+  data: { title: 'video Details' }
+},
+{
+  path: 'video-create',
+  component: VideoCreateComponent,
+  data: { title: 'Create video' }
+},
+{
+  path: 'video-edit/:id',
+  component: VideoEditComponent,
+  data: { title: 'Edit video' }
+},
+{ path: '',
+  redirectTo: '/videos',
+  pathMatch: 'full'
+}
 /*  {
     path: 'assessments',
     component: AssessmentsComponent,
@@ -206,6 +351,7 @@ const appRoutes: Routes = [
 ];
 @NgModule({
   declarations: [
+    AppNavbarComponent,
     AppComponent,
     BookComponent,
     BookDetailComponent,
@@ -239,6 +385,21 @@ const appRoutes: Routes = [
     EvaluacionEditComponent,
     EvaluacionCreateComponent,
     EvaluacionDetailComponent,
+    EvaluacionEstudianteEditComponent,
+    EvaluacionEstudianteCreateComponent,
+    EvaluacionEstudianteDetailComponent,
+    PersonaEditComponent,
+    PersonaCreateComponent,
+    PersonaDetailComponent,
+    PreguntaEditComponent,
+    PreguntaCreateComponent,
+    PreguntaDetailComponent,
+    PreguntaAssessmentEditComponent,
+    PreguntaAssessmentCreateComponent,
+    PreguntaAssessmentDetailComponent,
+    VideoEditComponent,
+    VideoCreateComponent,
+    VideoDetailComponent
 
       ],
   imports: [

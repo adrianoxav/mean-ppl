@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Edit evaluacion_estudiante</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateEvaluacion_estudiante(evaluacion_estudiante._id)" #evaluacion_estudianteForm="ngForm">
+        <div class="form-group">
+          <label for="name">Finalizada</label>
+          <input type="checkbox" style="width=15px;height:15px;" class="form-control" [(ngModel)]="evaluacion_estudiante.finalizo" name="finalizo" >
+        </div>
+
+        <div class="form-group">
+          <label for="name">Fecha Terminada</label>
+          <input type="date" class="form-control" [(ngModel)]="evaluacion_estudiante.fechaTerminada" name="fechaTerminada" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!evaluacion_estudianteForm.form.valid">Update</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

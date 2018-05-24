@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>{{ evaluacion_estudiante.title }}</h1>
+  <dl class="list">
+    <dt>Finalizó?</dt>
+    <dd>{{ evaluacion_estudiante.finalizo }}</dd>
+    <dt>Fecha de Finalización</dt>
+    <dd>{{ evaluacion_estudiante.fechaTerminada }}</dd>
+
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/evaluacion_estudiante-edit', evaluacion_estudiante._id]" class="btn btn-success">EDIT</a>
+    <button class="btn btn-danger" type="button" (click)="deleteEvaluacion_estudiante(evaluacion_estudiante._id)">DELETE</button>
+  </div>
+</div>

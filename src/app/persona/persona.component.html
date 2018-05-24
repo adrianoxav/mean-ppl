@@ -1,3 +1,31 @@
-<p>
-  persona works!
-</p>
+<div class="container">
+  <h1>Personas
+    <a [routerLink]="['/persona-create']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>email</th>
+        <th>identificacion</th>
+        <th>Tipo</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let persona of personas">
+        <td>{{ persona.nombres }}</td>
+        <td>{{ persona.apellidos }}</td>
+        <td>{{ persona.email }}</td>
+        <td>{{ persona.identificacion }}</td>
+        <td>{{ persona.tipo }}</td>
+
+
+        <td><a [routerLink]="['/persona-details', persona._id]">Show Detail</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
