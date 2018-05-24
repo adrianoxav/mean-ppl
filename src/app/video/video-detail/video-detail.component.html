@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>{{ video.title }}</h1>
+  <dl class="list">
+    <dt>Tema</dt>
+    <dd>{{ video.tema }}</dd>
+    <dt>Descripción</dt>
+    <dd>{{ video.descripcion }}</dd>
+    <dt>Módulo</dt>
+    <dd>{{ video.modulo }}</dd>
+    <dt>Image_Url</dt>
+    <dd>{{ video.img_url }}</dd>
+    <dt>Url</dt>
+    <dd>{{ video.url }}</dd>
+
+
+
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/video-edit', video._id]" class="btn btn-success">EDIT</a>
+    <button class="btn btn-danger" type="button" (click)="deleteVideo(video._id)">DELETE</button>
+  </div>
+</div>

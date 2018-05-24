@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Edit video</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateVideo(video._id)" #videoForm="ngForm">
+        <div class="form-group">
+          <label for="name">Tema</label>
+          <input type="text" class="form-control" [(ngModel)]="video.tema" name="tema" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Descripción</label>
+          <input type="text" class="form-control" [(ngModel)]="video.descripcion" name="descripcion" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Módulo</label>
+          <input type="text" class="form-control" [(ngModel)]="video.modulo" name="modulo" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Image_Url</label>
+          <input type="text" class="form-control" [(ngModel)]="video.img_url" name="img_url" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Url</label>
+          <input type="text" class="form-control" [(ngModel)]="video.url" name="url" required>
+        </div>
+
+
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!videoForm.form.valid">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
