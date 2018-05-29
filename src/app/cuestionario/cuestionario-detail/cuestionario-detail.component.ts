@@ -12,17 +12,30 @@ export class CuestionarioDetailComponent implements OnInit {
 
 
     cuestionario = {};
+    pregunta:any;
+
+    preguntas:{};
+    preg={};
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
     ngOnInit() {
       this.getCuestionarioDetail(this.route.snapshot.params['id']);
+
+
+
     }
 
     getCuestionarioDetail(id) {
       this.http.get('http://localhost:3000/cuestionario/'+id).subscribe(data => {
         this.cuestionario = data;
+        console.log(data);
+        this.getPreguntas(this.cuestionario.preguntas);
+        console.log(this.cuestionario);
+
       });
+  //    this.getPreguntas(this.cuestionario.preguntas);
+
     }
 
     deleteCuestionario(id) {
@@ -33,5 +46,21 @@ export class CuestionarioDetailComponent implements OnInit {
             console.log(err);
           }
         );
+    }
+    getPreguntas(preguntas){
+      var i:any;
+      let preg=[];
+      for (i of preguntas){
+        console.log(i);
+
+        this.http.get('http://localhost:3000/pregunta/'+i).subscribe(data => {
+          i = data;
+          console.log(data);
+          preg.push(data.pregunta);
+        });
+
+      }
+console.log(preg);
+this.cuestionario.preguntas=preg;
     }
 }

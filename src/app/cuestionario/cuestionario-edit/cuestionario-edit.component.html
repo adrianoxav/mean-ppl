@@ -4,10 +4,12 @@
     <div class="col-md-6">
       <form (ngSubmit)="updateCuestionario(cuestionario._id)" #cuestionarioForm="ngForm">
         <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="cuestionario.nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
           <label for="name">Creado</label>
-          <input type="date" class="form-control" [(ngModel)]="cuestionario.creado" name="creado" required>
-          
-
+          <input type="date" class="form-control"  [(ngModel)]="cuestionario.creado" name="creado" disabled>
         </div>
       <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!cuestionarioForm.form.valid">Update</button>

@@ -7,18 +7,31 @@
           <label for="name">Número</label>
           <input type="number" class="form-control" [(ngModel)]="evaluacion.numero" name="numero" required>
         </div>
+
+
         <div class="form-group">
           <label for="name">Tipo</label>
-          <input type="text" class="form-control" [(ngModel)]="evaluacion.tipo" name="tipo" required>
-        </div>
+          <select name="tipo" [(ngModel)]="evaluacion.tipo" required>
+                 <option value="Peer" selected="selected">Peer</option>
+                 <option value="Classwork">Classwork</option>
+                 <option value="Team">Team</option>
+                 <option value="Self">Self</option>
+
+             </select>
+           </div>
         <div class="form-group">
           <label for="name">Capítulo</label>
           <input type="number" class="form-control" [(ngModel)]="evaluacion.capitulo" name="capitulo" required>
         </div>
         <div class="form-group">
           <label for="name">Cuestionario</label>
-          <input type="number" class="form-control" [(ngModel)]="evaluacion.cuestionario" name="cuestionario" required>
-        </div>
+
+
+             <select   [(ngModel)]="evaluacion.idCuestionario" (ngModelChange)="onChange($event)" name="idCuestionario" required>
+               <option *ngFor="let c of cuestionarios" [ngValue]="c._id">{{c.nombre}}</option>
+         </select>
+
+           </div>
         <div class="form-group">
           <label for="name">Fecha de Inicio</label>
           <input type="date" class="form-control" [(ngModel)]="evaluacion.fechaInicioTomada" name="fechaInicioTomada" required>

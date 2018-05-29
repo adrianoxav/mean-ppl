@@ -6,7 +6,7 @@ var VideoSchema = new mongoose.Schema({
   tema: String,
   descripcion: String,
   modulo: String,
-  img_irl: String,
+  img_url: String,
   url: String,
 
   updated_date: { type: Date, default: Date.now },

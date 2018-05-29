@@ -4,10 +4,34 @@
     <div class="col-md-6">
       <form (ngSubmit)="saveCuestionario()" #cuestionarioForm="ngForm">
         <div class="form-group">
-          <label for="name">Creado</label>
-           <input name="date" [(ngModel)]="cuestionario.creado"  type="date" required>
+          <label for="name">Nombre</label>
+           <input name="name" [(ngModel)]="cuestionario.nombre"  type="text" required>
 
         </div>
+        <div class="form-group">
+          <label for="name">Creado</label>
+           <input name="creado" [(ngModel)]="cuestionario.creado"  type="date" disabled>
+
+        </div>
+
+        <tbody>
+          <tr *ngFor="let pregunta of preguntas">
+            <td>
+
+                <!-- evento change y atributo por defecto checked false, se agrega como id el id de la persona
+              para luego saber que checkbox le pertenece a cada persona-->
+                <input  [checked]="false" (change)="select(pregunta._id)" id="{{pregunta._id}}" type="checkbox" class="filled-in"/>
+
+                <label  attr.for="{{pregunta._id}}"></label>
+
+
+              </td>
+            <td>{{ pregunta.pregunta }}</td>
+
+            <td>{{ pregunta.tipo }}</td>
+
+          </tr>
+        </tbody>
 
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!cuestionario.form.valid">Save</button>

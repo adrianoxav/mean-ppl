@@ -24,7 +24,7 @@ export class CuestionarioEditComponent implements OnInit {
     }
 
     updateCuestionario(id) {
-  //    this.cuestionario.updated_date = Date.now();
+      this.cuestionario.creado = Date.now();
       this.http.put('http://localhost:3000/cuestionario/'+id, this.cuestionario)
         .subscribe(res => {
             let id = res['_id'];

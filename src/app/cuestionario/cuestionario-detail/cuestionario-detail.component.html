@@ -1,14 +1,23 @@
 <div class="container">
   <h1>{{ cuestionario.title }}</h1>
   <dl class="list">
+    <dt>Nombre</dt>
+    <dd>{{ cuestionario.nombre }}</dd>
     <dt>Creado</dt>
     <dd>{{ cuestionario.creado }}</dd>
+    <dt>Preguntas</dt>
+    <tr *ngFor="let pregunta of cuestionario.preguntas">
+      <td>{{ pregunta }}</td>
+
+
+
+    </tr>
 
   </dl>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <a [routerLink]="['/cuestionario-edit', cuestionario._id]" class="btn btn-success">EDIT</a>
+    <!--<a [routerLink]="['/cuestionario-edit', cuestionario._id]" class="btn btn-success">EDIT</a>-->
     <button class="btn btn-danger" type="button" (click)="deleteCuestionario(cuestionario._id)">DELETE</button>
   </div>
 </div>

@@ -8,11 +8,17 @@
     <dt>Capítulo</dt>
     <dd>{{ evaluacion.capitulo }}</dd>
     <dt>Cuestionario</dt>
-    <dd>{{ evaluacion.cuestionario }}</dd>
+    <dd>{{ cuestionario.nombre }}</dd>
     <dt>Fecha de Inicio</dt>
     <dd>{{ evaluacion.fechaInicioTomada }}</dd>
     <dt>Fecha de Finalización</dt>
     <dd>{{ evaluacion.fechaTerminada }}</dd>
+
+    <dt>Creado</dt>
+    <dd>{{ cuestionario.creado }}</dd>
+    <dt>Preguntas</dt>
+    <tr *ngFor="let pregunta of cuestionario.preguntas">
+      <td>{{ pregunta }}</td>
 
   </dl>
 </div>

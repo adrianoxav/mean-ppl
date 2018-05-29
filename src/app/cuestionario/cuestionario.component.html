@@ -7,12 +7,16 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Nombre</th>
+
         <th>Creado</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let cuestionario of cuestionarios">
+        <td>{{ cuestionario.nombre }}</td>
+
         <td>{{ cuestionario.creado }}</td>
 
         <td><a [routerLink]="['/cuestionario-details', cuestionario._id]">Show Detail</a></td>

@@ -9,16 +9,26 @@ import { HttpClient } from '@angular/common/http';
 export class CuestionarioCreateComponent implements OnInit {
 
     cuestionario = {};
+    preguntas={};
+    selected: String[]=[];
 
-   today: any;
+   creado: any;
     constructor(private http: HttpClient, private router: Router) { }
 
 
     ngOnInit() {
-this.today = new Date();
+this.creado = Date.now();
+
+this.http.get('http://localhost:3000/pregunta').subscribe(data => {
+  console.log(data);
+  this.preguntas = data;
+});
+
     }
 
     saveCuestionario() {
+      this.cuestionario.creado = Date.now();
+      this.cuestionario.preguntas=this.selected;
       this.http.post('http://localhost:3000/cuestionario', this.cuestionario)
         .subscribe(res => {
             let id = res['_id'];
@@ -28,4 +38,16 @@ this.today = new Date();
           }
         );
     }
+
+    select(id: any){
+       let index: number;
+       index = this.selected.findIndex(num => num == id);
+       if(index==-1){
+       this.selected.push(id);}
+       else{this.selected.splice(index,1)};
+       console.log(this.selected);
+
+     }
+
+
   }

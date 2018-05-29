@@ -19,10 +19,15 @@
           <label for="name">Identificación</label>
           <input type="text" class="form-control" [(ngModel)]="persona.identificacion" name="identificacion" required>
         </div>
+
         <div class="form-group">
           <label for="name">Tipo</label>
-          <input type="text" class="form-control" [(ngModel)]="persona.tipo" name="tipo" required>
-        </div>
+          <select name="tipo" [(ngModel)]="persona.tipo" required>
+                 <option value="Estudiante" selected="selected">Estudiante</option>
+                 <option value="Profesor">Profesor</option>
+                 <option value="Admin">Admin</option>
+             </select>
+           </div>
 
 
         <div class="form-group">

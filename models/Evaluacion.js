@@ -7,10 +7,13 @@ var EvaluacionSchema = new mongoose.Schema({
  type: Schema.Types.ObjectId,
  ref: 'Curso'
  },
+ 'idCuestionario': {
+  type: Schema.Types.ObjectId,
+  ref: 'Cuestionario'
+  },
   numero: Number,
   tipo: String,
   capitulo: Number,
-  cuestionario: Number,
   fechaInicioTomada: Date,
   fechaTerminada: Date,
   updated_date: { type: Date, default: Date.now },
