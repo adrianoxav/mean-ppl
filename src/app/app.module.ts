@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -76,6 +77,12 @@ import { VideoDetailComponent } from './video/video-detail/video-detail.componen
 
 //import { routing } from './app.routing';
 import { AppNavbarComponent } from './app-navbar/app-navbar.component';
+
+import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
+import {OWL_DATE_TIME_LOCALE , OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 
 
 const appRoutes: Routes = [
@@ -403,8 +410,12 @@ const appRoutes: Routes = [
 
       ],
   imports: [
-    BrowserModule,
 
+
+    BrowserModule,
+    BrowserAnimationsModule,
+    OwlDateTimeModule,
+             OwlNativeDateTimeModule,
   //  routing,
     FormsModule,
     HttpClientModule,
@@ -413,7 +424,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'}] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,9 +10,10 @@
         <th>Numero</th>
         <th>Tipo</th>
         <th>Capítulo</th>
-        <th>Cuestionario</th>
         <th>Fecha de Inicio</th>
+        <th>Hora de Inicio</th>
         <th>Fecha Terminada</th>
+        <th>Hora de Finalización</th>
 
       </tr>
     </thead>
@@ -21,12 +22,17 @@
         <td>{{ evaluacion.numero }}</td>
         <td>{{ evaluacion.tipo }}</td>
         <td>{{ evaluacion.capitulo }}</td>
-        <td>{{ evaluacion.cuestionario }}</td>
-        <td>{{ evaluacion.fechaInicioTomada }}</td>
-        <td>{{ evaluacion.fechaTerminada }}</td>
+        <td>{{ evaluacion.fechaInicioTomada | date: 'yyyy/MM/dd'}}</td>
+        <td>{{ evaluacion.fechaInicioTomada |  date:'hh:mm a'}}</td>
+        <td>{{ evaluacion.fechaTerminada | date: 'yyyy/MM/dd'}}</td>
+        <td>{{ evaluacion.fechaTerminada |  date:'hh:mm a'}}</td>
 
 
-        <td><a [routerLink]="['/evaluacion-details', evaluacion._id]">Show Detail</a></td>
+
+
+
+
+        <td><a [routerLink]="['/evaluacion-details', evaluacion._id]">Detalles</a></td>
       </tr>
     </tbody>
   </table>

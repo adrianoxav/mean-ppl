@@ -5,6 +5,7 @@ import { EvaluacionCreateComponent } from './evaluacion-create/evaluacion-create
 import { EvaluacionEditComponent } from './evaluacion-edit/evaluacion-edit.component';
 import { EvaluacionComponent } from './evaluacion/evaluacion.component';
 import { RouterModule, Routes } from '@angular/router';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule, OwlDateTimeModule,
+         OwlNativeDateTimeModule
   ],
   declarations: [EvaluacionDetailComponent, EvaluacionCreateComponent, EvaluacionEditComponent, EvaluacionComponent]
 })
