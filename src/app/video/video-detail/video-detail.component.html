@@ -18,7 +18,9 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <a [routerLink]="['/video-edit', video._id]" class="btn btn-success">EDIT</a>
-    <button class="btn btn-danger" type="button" (click)="deleteVideo(video._id)">DELETE</button>
+    <a [routerLink]="['/video-edit', video._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteVideo(video._id)">BORRAR</button>
+    <a [routerLink]="['/videos']" class="btn btn-info">VOLVER</a>
+
   </div>
 </div>

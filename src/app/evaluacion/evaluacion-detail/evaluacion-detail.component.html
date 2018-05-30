@@ -24,7 +24,9 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDIT</a>
-    <button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">DELETE</button>
+    <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">BORRAR</button>
+    <a [routerLink]="['/evaluaciones']" class="btn btn-info">VOLVER</a>
+
   </div>
 </div>
