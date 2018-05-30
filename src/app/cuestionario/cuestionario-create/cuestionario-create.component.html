@@ -8,11 +8,7 @@
            <input name="name" [(ngModel)]="cuestionario.nombre"  type="text" required>
 
         </div>
-        <div class="form-group">
-          <label for="name">Creado</label>
-           <input name="creado" [(ngModel)]="cuestionario.creado"  type="date" disabled>
 
-        </div>
 
         <tbody>
           <tr *ngFor="let pregunta of preguntas">

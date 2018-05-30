@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-cuestionario-create',
   templateUrl: './cuestionario-create.component.html',
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CuestionarioCreateComponent implements OnInit {
 
-    cuestionario = {};
+    cuestionario= {};
     preguntas={};
     selected: String[]=[];
 
@@ -17,8 +18,9 @@ export class CuestionarioCreateComponent implements OnInit {
 
 
     ngOnInit() {
-this.creado = Date.now();
-
+      console.log(this.cuestionario);
+//this.creado = Date.now();
+//this.cuestionario.preguntas=[];
 this.http.get('http://localhost:3000/pregunta').subscribe(data => {
   console.log(data);
   this.preguntas = data;
