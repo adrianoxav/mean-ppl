@@ -10,12 +10,17 @@
     <dt>Cuestionario</dt>
     <dd>{{ cuestionario.nombre }}</dd>
     <dt>Fecha de Inicio</dt>
-    <dd>{{ evaluacion.fechaInicioTomada }}</dd>
+    <dd>{{ evaluacion.fechaInicioTomada  | date: "dd MMM y" }}</dd>
+    <dt>Desde las:</dt>
+    <dd>{{ evaluacion.fechaInicioTomada  | date:'hh:mm a' }}</dd>
     <dt>Fecha de Finalización</dt>
-    <dd>{{ evaluacion.fechaTerminada }}</dd>
+    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y" }}</dd>
 
-    <dt>Creado</dt>
-    <dd>{{ cuestionario.creado }}</dd>
+    <dt>Hasta:</dt>
+    <dd>{{ evaluacion.fechaTerminada |  date:'hh:mm a' }}</dd>
+
+
+
     <dt>Preguntas</dt>
     <tr *ngFor="let pregunta of cuestionario.preguntas">
       <td>{{ pregunta }}</td>

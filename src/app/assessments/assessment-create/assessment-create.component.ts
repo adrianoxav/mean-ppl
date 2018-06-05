@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-assessment-create',
@@ -15,10 +15,14 @@ export class AssessmentCreateComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+
   }
 
   saveAssessment() {
-    this.http.post('http://localhost:3000/assessment', this.assessment)
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    this.http.post('http://localhost:3000/assessment', this.assessment,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/assessment-details', id]);

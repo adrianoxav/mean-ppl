@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 
 @Component({
   selector: 'app-cuestionario-create',
@@ -21,7 +24,7 @@ export class CuestionarioCreateComponent implements OnInit {
       console.log(this.cuestionario);
 //this.creado = Date.now();
 //this.cuestionario.preguntas=[];
-this.http.get('http://localhost:3000/pregunta').subscribe(data => {
+this.http.get('http://localhost:3000/pregunta', httpOptions).subscribe(data => {
   console.log(data);
   this.preguntas = data;
 });
@@ -29,9 +32,12 @@ this.http.get('http://localhost:3000/pregunta').subscribe(data => {
     }
 
     saveCuestionario() {
+      let httpOptions = {
+        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+      };
       this.cuestionario.creado = Date.now();
       this.cuestionario.preguntas=this.selected;
-      this.http.post('http://localhost:3000/cuestionario', this.cuestionario)
+      this.http.post('http://localhost:3000/cuestionario', this.cuestionario,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/cuestionario-details', id]);

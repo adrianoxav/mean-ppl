@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-curso-edit',
@@ -18,14 +21,14 @@ export class CursoEditComponent implements OnInit {
       }
 
       getCurso(id) {
-        this.http.get('http://localhost:3000/curso/'+id).subscribe(data => {
+        this.http.get('http://localhost:3000/curso/'+id,httpOptions).subscribe(data => {
           this.curso = data;
         });
       }
 
       updateCurso(id) {
     //    this.curso.updated_date = Date.now();
-        this.http.put('http://localhost:3000/curso/'+id, this.curso)
+        this.http.put('http://localhost:3000/curso/'+id, this.curso,httpOptions)
           .subscribe(res => {
               let id = res['_id'];
               this.router.navigate(['/curso-details', id]);

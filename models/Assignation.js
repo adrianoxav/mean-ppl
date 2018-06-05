@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 
 var AssignationSchema = new mongoose.Schema({
-  'idPersona': {
+  'idUser': {
 type: Schema.Types.ObjectId,
-ref: 'Persona'
+ref: 'User'
 },
 'idCurso': {
 type: Schema.Types.ObjectId,

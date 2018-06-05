@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -21,14 +24,14 @@ export class EvaluacionEditComponent implements OnInit {
         }
 
         getEvaluacion(id) {
-          this.http.get('http://localhost:3000/evaluacion/'+id).subscribe(data => {
+          this.http.get('http://localhost:3000/evaluacion/'+id,httpOptions).subscribe(data => {
             this.evaluacion = data;
           });
         }
 
         updateEvaluacion(id) {
       //    this.evaluacion.updated_date = Date.now();
-          this.http.put('http://localhost:3000/evaluacion/'+id, this.evaluacion)
+          this.http.put('http://localhost:3000/evaluacion/'+id, this.evaluacion,httpOptions)
             .subscribe(res => {
                 let id = res['_id'];
                 this.router.navigate(['/evaluacion-details', id]);

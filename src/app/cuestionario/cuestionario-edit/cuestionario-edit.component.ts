@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-cuestionario-edit',
@@ -24,8 +27,11 @@ export class CuestionarioEditComponent implements OnInit {
     }
 
     updateCuestionario(id) {
+      let httpOptions = {
+        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+      };
       this.cuestionario.creado = Date.now();
-      this.http.put('http://localhost:3000/cuestionario/'+id, this.cuestionario)
+      this.http.put('http://localhost:3000/cuestionario/'+id, this.cuestionario,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/cuestionario-details', id]);

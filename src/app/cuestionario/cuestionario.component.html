@@ -10,6 +10,7 @@
         <th>Nombre</th>
 
         <th>Creado</th>
+        <th>Hora</th>
 
       </tr>
     </thead>
@@ -17,7 +18,9 @@
       <tr *ngFor="let cuestionario of cuestionarios">
         <td>{{ cuestionario.nombre }}</td>
 
-        <td>{{ cuestionario.creado }}</td>
+        <td>{{ cuestionario.creado | date :  "dd MMM y" }}</td>
+        <td>{{ cuestionario.creado | date :  "h:mm a" }}</td>
+
 
         <td><a [routerLink]="['/cuestionario-details', cuestionario._id]">Detalles</a></td>
       </tr>

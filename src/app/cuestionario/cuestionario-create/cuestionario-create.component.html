@@ -10,24 +10,41 @@
         </div>
 
 
-        <tbody>
-          <tr *ngFor="let pregunta of preguntas">
-            <td>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Seleccionar</th>
+                <th>Pregunta</th>
 
-                <!-- evento change y atributo por defecto checked false, se agrega como id el id de la persona
-              para luego saber que checkbox le pertenece a cada persona-->
-                <input  [checked]="false" (change)="select(pregunta._id)" id="{{pregunta._id}}" type="checkbox" class="filled-in"/>
+                <th>Tipo</th>
 
-                <label  attr.for="{{pregunta._id}}"></label>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let pregunta of preguntas">
+                <td>
+
+                    <!-- evento change y atributo por defecto checked false, se agrega como id el id de la persona
+                  para luego saber que checkbox le pertenece a cada persona-->
+                    <input  [checked]="false" (change)="select(pregunta._id)" id="{{pregunta._id}}" type="checkbox" class="filled-in"/>
+
+                    <label  attr.for="{{pregunta._id}}"></label>
 
 
-              </td>
-            <td>{{ pregunta.pregunta }}</td>
+                  </td>
+                <td>{{ pregunta.pregunta }}</td>
 
-            <td>{{ pregunta.tipo }}</td>
+                <td>{{ pregunta.tipo }}</td>
 
-          </tr>
-        </tbody>
+              </tr>
+
+
+          </tbody>
+
+</table>
+
+
 
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!cuestionario.form.valid">Save</button>

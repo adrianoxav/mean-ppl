@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 @Component({
   selector: 'app-curso-create',
   templateUrl: './curso-create.component.html',
@@ -17,7 +20,8 @@ export class CursoCreateComponent implements OnInit {
   }
 
   saveCurso() {
-    this.http.post('http://localhost:3000/curso', this.curso)
+
+    this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/curso-details', id]);

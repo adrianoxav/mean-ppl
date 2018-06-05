@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-persona-detail',
@@ -18,13 +21,13 @@ export class PersonaDetailComponent implements OnInit {
   }
 
   getPersonaDetail(id) {
-    this.http.get('http://localhost:3000/persona/'+id).subscribe(data => {
+    this.http.get('http://localhost:3000/persona/'+id, httpOptions).subscribe(data => {
       this.persona = data;
     });
   }
 
   deletePersona(id) {
-    this.http.delete('http://localhost:3000/persona/'+id)
+    this.http.delete('http://localhost:3000/persona/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/personas']);
         }, (err) => {

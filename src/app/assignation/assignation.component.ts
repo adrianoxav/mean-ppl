@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-assignation',
   templateUrl: './assignation.component.html',
@@ -12,7 +12,10 @@ export class AssignationComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:3000/asignacion').subscribe(data => {
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    this.http.get('http://localhost:3000/asignacion',httpOptions).subscribe(data => {
       console.log(data);
       this.assignations = data;
     });

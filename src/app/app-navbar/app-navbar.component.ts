@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { SimpleChanges } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
+
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -26,7 +31,9 @@ export class AppNavbarComponent implements OnInit {
   }*/
 
   ngOnInit() {
-
+    let httpOptions = {
+       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+     };
   }
 
 ngOnChanges(changes: SimpleChanges) {
@@ -40,7 +47,9 @@ ngOnChanges(changes: SimpleChanges) {
   /*  localStorage.removeItem('currentUser');
     localStorage.removeItem('CRNS');
     localStorage.removeItem('infoUser');*/
-    this.router.navigate(['/inicio']);
+    localStorage.removeItem('jwtToken');
+ this.router.navigate(['/login']);
+
   }
 
 /*  changeUserPassword(){

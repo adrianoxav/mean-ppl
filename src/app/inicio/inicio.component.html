@@ -1,3 +1,25 @@
-<p>
-  inicio works!
-</p>
+<div class="container">
+  <h1>User List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>usuario</th>
+        <th>nombres</th>
+        <th>apellidos</th>
+        <th>identificacion</th>
+        <th>tipo</th>
+        <th>activo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.email }}</td>
+        <td>{{ user.nombres }}</td>
+        <td>{{ user.apellidos }}</td>
+        <td>{{ user.identificacion }}</td>
+        <td>{{ user.tipo }}</td>
+        <td>{{ user.activo }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

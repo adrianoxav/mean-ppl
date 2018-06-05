@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 
 @Component({
   selector: 'app-persona-create',
@@ -18,7 +21,7 @@ export class PersonaCreateComponent implements OnInit {
   }
 
   savePersona() {
-    this.http.post('http://localhost:3000/persona', this.persona)
+    this.http.post('http://localhost:3000/persona', this.persona, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/persona-details', id]);

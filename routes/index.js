@@ -1,16 +1,23 @@
+var AuthenticationController = require('./AuthenticationController');
+
+
 module.exports = function(app) {
-  app.use('/assessment', require('./Assessment'));
-  app.use('/asignacion', require('./Assignation'));
-  app.use('/cuestionario', require('./Cuestionario'));
-  app.use('/curso', require('./Curso'));
-  app.use('/evaluacion_estudiante', require('./Evaluacion_estudiante'));
-  app.use('/evaluacion', require('./Evaluacion'));
-  app.use('/persona',  require('./Persona'));
-  app.use('/pregunta_assessment', require('./Pregunta_assessment'));
-  app.use('/pregunta',  require('./Pregunta'));
-  app.use('/video_curso',  require('./Video_curso'));
-  app.use('/video', require('./Video'));
+  app.use('/assessment',AuthenticationController.isAuthenticated,  require('./Assessment'));
+  app.use('/asignacion',AuthenticationController.isAuthenticated,  require('./Assignation'));
+  app.use('/cuestionario', AuthenticationController.isAuthenticated, require('./Cuestionario'));
+  app.use('/curso',AuthenticationController.isAuthenticated,  require('./Curso'));
+  app.use('/evaluacion_estudiante', AuthenticationController.isAuthenticated, require('./Evaluacion_estudiante'));
+  app.use('/evaluacion',AuthenticationController.isAuthenticated,  require('./Evaluacion'));
+  app.use('/persona', AuthenticationController.isAuthenticated,  require('./Persona'));
+  app.use('/pregunta_assessment', AuthenticationController.isAuthenticated, require('./Pregunta_assessment'));
+  app.use('/pregunta',AuthenticationController.isAuthenticated,   require('./Pregunta'));
+  app.use('/video_curso',AuthenticationController.isAuthenticated,   require('./Video_curso'));
+  app.use('/video', AuthenticationController.isAuthenticated, require('./Video'));
   app.use('/book', require('./book'));
+  app.use('/user',AuthenticationController.isAuthenticated,  require('./User'));
+
+  app.use('/api', require('./api'));
+
   //app.use('/books', express.static(path.join(__dirname, 'dist')));
 //  app.use('/assessments', express.static(path.join(__dirname, 'dist')));
 //app.use('/video_curso', authApi.profesor, require('./routes/rubrica.router'))

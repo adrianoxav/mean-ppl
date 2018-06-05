@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 
 @Component({
   selector: 'app-pregunta-create',
@@ -18,7 +21,7 @@ export class PreguntaCreateComponent implements OnInit {
   }
 
   savePregunta() {
-    this.http.post('http://localhost:3000/pregunta', this.pregunta)
+    this.http.post('http://localhost:3000/pregunta', this.pregunta, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/pregunta-details', id]);

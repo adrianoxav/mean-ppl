@@ -22,10 +22,11 @@
         <td>{{ evaluacion.numero }}</td>
         <td>{{ evaluacion.tipo }}</td>
         <td>{{ evaluacion.capitulo }}</td>
-        <td>{{ evaluacion.fechaInicioTomada | date: 'yyyy/MM/dd'}}</td>
+        <td>{{ evaluacion.fechaInicioTomada | date: "dd MMM y"}}</td>
         <td>{{ evaluacion.fechaInicioTomada |  date:'hh:mm a'}}</td>
-        <td>{{ evaluacion.fechaTerminada | date: 'yyyy/MM/dd'}}</td>
-        <td>{{ evaluacion.fechaTerminada |  date:'hh:mm a'}}</td>
+        <td>{{ evaluacion.fechaTerminada | date: "dd MMM y"}}</td>
+        <td>{{ evaluacion.fechaTerminada |  date:"h:mm a"}}</td>
+  
 
 
 

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-persona-edit',
@@ -17,14 +20,14 @@ export class PersonaEditComponent implements OnInit {
   }
 
   getPersona(id) {
-    this.http.get('http://localhost:3000/persona/'+id).subscribe(data => {
+    this.http.get('http://localhost:3000/persona/'+id, httpOptions).subscribe(data => {
       this.persona = data;
     });
   }
 
   updatePersona(id) {
 //    this.persona.updated_date = Date.now();
-    this.http.put('http://localhost:3000/persona/'+id, this.persona)
+    this.http.put('http://localhost:3000/persona/'+id, this.persona, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/persona-details', id]);

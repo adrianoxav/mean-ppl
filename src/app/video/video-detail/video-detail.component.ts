@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -19,14 +22,14 @@ export class VideoDetailComponent implements OnInit {
     }
 
     getVideoDetail(id) {
-      this.http.get('http://localhost:3000/video/'+id).subscribe(data => {
+      this.http.get('http://localhost:3000/video/'+id, httpOptions).subscribe(data => {
         this.video = data;
         console.log(this.video);
       });
     }
 
     deleteVideo(id) {
-      this.http.delete('http://localhost:3000/video/'+id)
+      this.http.delete('http://localhost:3000/video/'+id, httpOptions)
         .subscribe(res => {
             this.router.navigate(['/videos']);
             console.log(this.video);

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -19,13 +22,13 @@ export class PreguntaDetailComponent implements OnInit {
   }
 
   getPreguntaDetail(id) {
-    this.http.get('http://localhost:3000/pregunta/'+id).subscribe(data => {
+    this.http.get('http://localhost:3000/pregunta/'+id, httpOptions).subscribe(data => {
       this.pregunta = data;
     });
   }
 
   deletePregunta(id) {
-    this.http.delete('http://localhost:3000/pregunta/'+id)
+    this.http.delete('http://localhost:3000/pregunta/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/preguntas']);
         }, (err) => {

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-evaluacion-estudiante-detail',
@@ -20,13 +23,13 @@ export class EvaluacionEstudianteDetailComponent implements OnInit {
           }
 
           getEvaluacion_estudianteDetail(id) {
-            this.http.get('http://localhost:3000/evaluacion_estudiante/'+id).subscribe(data => {
+            this.http.get('http://localhost:3000/evaluacion_estudiante/'+id,httpOptions).subscribe(data => {
               this.evaluacion_estudiante = data;
             });
           }
 
           deleteEvaluacion_estudiante(id) {
-            this.http.delete('http://localhost:3000/evaluacion_estudiante/'+id)
+            this.http.delete('http://localhost:3000/evaluacion_estudiante/'+id,httpOptions)
               .subscribe(res => {
                   this.router.navigate(['/evaluacion_estudiantes']);
                 }, (err) => {

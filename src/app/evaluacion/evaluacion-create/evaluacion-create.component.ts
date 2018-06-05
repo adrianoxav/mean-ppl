@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 @Component({
   selector: 'app-evaluacion-create',
   templateUrl: './evaluacion-create.component.html',
@@ -29,7 +32,7 @@ export class EvaluacionCreateComponent implements OnInit {
     console.log(this.fechaTerminada);
     this.fechaInicioTomada = new Date();
     console.log(this.fechaInicioTomada);
-    this.http.get('http://localhost:3000/cuestionario').subscribe(data => {
+    this.http.get('http://localhost:3000/cuestionario',httpOptions).subscribe(data => {
       console.log(data);
       this.cuestionarios = data;
     });
@@ -43,7 +46,7 @@ export class EvaluacionCreateComponent implements OnInit {
 //    this.evaluacion.fechaTerminada=this.fechaTerminada;
     console.log(this.evaluacion.fechaTerminada);
 
-        this.http.post('http://localhost:3000/evaluacion', this.evaluacion)
+        this.http.post('http://localhost:3000/evaluacion', this.evaluacion,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/evaluacion-details', id]);

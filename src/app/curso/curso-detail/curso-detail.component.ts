@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 
 @Component({
   selector: 'app-curso-detail',
@@ -17,17 +20,19 @@ export class CursoDetailComponent implements OnInit {
       constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
       ngOnInit() {
+
         this.getCursoDetail(this.route.snapshot.params['id']);
       }
 
       getCursoDetail(id) {
-        this.http.get('http://localhost:3000/curso/'+id).subscribe(data => {
+
+        this.http.get('http://localhost:3000/curso/'+id,httpOptions).subscribe(data => {
           this.curso = data;
         });
       }
 
       deleteCurso(id) {
-        this.http.delete('http://localhost:3000/curso/'+id)
+        this.http.delete('http://localhost:3000/curso/'+id,httpOptions)
           .subscribe(res => {
               this.router.navigate(['/cursos']);
             }, (err) => {

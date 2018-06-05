@@ -81,6 +81,8 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 import {OWL_DATE_TIME_LOCALE , OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -91,7 +93,16 @@ const appRoutes: Routes = [
     component: InicioComponent,
     data: { title: 'Inicio' }
   },
-
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Login' }
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    data: { title: 'Registrarse' }
+  },
   //assesstments
 
   {
@@ -252,7 +263,7 @@ const appRoutes: Routes = [
 
 
   { path: '',
-    redirectTo: '/personas',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
 //Preguntas
@@ -406,7 +417,9 @@ const appRoutes: Routes = [
     PreguntaAssessmentDetailComponent,
     VideoEditComponent,
     VideoCreateComponent,
-    VideoDetailComponent
+    VideoDetailComponent,
+    LoginComponent,
+    SignupComponent
 
       ],
   imports: [

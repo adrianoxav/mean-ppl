@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-assessments',
   templateUrl: './assessments.component.html',
@@ -11,7 +11,11 @@ export class AssessmentsComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://localhost:3000/assessment').subscribe(data => {
+
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    this.http.get('http://localhost:3000/assessment',httpOptions).subscribe(data => {
       console.log(data);
       this.assessments = data;
     });

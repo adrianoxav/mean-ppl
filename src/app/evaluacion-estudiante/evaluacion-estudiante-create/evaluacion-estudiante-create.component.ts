@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 @Component({
   selector: 'app-evaluacion-estudiante-create',
   templateUrl: './evaluacion-estudiante-create.component.html',
@@ -22,7 +25,7 @@ export class EvaluacionEstudianteCreateComponent implements OnInit {
     }
 
     saveEvaluacion_estudiante() {
-      this.http.post('http://localhost:3000/evaluacion_estudiante', this.evaluacion_estudiante)
+      this.http.post('http://localhost:3000/evaluacion_estudiante', this.evaluacion_estudiante,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/evaluacion_estudiante-details', id]);

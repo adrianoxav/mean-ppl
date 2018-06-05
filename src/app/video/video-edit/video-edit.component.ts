@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+let httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+};
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-video-edit',
@@ -17,7 +20,7 @@ export class VideoEditComponent implements OnInit {
   }
 
   getVideo(id) {
-    this.http.get('http://localhost:3000/video/'+id).subscribe(data => {
+    this.http.get('http://localhost:3000/video/'+id, httpOptions).subscribe(data => {
       this.video = data;
       console.log(this.video);
     });
@@ -25,7 +28,7 @@ export class VideoEditComponent implements OnInit {
 
   updateVideo(id) {
   //    this.video.updated_date = Date.now();
-    this.http.put('http://localhost:3000/video/'+id, this.video)
+    this.http.put('http://localhost:3000/video/'+id, this.video, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/video-details', id]);
