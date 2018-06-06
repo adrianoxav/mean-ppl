@@ -18,7 +18,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class AppNavbarComponent implements OnInit {
   title;
-
+  token: any;
   constructor(private router: Router) {}
 /*
   getCrn(id): void {
@@ -31,9 +31,21 @@ export class AppNavbarComponent implements OnInit {
   }*/
 
   ngOnInit() {
+    let aValue = localStorage.getItem('jwtToken');
+
     let httpOptions = {
        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
      };
+     if (aValue==null){
+       this.token = false;
+       this.router.navigate(['/login']);
+     }
+     else {
+       this.token=true;
+     }
+     console.log(aValue);
+     console.log(this.token);
+
   }
 
 ngOnChanges(changes: SimpleChanges) {
@@ -43,11 +55,18 @@ ngOnChanges(changes: SimpleChanges) {
 
 }
 
+istokenized(){
+
+
+}
+
   logOut(){
   /*  localStorage.removeItem('currentUser');
     localStorage.removeItem('CRNS');
     localStorage.removeItem('infoUser');*/
     localStorage.removeItem('jwtToken');
+    window.location.reload();
+
  this.router.navigate(['/login']);
 
   }

@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
   this.http.post('http://localhost:3000/api/signin',this.loginData).subscribe(resp => {
     this.data = resp;
     localStorage.setItem('jwtToken', this.data.token);
+    window.location.reload();
+
     this.router.navigate(['/inicio']);
+
   }, err => {
     this.message = err.error.msg;
   });

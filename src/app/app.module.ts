@@ -83,8 +83,12 @@ import {OWL_DATE_TIME_LOCALE , OwlDateTimeModule, OwlNativeDateTimeModule} from 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
-
+import { UsuarioModule } from './usuario/usuario.module';
+import { UsuarioEditComponent } from './usuario/usuario-edit/usuario-edit.component';
+import { UsuarioCreateComponent } from './usuario/usuario-create/usuario-create.component';
+import { UsuarioDetailComponent } from './usuario/usuario-detail/usuario-detail.component';
 
 
 const appRoutes: Routes = [
@@ -103,6 +107,29 @@ const appRoutes: Routes = [
     component: SignupComponent,
     data: { title: 'Registrarse' }
   },
+
+  //USUARIOS
+  {
+    path: 'usuarios',
+    component: UsuarioComponent,
+    data: { title: 'usuarios' }
+  },
+  {
+    path: 'usuario-details/:id',
+    component: UsuarioDetailComponent,
+    data: { title: 'usuario Details' }
+  },
+  {
+    path: 'usuario-create',
+    component: UsuarioCreateComponent,
+    data: { title: 'Create usuario' }
+  },
+  {
+    path: 'usuario-edit/:id',
+    component: UsuarioEditComponent,
+    data: { title: 'Edit usuario' }
+  },
+
   //assesstments
 
   {
@@ -371,6 +398,10 @@ const appRoutes: Routes = [
   declarations: [
     AppNavbarComponent,
     AppComponent,
+    UsuarioComponent,
+    UsuarioDetailComponent,
+    UsuarioCreateComponent,
+    UsuarioEditComponent,
     BookComponent,
     BookDetailComponent,
     BookCreateComponent,
@@ -419,7 +450,8 @@ const appRoutes: Routes = [
     VideoCreateComponent,
     VideoDetailComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UsuarioComponent
 
       ],
   imports: [

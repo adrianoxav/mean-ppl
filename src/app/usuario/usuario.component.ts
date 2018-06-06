@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 
-
 @Component({
-  selector: 'app-cuestionario',
-  templateUrl: './cuestionario.component.html',
-  styleUrls: ['./cuestionario.component.css']
+  selector: 'app-usuario',
+  templateUrl: './usuario.component.html',
+  styleUrls: ['./usuario.component.css']
 })
-export class CuestionarioComponent implements OnInit {
+export class UsuarioComponent implements OnInit {
 
-  cuestionarios: any;
+  usuarios: any;
 
   constructor(private http: HttpClient) { }
 
@@ -17,9 +16,9 @@ export class CuestionarioComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://localhost:3000/cuestionario',httpOptions).subscribe(data => {
+    this.http.get('http://localhost:3000/user',httpOptions).subscribe(data => {
       console.log(data);
-      this.cuestionarios = data;
+      this.usuarios = data;
     });
   }
 }

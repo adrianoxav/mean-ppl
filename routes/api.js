@@ -32,6 +32,29 @@ router.post('/signup', function(req, res) {
 });
 //Create router for login or sign-in.
 
+
+router.post('/register', function(req, res) {
+  if (!req.body.email || !req.body.identificacion) {
+    res.json({success: false, msg: 'Please pass email and password.'});
+  } else {
+    var newUser = new User({
+      email: req.body.email,
+      password: req.body.identificacion,
+      nombres: req.body.nombres,
+      apellidos: req.body.apellidos,
+      tipo: req.body.tipo,
+      identificacion: req.body.identificacion
+    });
+    // save the user
+    newUser.save(function(err,post) {
+      if (err) {
+        return res.json({success: false, msg: 'email already exists.'});
+      }
+      res.json(post);
+    });
+  }
+});
+
 router.post('/signin', function(req, res) {
   User.findOne({
     email: req.body.email
@@ -56,17 +79,7 @@ router.post('/signin', function(req, res) {
   });
 });
 //Create router for add new book that only accessible to authorized user.
-router.get('/user', passport.authenticate('jwt', { session: false}), function(req, res) {
-  var token = getToken(req.headers);
-  if (token) {
-    User.find(function (err, users) {
-      if (err) return next(err);
-      res.json(users);
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
-  }
-});
+
 //Create function for parse authorization token from request headers.
 
 getToken = function (headers) {

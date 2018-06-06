@@ -4,38 +4,35 @@ let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
 };
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
-  selector: 'app-pregunta-detail',
-  templateUrl: './pregunta-detail.component.html',
-  styleUrls: ['./pregunta-detail.component.css'],
+  selector: 'app-usuario-detail',
+  templateUrl: './usuario-detail.component.html',
+  styleUrls: ['./usuario-detail.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class PreguntaDetailComponent implements OnInit {
+export class UsuarioDetailComponent implements OnInit {
 
-  pregunta = {};
+  usuario = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
-    this.getPreguntaDetail(this.route.snapshot.params['id']);
+    this.getUsuarioDetail(this.route.snapshot.params['id']);
   }
 
-  getPreguntaDetail(id) {
-    this.http.get('http://localhost:3000/pregunta/'+id, httpOptions).subscribe(data => {
-      this.pregunta = data;
-      console.log(data);
+  getUsuarioDetail(id) {
+    this.http.get('http://localhost:3000/user/'+id, httpOptions).subscribe(data => {
+      this.usuario = data;
     });
   }
 
-  deletePregunta(id) {
-    this.http.delete('http://localhost:3000/pregunta/'+id, httpOptions)
+  deletePersona(id) {
+    this.http.delete('http://localhost:3000/user/'+id, httpOptions)
       .subscribe(res => {
-          this.router.navigate(['/preguntas']);
+          this.router.navigate(['/usuarios']);
         }, (err) => {
           console.log(err);
         }
       );
   }
-
 }

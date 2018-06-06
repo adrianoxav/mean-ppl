@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-let httpOptions = {
-  headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
-};
+
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';

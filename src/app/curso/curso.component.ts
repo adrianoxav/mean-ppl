@@ -5,13 +5,13 @@ import { Constants } from '../config/constants';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-
+/*
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
     'token': '$0m3-U/1qu3-K3Y'
   })
-};
+};*/
 
 let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' ,'token': '$0m3-U/1qu3-K3Y'});
     let options = new RequestOptions({ headers: headers });
@@ -33,7 +33,7 @@ private options = new RequestOptions({ headers: this.headers });
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
+  ngOnInit() {/*
     this.codmateria="ADM000380";
     this.codperiodo="642";
     let date = new FormData();
@@ -49,7 +49,7 @@ form.append("codperiodo", "642");
 var config = {headers : {
           "Content-Type": "application/json; charset = utf-8;", "token": "$0m3-U/1qu3-K3Y"
       }
-  };
+  };*/
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
@@ -57,14 +57,12 @@ var config = {headers : {
       console.log(data);
       this.cursos = data;
     });
-    console.log(form);
-    console.log( options.headers);
 
-    this.http.post('http://academico.admision.espol.edu.ec/Api/CursosAlumnos', form, options)
+/*    this.http.post('http://academico.admision.espol.edu.ec/Api/CursosAlumnos', form, options)
     .map(res => {res.json();
       console.log(res.json());
     })
        // ...and calling .json() on the response to return data
-                         .subscribe();
+                         .subscribe();*/
     }
 }
