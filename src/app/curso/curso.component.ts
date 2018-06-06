@@ -33,7 +33,7 @@ private options = new RequestOptions({ headers: this.headers });
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {/*
+  ngOnInit() {
     this.codmateria="ADM000380";
     this.codperiodo="642";
     let date = new FormData();
@@ -49,7 +49,7 @@ form.append("codperiodo", "642");
 var config = {headers : {
           "Content-Type": "application/json; charset = utf-8;", "token": "$0m3-U/1qu3-K3Y"
       }
-  };*/
+  };
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
@@ -57,8 +57,10 @@ var config = {headers : {
       console.log(data);
       this.cursos = data;
     });
-
-/*    this.http.post('http://academico.admision.espol.edu.ec/Api/CursosAlumnos', form, options)
+    let httpOptions1 = {
+      headers: new HttpHeaders({ 'token': '$0m3-U/1qu3-K3Y' })
+    };
+    /*this.http.post('http://academico.admision.espol.edu.ec/Api/CursosAlumnos', form, httpOptions1)
     .map(res => {res.json();
       console.log(res.json());
     })
