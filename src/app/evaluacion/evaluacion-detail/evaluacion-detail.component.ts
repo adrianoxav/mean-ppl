@@ -12,11 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EvaluacionDetailComponent implements OnInit {
 
-  cuestionario = {};
+  cuestionario : any;
   pregunta:any;
 
-  preguntas:{};
-        evaluacion = {};
+  preguntas: any;
+        evaluacion: any;
 
         constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 

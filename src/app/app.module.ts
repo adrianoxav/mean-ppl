@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { AuthGuard } from './auth/auth.guard';
+
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './book/book.component';
@@ -90,6 +92,7 @@ import { UsuarioEditComponent } from './usuario/usuario-edit/usuario-edit.compon
 import { UsuarioCreateComponent } from './usuario/usuario-create/usuario-create.component';
 import { UsuarioDetailComponent } from './usuario/usuario-detail/usuario-detail.component';
 
+import { JwtModule } from '@auth0/angular-jwt'
 
 const appRoutes: Routes = [
   {
@@ -106,6 +109,8 @@ const appRoutes: Routes = [
     path: 'signup',
     component: SignupComponent,
     data: { title: 'Registrarse' }
+
+
   },
 
   //USUARIOS
@@ -113,7 +118,7 @@ const appRoutes: Routes = [
     path: 'usuarios',
     component: UsuarioComponent,
     data: { title: 'usuarios' }
-  },
+    },
   {
     path: 'usuario-details/:id',
     component: UsuarioDetailComponent,
@@ -469,7 +474,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG'}] ,
+  providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG',},AuthGuard] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

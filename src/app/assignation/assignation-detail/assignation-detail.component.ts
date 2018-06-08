@@ -24,7 +24,16 @@ export class AssignationDetailComponent implements OnInit {
 
     this.http.get('http://localhost:3000/asignacion/'+id,httpOptions).subscribe(data => {
       this.assignation = data;
+      this.http.get('http://localhost:3000/curso/'+this.assignation.idCurso,httpOptions).subscribe(data => {
+        console.log(data);
+        this.assignation.idCurso = data;
+      });
+      this.http.get('http://localhost:3000/user/'+this.assignation.idUser,httpOptions).subscribe(data => {
+        console.log(data);
+        this.assignation.idUser = data;
+      });
     });
+
   }
 
   deleteAssignation(id) {

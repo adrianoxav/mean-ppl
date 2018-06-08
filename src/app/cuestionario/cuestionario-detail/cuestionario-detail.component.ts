@@ -14,11 +14,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CuestionarioDetailComponent implements OnInit {
 
 
-    cuestionario = {};
+    cuestionario :any;
     pregunta:any;
 
-    preguntas:{};
-    preg={};
+    preguntas:any;
+    preg: any;
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 

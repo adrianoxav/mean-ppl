@@ -19,6 +19,9 @@ import 'rxjs/add/operator/toPromise';
 export class AppNavbarComponent implements OnInit {
   title;
   token: any;
+  tipo:any;
+  nombres: any;
+  apellidos: any;
   constructor(private router: Router) {}
 /*
   getCrn(id): void {
@@ -32,6 +35,11 @@ export class AppNavbarComponent implements OnInit {
 
   ngOnInit() {
     let aValue = localStorage.getItem('jwtToken');
+    this.nombres = localStorage.getItem('nombres');
+    this.apellidos = localStorage.getItem('apellidos');
+    let tip = localStorage.getItem('tipo');
+    let identificacion = localStorage.getItem('identificacion');
+
 
     let httpOptions = {
        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
@@ -43,8 +51,13 @@ export class AppNavbarComponent implements OnInit {
      else {
        this.token=true;
      }
-     console.log(aValue);
-     console.log(this.token);
+     if (tip=="Profesor"){
+       this.tipo=true;
+
+     }
+     else (this.tipo=false);
+     //console.log(nombres);
+    // console.log(apellidos);
 
   }
 
@@ -62,10 +75,10 @@ istokenized(){
 
   logOut(){
   /*  localStorage.removeItem('currentUser');
-    localStorage.removeItem('CRNS');
-    localStorage.removeItem('infoUser');*/
+    localStorage.removeItem('CRNS');*/
+    localStorage.removeItem('user');
     localStorage.removeItem('jwtToken');
-    window.location.reload();
+   window.location.reload();
 
  this.router.navigate(['/login']);
 

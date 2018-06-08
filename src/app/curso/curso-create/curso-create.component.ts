@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable } from 'rxjs/Observable';
+import { tap, catchError } from 'rxjs/operators';
+
 let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
 };
@@ -12,6 +16,8 @@ let httpOptions = {
 export class CursoCreateComponent implements OnInit {
 
   curso = {};
+  users : any;
+
 
   constructor(private http: HttpClient, private router: Router) { }
 

@@ -1,6 +1,12 @@
 <div class="container">
   <h1>{{ assignation.title }}</h1>
   <dl class="list">
+    <dt>Curso</dt>
+    <dd>{{ assignation.idCurso.nombre }} Paralelo {{ assignation.idCurso.paralelo }}</dd>
+    <dt>Persona</dt>
+    <dd>{{ assignation.idUser.nombres }} {{ assignation.idUser.apellidos }}</dd>
+    <dt>Matrícula</dt>
+    <dd>{{ assignation.idUser.identificacion }}</dd>
     <dt>Grupo</dt>
     <dd>{{ assignation.grupo }}</dd>
 

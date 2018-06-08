@@ -12,7 +12,7 @@ let httpOptions = {
 })
 export class CuestionarioCreateComponent implements OnInit {
 
-    cuestionario= {};
+    cuestionario={};
     preguntas={};
     selected: String[]=[];
 

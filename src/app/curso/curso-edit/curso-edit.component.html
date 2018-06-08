@@ -20,10 +20,55 @@
           <label for="name">Código de Materia</label>
           <input type="text" class="form-control" [(ngModel)]="curso.cod_materia" name="cod_materia" required>
         </div>
+        <div class="form-group">
+          <label for="name">Paralelo</label>
+          <input type="text" class="form-control" [(ngModel)]="curso.paralelo" name="paralelo" required>
+        </div>
       <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!cursoForm.form.valid">Update</button>
         </div>
       </form>
     </div>
   </div>
+  <div class="container">
+
+  <h1>Subir Lista de Estudiantes al curso</h1>
+
+  <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Subir archivo .xlsx" accept=".xlsx">
+  <button type="button" class="btn btn-info" (click)="Upload()" >Importar Estudiantes</button>
+  <button type="button" class="btn btn-success" (click)="createUsers()" >Añadir al Curso</button>
+
+
+  <div class="container">
+    <h2>Estudiantes del Paralelo</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>identificacion</th>
+          <th>email</th>
+          <th>nombres</th>
+          <th>apellidos</th>
+          <th>tipo</th>
+          <th>Grupo</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of lista">
+          <td>{{ list.identificacion }}</td>
+          <td>{{ list.email }}</td>
+          <td>{{ list.nombres }}</td>
+          <td>{{ list.apellidos }}</td>
+          <td>{{ list.tipo }}</td>
+          <td>{{ list.grupo }}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
 </div>

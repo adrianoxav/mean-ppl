@@ -24,7 +24,17 @@ export class LoginComponent implements OnInit {
   login() {
   this.http.post('http://localhost:3000/api/signin',this.loginData).subscribe(resp => {
     this.data = resp;
+    console.log(this.data);
     localStorage.setItem('jwtToken', this.data.token);
+    localStorage.setItem('nombres', this.data.user.nombres);
+    localStorage.setItem('apellidos', this.data.user.apellidos);
+    localStorage.setItem('tipo', this.data.user.tipo);
+    localStorage.setItem('email', this.data.user.email);
+    localStorage.setItem('identificacion', this.data.user.identificacion);
+    localStorage.setItem('user', this.data.user);
+
+
+
     window.location.reload();
 
     this.router.navigate(['/inicio']);

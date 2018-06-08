@@ -7,12 +7,20 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Persona</th>
+        <th>Matrícula</th>
+        <th>Curso</th>
+        <th>Tipo</th>
         <th>Grupo</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let assignation of assignations">
+        <td>{{ assignation.idUser.nombres }} {{ assignation.idUser.apellidos }}</td>
+        <td>{{ assignation.idUser.identificacion }} </td>
+        <td>{{ assignation.idCurso.nombre }}</td>
+        <td>{{ assignation.idUser.tipo }}</td>
         <td>{{ assignation.grupo }}</td>
 
         <td><a [routerLink]="['/assignation-details', assignation._id]">Detalles</a></td>

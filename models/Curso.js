@@ -7,6 +7,8 @@ var CursoSchema = new mongoose.Schema({
   anio: String,
   termino: String,
   cod_materia: String,
+  paralelo: String,
+
   updated_date: { type: Date, default: Date.now },
 });
 
