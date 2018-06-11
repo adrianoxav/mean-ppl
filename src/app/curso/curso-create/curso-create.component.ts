@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
+import { NotificationsService  } from 'angular2-notifications';
+
 
 let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
@@ -19,7 +21,7 @@ export class CursoCreateComponent implements OnInit {
   users : any;
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private _service: NotificationsService) { }
 
 
   ngOnInit() {
@@ -30,7 +32,19 @@ export class CursoCreateComponent implements OnInit {
     this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
+          this._service.success(
+					'Exito',
+					'Curso creado exitosamente',
+					{
+							timeOut: 5000,
+							showProgressBar: true,
+							pauseOnHover: false,
+							clickToClose: false
+					}
+				)
           this.router.navigate(['/curso-details', id]);
+
+
         }, (err) => {
           console.log(err);
         }

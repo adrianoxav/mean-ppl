@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { AuthGuard } from './auth/auth.guard';
+import { DataTablesModule } from 'angular-datatables';
 
 
 import { AppComponent } from './app.component';
@@ -91,6 +92,8 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { UsuarioEditComponent } from './usuario/usuario-edit/usuario-edit.component';
 import { UsuarioCreateComponent } from './usuario/usuario-create/usuario-create.component';
 import { UsuarioDetailComponent } from './usuario/usuario-detail/usuario-detail.component';
+import {ToasterModule, ToasterService} from 'angular5-toaster';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { JwtModule } from '@auth0/angular-jwt'
 
@@ -460,8 +463,9 @@ const appRoutes: Routes = [
 
       ],
   imports: [
-
-
+    DataTablesModule,
+    SimpleNotificationsModule.forRoot(),
+ToasterModule,
     BrowserModule,
     BrowserAnimationsModule,
     OwlDateTimeModule,
@@ -475,6 +479,8 @@ const appRoutes: Routes = [
     )
   ],
   providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG',},AuthGuard] ,
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -88,25 +88,52 @@ createUsers(){
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
     for(let l of this.lista){
-
+let assign:any;
 
       this.http.post('http://localhost:3000/api/register', l, httpOptions)
         .subscribe(res => {
-            console.log(res);
+            console.log(res.msg);
             let idUser = res['_id'];
-            let assignation = {
+let assignation:any;
+            if(res.msg=="email already exists."){
+              console.log("wiiiiii");
+              this.http.get('http://localhost:3000/user/email/'+l.email, httpOptions).subscribe(data => {
+                console.log(data);
+
+                 assignation = {
+                     'idCurso': this.id,
+                     'grupo': l.grupo,
+                   'idUser': data._id };
+                   console.log(assignation);
+                   this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
+                     .subscribe(res => {
+                         console.log(res);
+                       }, (err) => {
+                         console.log(err);
+                       }
+                     );
+
+              }
+
+            );
+
+            }
+            else{
+             assignation = {
                  'idCurso': this.id,
                  'grupo': l.grupo,
                'idUser': idUser };
-
-            console.log(assignation);
-            this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
-              .subscribe(res => {
-                  console.log(res);
-                }, (err) => {
-                  console.log(err);
+               console.log(assignation);
+               this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
+                 .subscribe(res => {
+                     console.log(res);
+                   }, (err) => {
+                     console.log(err);
+                   }
+                 );
                 }
-              );
+
+
 
     }
 );

@@ -10,13 +10,17 @@ var app = express();
 var api = require('./routes/api');
 var config = require('./config/database');
 const cors = require('cors');
+var DataTable = require('mongoose-datatable');
+
+
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
-
+  DataTable.configure({ verbose: true, debug : true });
+  mongoose.plugin(DataTable.init);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(passport.initialize());

@@ -26,6 +26,16 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+/* GET SINGLE User BY email */
+router.get('/email/:email', function(req, res, next) {
+  User.findOne({
+    email: req.params.email
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* SAVE User */
 router.post('/', function(req, res, next) {
   User.create(req.body, function (err, post) {

@@ -4,7 +4,8 @@
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
   </h1>
-  <table class="table">
+  <div *ngIf="!isLoading">
+  <table datatable [dtOptions]="dtOptionsUser" class="row-border hover">
     <thead>
       <tr>
         <th>Nombres</th>
@@ -12,6 +13,8 @@
         <th>email</th>
         <th>identificacion</th>
         <th>Tipo</th>
+        <th>Acciones</th>
+
 
       </tr>
     </thead>
@@ -28,4 +31,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

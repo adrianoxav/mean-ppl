@@ -5,6 +5,8 @@ import { UsuarioDetailComponent } from './usuario-detail/usuario-detail.componen
 import { UsuarioCreateComponent } from './usuario-create/usuario-create.component';
 import { UsuarioEditComponent } from './usuario-edit/usuario-edit.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DataTablesModule } from 'angular-datatables';
+
 
 
 const appRoutes: Routes = [
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
 ];
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    DataTablesModule
   ],
   declarations: [UsuarioComponent, UsuarioDetailComponent, UsuarioCreateComponent, UsuarioEditComponent]
 })

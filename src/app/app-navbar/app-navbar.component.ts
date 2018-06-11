@@ -20,6 +20,8 @@ export class AppNavbarComponent implements OnInit {
   title;
   token: any;
   tipo:any;
+  tip:any;
+
   nombres: any;
   apellidos: any;
   constructor(private router: Router) {}
@@ -37,7 +39,7 @@ export class AppNavbarComponent implements OnInit {
     let aValue = localStorage.getItem('jwtToken');
     this.nombres = localStorage.getItem('nombres');
     this.apellidos = localStorage.getItem('apellidos');
-    let tip = localStorage.getItem('tipo');
+    this.tip = localStorage.getItem('tipo');
     let identificacion = localStorage.getItem('identificacion');
 
 
@@ -51,7 +53,8 @@ export class AppNavbarComponent implements OnInit {
      else {
        this.token=true;
      }
-     if (tip=="Profesor"){
+     console.log(this.tip);
+     if (this.tip=="Profesor"){
        this.tipo=true;
 
      }
@@ -76,9 +79,15 @@ istokenized(){
   logOut(){
   /*  localStorage.removeItem('currentUser');
     localStorage.removeItem('CRNS');*/
-    localStorage.removeItem('user');
+    localStorage.removeItem('nombres');
+    localStorage.removeItem('apellidos');
+    localStorage.removeItem('tipo');
+    localStorage.removeItem('identificacion');
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('email');
+
    window.location.reload();
+
 
  this.router.navigate(['/login']);
 
