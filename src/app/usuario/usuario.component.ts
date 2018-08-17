@@ -55,7 +55,9 @@ export class UsuarioComponent implements OnInit {
            }
          },
          "order": [[2,"desc"], [1,"desc"]],
-         "autoWidth": false
+         "autoWidth": false,
+         "lengthMenu": [50, 100, 150, 200]
+
      }
    }
 

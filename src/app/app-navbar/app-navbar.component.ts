@@ -85,6 +85,8 @@ istokenized(){
     localStorage.removeItem('identificacion');
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('email');
+    localStorage.removeItem('idUser');
+    localStorage.removeItem('curso');
 
    window.location.reload();
 

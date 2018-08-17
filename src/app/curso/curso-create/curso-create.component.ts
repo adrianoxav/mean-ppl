@@ -19,18 +19,31 @@ export class CursoCreateComponent implements OnInit {
 
   curso = {};
   users : any;
+  materias={};
+materia:any;
 
 
   constructor(private http: HttpClient, private router: Router,private _service: NotificationsService) { }
 
 
   ngOnInit() {
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    this.http.get('http://localhost:3000/materia',httpOptions).subscribe(data => {
+      console.log(data);
+      this.materias = data;
+    });
   }
 
   saveCurso() {
-
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    console.log(this.curso);
     this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
       .subscribe(res => {
+        console.log(res);
           let id = res['_id'];
           this._service.success(
 					'Exito',
@@ -49,6 +62,27 @@ export class CursoCreateComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+  onChange(newValue) {
+    this.curso.idMateria=newValue;
+    console.log(this.curso);
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+this.materia=newValue;
+this.http.get('http://localhost:3000/materia/'+this.materia,httpOptions).subscribe(data => {
+  console.log(data);
+
+  this.curso.nombre = data.nombre;
+  this.curso.cod_materia = data.cod_materia;
+
+});
+      // ... do other stuff here ...
+  }
+
+  onchange1(newValue){
+    console.log(newValue);
+
   }
 
 }

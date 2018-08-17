@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>{{ materia.title }}</h1>
+  <dl class="list">
+    <dt>Nombre de Materia</dt>
+    <dd>{{ materia.nombre }}</dd>
+
+    <dt>Código de Materia</dt>
+    <dd>{{ materia.cod_materia }}</dd>
+
+
+  </dl>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/materia-edit', materia._id]" class="btn btn-success">EDITAR</a>
+    <button class="btn btn-danger" type="button" (click)="deleteCurso(materia._id)">BORRAR</button>
+    <a [routerLink]="['/materias']" class="btn btn-info">VOLVER</a>
+
+  </div>
+</div>

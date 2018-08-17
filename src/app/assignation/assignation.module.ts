@@ -5,6 +5,7 @@ import { AssignationDetailComponent } from './assignation-detail/assignation-det
 import { AssignationComponent } from './assignation/assignation.component';
 import { AssignationCreateComponent } from './assignation-create/assignation-create.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    DataTablesModule
   ],
   declarations: [AssignationEditComponent, AssignationDetailComponent, AssignationComponent, AssignationCreateComponent]
 })

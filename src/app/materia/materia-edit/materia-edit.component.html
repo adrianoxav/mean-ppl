@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Edit materia</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateCurso(curso._id)" #cursoForm="ngForm">
+        <
+        <div class="form-group">
+          <label for="name">Nombre de Materia</label>
+          <input type="text" class="form-control" [(ngModel)]="materia.nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Código de Materia</label>
+          <input type="text" class="form-control" [(ngModel)]="materia.cod_materia" name="cod_materia" required>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>

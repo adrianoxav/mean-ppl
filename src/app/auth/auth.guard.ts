@@ -14,10 +14,12 @@ export class AuthGuard implements CanActivate {
           if (tipo=="Profesor"){
             return true;
           }
-
+          else if (tipo=="Estudiante"){
+            return true;
+          }
       }
       // not logged in so redirect to login page
-      this.router.navigate(['/login']);
+    //  this.router.navigate(['/login']);
       return false;
   }
 }

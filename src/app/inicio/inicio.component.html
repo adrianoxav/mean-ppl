@@ -1,1 +1,31 @@
+<div class="container">
+  <h1>Mis Cursos
+    <a [routerLink]="['/book-create']" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </a>
+  </h1>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Curso</th>
+      <th>Año</th>
+      <th>Término</th>
+      <th>Paralelo</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursos">
+      <td>{{ curso.nombre }}</td>
+      <td>{{ curso.anio }}</td>
+      <td>{{ curso.termino }}</td>
+
+      <td>{{ curso.paralelo }}</td>
+      <td>{{ tipo }}</td>
+      <td><a [routerLink]="['/curso-details', curso._id]">Detalles</a></td>
+
+    </tr>
+  </tbody>
+</table>
+  </div>

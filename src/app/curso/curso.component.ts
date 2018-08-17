@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch'
 /*
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/ json',
     'token': '$0m3-U/1qu3-K3Y'
   })
 };*/
@@ -34,22 +34,7 @@ private options = new RequestOptions({ headers: this.headers });
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.codmateria="ADM000380";
-    this.codperiodo="642";
-    let date = new FormData();
-         date.append('codmateria', this.codmateria);
-         date.append('codperiodo', this.codperiodo );
-         let headers = new Headers();
-headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-headers.append('token', '$0m3-U/1qu3-K3Y');
-var form = new FormData();
-form.append("codmateria", "ADM000380");
-form.append("codperiodo", "642");
-var config = {headers : {
-          "Content-Type": "application/json; charset = utf-8;", "token": "$0m3-U/1qu3-K3Y"
-      }
-  };
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };

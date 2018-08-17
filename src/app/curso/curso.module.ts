@@ -6,6 +6,7 @@ import { CursoCreateComponent } from './curso-create/curso-create.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CursoComponent } from './curso/curso.component';
 
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +38,9 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    NgxPermissionsModule.forChild()
+
   ],
   declarations: [CursoDetailComponent, CursoEditComponent, CursoCreateComponent, CursoComponent]
 })

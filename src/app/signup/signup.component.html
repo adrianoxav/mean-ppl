@@ -4,7 +4,30 @@
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           {{message}}
         </div>
-        <h2 class="form-signin-heading">Sign Up Now</h2>
+        <h2 class="form-signin-heading">Registrarse a un curso</h2>
+        <label for="nombres" class="sr-only">Nombres</label>
+        <input type="text" class="form-control" placeholder="JHON ALEX" [(ngModel)]="signupData.nombres" name="nombres" required/>
+        <label for="apellidos" class="sr-only">Apellidos</label>
+        <input type="text" class="form-control" placeholder="VERA VERA" [(ngModel)]="signupData.apellidos" name="apellidos" required/>
+        <label for="identificacion" class="sr-only">Identificación</label>
+        <input type="text" class="form-control" placeholder="Cédula/Mátricula Espol" [(ngModel)]="signupData.identificacion" name="identificacion" required/>
+        <div class="form-control">
+          <label for="tipo">Tipo</label>
+          <select name="tipo" [(ngModel)]="signupData.tipo" required>
+                 <option value="Estudiante" selected="selected">Estudiante</option>
+                 <option value="Profesor">Profesor</option>
+             </select>
+           </div>
+           <div class="form-control">
+
+             <label for="name">Curso</label>
+
+
+                <select   [(ngModel)]="idcurso" (ngModelChange)="onChange($event)" name="idCurso" required>
+                  <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
+            </select>
+          </div>
+
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" class="form-control" placeholder="Email address" [(ngModel)]="signupData.email" name="email" required/>
         <label for="inputPassword" class="sr-only">Password</label>

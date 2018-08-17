@@ -22,24 +22,50 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login() {
-  this.http.post('http://localhost:3000/api/signin',this.loginData).subscribe(resp => {
+  this.http.post('http://localhost:3000/api/signinEstudiante',this.loginData).subscribe(resp => {
     this.data = resp;
-    console.log(this.data);
+    console.log(resp);
     localStorage.setItem('jwtToken', this.data.token);
     localStorage.setItem('nombres', this.data.user.nombres);
     localStorage.setItem('apellidos', this.data.user.apellidos);
     localStorage.setItem('tipo', this.data.user.tipo);
     localStorage.setItem('email', this.data.user.email);
     localStorage.setItem('identificacion', this.data.user.identificacion);
-
-
-
-    window.location.reload();
-
+    localStorage.setItem('idUser', this.data.user._id);
+    localStorage.setItem('curso', this.data.user.curso);
+      window.location.reload();
     this.router.navigate(['/inicio']);
 
   }, err => {
-    this.message = err.error.msg;
+    console.log(err);
+    this.http.post('http://localhost:3000/api/signin',this.loginData).subscribe(resp => {
+      this.data = resp;
+      console.log(resp);
+      localStorage.setItem('jwtToken', this.data.token);
+      localStorage.setItem('nombres', this.data.user.nombres);
+      localStorage.setItem('apellidos', this.data.user.apellidos);
+      localStorage.setItem('tipo', this.data.user.tipo);
+      localStorage.setItem('email', this.data.user.email);
+      localStorage.setItem('identificacion', this.data.user.identificacion);
+      localStorage.setItem('idUser', this.data.user._id);
+      localStorage.setItem('curso', this.data.user.curso);
+  window.location.reload();
+      this.router.navigate(['/evaluaciones']);
+
+
+    }, err => {
+      console.log(err);
+        });
+  //  this.message = err.error.msg;
   });
+
+
+
+
+
+
+
+
+
 }
 }

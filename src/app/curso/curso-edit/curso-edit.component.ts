@@ -18,9 +18,35 @@ export class CursoEditComponent implements OnInit {
   lista: any;
   arrayBuffer:any;
   file:File;
+  materias:{};
+  profesores=[ ];
+  estudiantes=[ ];
+
+
   incomingfile(event)
    {
    this.file= event.target.files[0];
+   }
+   onChange(newValue) {
+     this.curso.idMateria=newValue;
+     console.log(this.curso);
+     let httpOptions = {
+       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+     };
+ this.materia=newValue;
+ this.http.get('http://localhost:3000/materia/'+this.materia,httpOptions).subscribe(data => {
+   console.log(data);
+
+   this.curso.nombre = data.nombre;
+   this.curso.cod_materia = data.cod_materia;
+
+ });
+       // ... do other stuff here ...
+   }
+
+   onchange1(newValue){
+     console.log(newValue);
+
    }
 
   Upload() {
@@ -49,11 +75,32 @@ export class CursoEditComponent implements OnInit {
         this.getCurso(this.route.snapshot.params['id']);
         this.id=this.route.snapshot.params['id'];
         console.log(this.id);
+
+        let httpOptions = {
+          headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+        };
+    /*    this.http.get('http://localhost:3000/materia',httpOptions).subscribe(data => {
+          console.log(data);
+          this.materias = data;
+        });*/
+        console.log(this.curso);
+
       }
 
       getCurso(id) {
         this.http.get('http://localhost:3000/curso/'+id,httpOptions).subscribe(data => {
           this.curso = data;
+          console.log(this.curso);
+          for (let i of this.curso.profesores){
+          this.http.get('http://localhost:3000/user/'+i,httpOptions).subscribe(data => {
+               console.log(data);
+               this.profesores.push(data);
+             });}
+             for (let i of this.curso.estudiantes){
+             this.http.get('http://localhost:3000/estudiantes/'+i,httpOptions).subscribe(data => {
+                  console.log(data);
+                  this.estudiantes.push(data);
+                });}
         });
       }
 
@@ -96,7 +143,6 @@ let assign:any;
             let idUser = res['_id'];
 let assignation:any;
             if(res.msg=="email already exists."){
-              console.log("wiiiiii");
               this.http.get('http://localhost:3000/user/email/'+l.email, httpOptions).subscribe(data => {
                 console.log(data);
 

@@ -4,14 +4,19 @@
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
   </h1>
-  <table class="table">
+  <div *ngIf="!isLoading">
+
+  <table datatable [dtOptions]="dtOptionsAssig" class="row-border hover">
     <thead>
       <tr>
         <th>Persona</th>
-        <th>Matrícula</th>
+        <th>Identificación</th>
         <th>Curso</th>
+        <th>Paralelo</th>
         <th>Tipo</th>
         <th>Grupo</th>
+        <th>Acciones</th>
+
 
       </tr>
     </thead>
@@ -20,6 +25,7 @@
         <td>{{ assignation.idUser.nombres }} {{ assignation.idUser.apellidos }}</td>
         <td>{{ assignation.idUser.identificacion }} </td>
         <td>{{ assignation.idCurso.nombre }}</td>
+        <td>{{ assignation.idCurso.paralelo }}</td>
         <td>{{ assignation.idUser.tipo }}</td>
         <td>{{ assignation.grupo }}</td>
 
@@ -27,4 +33,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { AuthGuard } from './auth/auth.guard';
 import { DataTablesModule } from 'angular-datatables';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import { CuestionarioComponent } from './cuestionario/cuestionario.component';
 import { CursoComponent } from './curso/curso.component';
 import { EvaluacionEstudianteComponent } from './evaluacion-estudiante/evaluacion-estudiante.component';
 import { EvaluacionComponent } from './evaluacion/evaluacion.component';
+import { EstudianteComponent } from './estudiante/estudiante.component';
+
 import { PersonaComponent } from './persona/persona.component';
 import { PreguntaAssessmentComponent } from './pregunta-assessment/pregunta-assessment.component';
 import { PreguntaComponent } from './pregunta/pregunta.component';
@@ -46,6 +49,8 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { CursoCreateComponent } from './curso/curso-create/curso-create.component';
 import { CursoDetailComponent } from './curso/curso-detail/curso-detail.component';
 
+import { EstudianteModule } from './estudiante/estudiante.module';
+
 import { EvaluacionModule } from './evaluacion/evaluacion.module';
 import { EvaluacionEditComponent } from './evaluacion/evaluacion-edit/evaluacion-edit.component';
 import { EvaluacionCreateComponent } from './evaluacion/evaluacion-create/evaluacion-create.component';
@@ -56,6 +61,16 @@ import { Evaluacion_estudianteModule } from './evaluacion-estudiante/evaluacion-
 import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evaluacion-estudiante-edit/evaluacion-estudiante-edit.component';
 import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
 import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
+
+import { GrupoComponent } from './grupo/grupo.component';
+import { GrupoModule } from './grupo/grupo.module';
+
+import { MateriaModule } from './materia/materia.module';
+import { MateriaComponent } from './materia/materia.component';
+
+import { MateriaEditComponent } from './materia/materia-edit/materia-edit.component';
+import { MateriaCreateComponent } from './materia/materia-create/materia-create.component';
+import { MateriaDetailComponent } from './materia/materia-detail/materia-detail.component';
 
 
 import { PersonaModule } from './persona/persona.module';
@@ -95,7 +110,11 @@ import { UsuarioDetailComponent } from './usuario/usuario-detail/usuario-detail.
 import {ToasterModule, ToasterService} from 'angular5-toaster';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
-import { JwtModule } from '@auth0/angular-jwt'
+import { JwtModule } from '@auth0/angular-jwt';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module'
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+
 
 const appRoutes: Routes = [
   {
@@ -115,7 +134,19 @@ const appRoutes: Routes = [
 
 
   },
+//profile
 
+{
+  path: 'profile',
+  component: ProfileComponent,
+  data: { title: 'profile' }
+},
+
+{
+  path: 'profile-edit/:id',
+  component: ProfileEditComponent,
+  data: { title: 'Edit profile' }
+},
   //USUARIOS
   {
     path: 'usuarios',
@@ -227,7 +258,41 @@ const appRoutes: Routes = [
   data: { title: 'Edit curso' }
 },
 
+//materia
 
+//Cursos
+{
+  path: 'materias',
+  component: MateriaComponent,
+  data: { title: 'materias' }
+},
+{
+  path: 'materia-details/:id',
+  component: MateriaDetailComponent,
+  data: { title: 'materia Details' }
+},
+{
+  path: 'materia-create',
+  component: MateriaCreateComponent,
+  data: { title: 'Create materia' }
+},
+{
+  path: 'materia-edit/:id',
+  component: MateriaEditComponent,
+  data: { title: 'Edit materia' }
+},
+
+//Evaluaciones
+{
+  path: 'estudiante',
+  component: EstudianteComponent,
+  data: { title: 'estudiante' }
+},
+{
+  path: 'grupo',
+  component: GrupoComponent,
+  data: { title: 'grupo' }
+},
 //Evaluaciones
 {
   path: 'evaluaciones',
@@ -298,7 +363,7 @@ const appRoutes: Routes = [
 
 
   { path: '',
-    redirectTo: '/login',
+    redirectTo: '/inicio',
     pathMatch: 'full'
   },
 //Preguntas
@@ -417,8 +482,10 @@ const appRoutes: Routes = [
     AssignationComponent,
     CuestionarioComponent,
     CursoComponent,
+    MateriaComponent,
     EvaluacionEstudianteComponent,
     EvaluacionComponent,
+    EstudianteComponent,
     PersonaComponent,
     PreguntaAssessmentComponent,
     PreguntaComponent,
@@ -439,6 +506,9 @@ const appRoutes: Routes = [
     CursoEditComponent,
     CursoCreateComponent,
     CursoDetailComponent,
+    MateriaEditComponent,
+    MateriaCreateComponent,
+    MateriaDetailComponent,
     EvaluacionEditComponent,
     EvaluacionCreateComponent,
     EvaluacionDetailComponent,
@@ -459,10 +529,15 @@ const appRoutes: Routes = [
     VideoDetailComponent,
     LoginComponent,
     SignupComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    ProfileComponent,
+    ProfileEditComponent,
+    GrupoComponent
 
       ],
   imports: [
+    NgxPermissionsModule.forRoot(),
+
     DataTablesModule,
     SimpleNotificationsModule.forRoot(),
 ToasterModule,
@@ -476,7 +551,8 @@ ToasterModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    ProfileModule
   ],
   providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG',},AuthGuard] ,
 
