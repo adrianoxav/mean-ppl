@@ -1,11 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const shortid = require('shortid');
 
 
 var AssessmentSchema = new mongoose.Schema({
     'idEvaluacion-estudiante': {
   type: Schema.Types.ObjectId,
   ref: 'Evaluacion-estudiante'
+},
+_id: {
+type: String,
+'default' : shortid.generate
 },
 
   puntaje: Number,

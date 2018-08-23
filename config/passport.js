@@ -3,6 +3,8 @@ var JwtStrategy = require('passport-jwt').Strategy,
 
 // load up the user model
 var User = require('../models/user');
+var Estudiante = require('../models/Estudiante');
+
 var config = require('../config/database'); // get db config file
 
 module.exports = function(passport) {
@@ -18,6 +20,17 @@ module.exports = function(passport) {
               done(null, user);
           } else {
               done(null, false);
+                Estudiante.findOne({id: jwt_payload.id}, function(err, user) {
+                      if (err) {
+                          return done(err, false);
+                      }
+                      if (user) {
+                          done(null, user);
+                      } else {
+                          done(null, false);
+                      }
+                  });
+
           }
       });
   }));

@@ -30,22 +30,7 @@ export class InicioComponent implements OnInit {
   this.tipo=localStorage.getItem('tipo');
 
 
-  this.http.get('http://localhost:3000/asignacion/id/'+this.idUser,httpOptions).subscribe(data => {
-    console.log(data);
-    console.log(this.idUser);
-    for (let assig of data){
-      this.http.get('http://localhost:3000/curso/'+assig.idCurso,httpOptions).subscribe(data => {
-        this.cursos.push(data);
-        console.log(data);
 
-      });
-
-    }
-     },
-    error => console.log(error),
-    () => this.isLoading = false
-  );
-  console.log(this.cursos);
 
   }
 

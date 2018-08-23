@@ -3,20 +3,24 @@ var Schema = mongoose.Schema;
 const shortid = require('shortid');
 
 
-var Video_cursoSchema = new mongoose.Schema({
+var GrupoSchema = new mongoose.Schema({
   _id: {
   type: String,
   'default' : shortid.generate
 },
-  'idVideo': {
-type: Schema.Types.ObjectId,
-ref: 'Video'
+
+nombre: {
+  type: String
 },
-'idCurso': {
-type: Schema.Types.ObjectId,
-ref: 'Curso'
+estudiantes: [{
+  type: String,
+  ref: 'Estudiante',
+}],
+curso: {
+  type: String,
+  ref: 'Curso'
 },
   updated_date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Video_curso', Video_cursoSchema);
+module.exports = mongoose.model('Grupo', GrupoSchema);

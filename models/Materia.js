@@ -3,19 +3,16 @@ var Schema = mongoose.Schema;
 const shortid = require('shortid');
 
 
-var PreguntaSchema = new mongoose.Schema({
+var MateriaSchema = new mongoose.Schema({
   _id: {
   type: String,
   'default' : shortid.generate
 },
-  'idCuestionario': {
-type: Schema.Types.ObjectId,
-ref: 'Cuestionario'
-},
-  pregunta: String,
-  tipo: String,
+  nombre: String,
+
+  cod_materia: String,
 
   updated_date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Pregunta', PreguntaSchema);
+module.exports = mongoose.model('Materia', MateriaSchema);

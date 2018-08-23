@@ -2,9 +2,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+const shortid = require('shortid');
 
 
 var PersonaSchema = new mongoose.Schema({
+  _id: {
+  type: String,
+  'default' : shortid.generate
+},
   nombres: String,
   apellidos: String,
   email: String,

@@ -36,11 +36,11 @@ export class SignupComponent implements OnInit {
   this.signupData.curso=this.idcurso;
   if(this.signupData.tipo=="Estudiante"){
 
-  this.http.post('http://localhost:3000/api/signupestudiante',this.signupData).subscribe(resp => {
+  this.http.post('http://localhost:3000/api/suestudiante',this.signupData).subscribe(resp => {
     console.log(resp);
     let idUser = resp['_id'];
 
-    if(resp.msg=="email already exists."){
+    if(resp.msg=="email already exists. in estudiantes"){
       this.http.get('http://localhost:3000/estudiantes/email/'+this.signupData.email).subscribe(data => {
         console.log(data);
         idUser=data._id;

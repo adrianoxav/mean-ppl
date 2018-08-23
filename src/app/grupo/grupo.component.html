@@ -1,3 +1,44 @@
+<h1>
+Grupos</h1>
 <p>
-  grupo works!
-</p>
+Seleccionar Paralelo</p>
+
+<select   [(ngModel)]="cursoSeleccionado" (ngModelChange)="onChange($event)" name="idCurso" required>
+  <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
+</select>
+
+<div class="container">
+  <h2>Estudiantes del Paralelo</h2>
+  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  </a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>identificacion</th>
+        <th>email</th>
+        <th>nombres</th>
+        <th>apellidos</th>
+        <th>tipo</th>
+        <th>Grupo</th>
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of estudiantes">
+        <td>{{ list.identificacion }}</td>
+        <td>{{ list.email }}</td>
+        <td>{{ list.nombres }}</td>
+        <td>{{ list.apellidos }}</td>
+        <td>{{ list.tipo }}</td>
+        <input type="number"  [(ngModel)]="list.grupo" name="grupo" required>
+
+        <td>{{ list.grupo }}</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>

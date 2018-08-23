@@ -21,6 +21,8 @@ export class CursoCreateComponent implements OnInit {
   users : any;
   materias={};
 materia:any;
+cursocreado:any;
+
 
 
   constructor(private http: HttpClient, private router: Router,private _service: NotificationsService) { }
@@ -45,6 +47,30 @@ materia:any;
       .subscribe(res => {
         console.log(res);
           let id = res['_id'];
+          this.cursocreado=res;
+          console.log(this.cursocreado);
+          for(var i=0;i<this.curso.numgrupos;i++){
+            let grupo = { nombre:(i+1), curso:id };
+            console.log(grupo);
+            this.http.post('http://localhost:3000/grupo', grupo,httpOptions)
+              .subscribe(res => {
+                console.log(res);
+                this.cursocreado.grupos.push(res['_id']);
+                console.log(this.cursocreado);
+                console.log(this.cursocreado['_id']);
+                this.http.put('http://localhost:3000/cursos/'+this.cursocreado['_id'],this.cursocreado).subscribe(data => {
+                  console.log(data);
+
+
+              });
+          }, (err) => {
+            console.log(err);
+          }
+        );
+
+          }
+
+
           this._service.success(
 					'Exito',
 					'Curso creado exitosamente',
@@ -55,6 +81,7 @@ materia:any;
 							clickToClose: false
 					}
 				)
+
           this.router.navigate(['/curso-details', id]);
 
 

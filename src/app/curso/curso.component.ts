@@ -24,7 +24,7 @@ let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
 })
 export class CursoComponent implements OnInit {
 
-  cursos: any;
+  cursos: any; 
   codmateria:any;
   codperiodo:any;
 
