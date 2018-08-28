@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
         console.log(data);
         idUser=data._id;
         let asignacion = { idUser:data._id, idcurso:this.idcurso,tipo:this.signupData.tipo };
-        console.log(asignacion);
+        console.log(asignacion); 
 
         this.cursoaActualizar.estudiantes.push(idUser);
 
@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit {
       });
         }
         );
-    //this.router.navigate(['login']);
+    this.router.navigate(['login']);
     }
     else{
       let asignacion = { idUser:idUser, idcurso:this.idcurso,tipo:this.signupData.tipo };

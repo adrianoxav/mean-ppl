@@ -19,6 +19,16 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.get('/getgrupobynumcurso/:nombre/:curso', function(req, res, next) {
+console.log(req.params.nombre);
+console.log(req.params.curso);
+  Grupo.findOne({nombre: req.params.nombre, curso:req.body.curso}, function (err, post) {
+    if (err) return next(err);
+    console.log(post);
+    res.json(post);
+  });
+});
+
 /* SAVE Curso */
 router.post('/', function(req, res, next) {
   console.log(req.body);

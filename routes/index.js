@@ -23,6 +23,7 @@ module.exports = function(app) {
 
   app.use('/estudiante',AuthenticationController.isAuthenticated,  require('./Estudiante'));
   app.use('/estudiantes',  require('./Estudiante'));
+  app.use('/grupos',  require('./Grupo'));
 
 
   app.use('/api', require('./api'));

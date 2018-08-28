@@ -3,15 +3,18 @@ Grupos</h1>
 <p>
 Seleccionar Paralelo</p>
 
+<h1>
+Número de Grupos del Paralelo: {{ numgrupos }}</h1>
+<p>
+
 <select   [(ngModel)]="cursoSeleccionado" (ngModelChange)="onChange($event)" name="idCurso" required>
   <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
 </select>
 
 <div class="container">
   <h2>Estudiantes del Paralelo</h2>
-  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-  </a>
+  <button type="button" class="btn btn-info" (click)="saveGrupos()" >Actualizar Grupos</button>
+
   <table class="table">
     <thead>
       <tr>

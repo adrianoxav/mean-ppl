@@ -17,6 +17,7 @@ export class GrupoComponent implements OnInit {
   cursos=[];
   estudiantes=[];
   cursoSeleccionado:any;
+  numgrupos:any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
   ngOnInit() {
     let httpOptions = {
@@ -39,11 +40,38 @@ export class GrupoComponent implements OnInit {
 
 
   }
+
+
+
+  saveGrupos() {
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
+    };
+    console.log(this.estudiantes);
+    for(let est of this.estudiantes){
+    //let grupo = { grupo:est.grupo, curso:est.curso};
+    this.http.get('http://localhost:3000/grupo/getgrupobynumcurso/'+ est.grupo + '/' + est.curso,httpOptions).subscribe(data => {
+      console.log(data);
+    });
+
+}
+  /*  this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
+      .subscribe(res => {
+
+        }, (err) => {
+          console.log(err);
+        }
+      );*/
+  }
+
+
+
   onChange(newValue) {
     this.cursoSeleccionado=newValue;
     this.estudiantes=[];
       console.log(newValue);
       this.http.get('http://localhost:3000/curso/'+newValue,httpOptions).subscribe(data => {
+        this.numgrupos=data.numgrupos;
         console.log(data.estudiantes)
         for (let i of data.estudiantes){
         this.http.get('http://localhost:3000/estudiantes/'+i,httpOptions).subscribe(data => {

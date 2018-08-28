@@ -64,7 +64,7 @@ cursocreado:any;
 
               });
           }, (err) => {
-            console.log(err);
+            console.log(err); 
           }
         );
 
