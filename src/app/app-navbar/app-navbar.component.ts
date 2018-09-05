@@ -48,7 +48,7 @@ export class AppNavbarComponent implements OnInit {
      };
      if (aValue==null){
        this.token = false;
-       this.router.navigate(['/login']);
+       //this.router.navigate(['/login']);
      }
      else {
        this.token=true;

@@ -1,22 +1,30 @@
-<div class="container">
+<div class="container" style="width:65%;">
   <h1>Perfil</h1>
-  <dl class="list">
-    <dt>Nombres</dt>
-    <dd>{{ usuario.nombres }}</dd>
-    <dt>Apellidos</dt>
-    <dd>{{ usuario.apellidos }}</dd>
-    <dt>Email</dt>
-    <dd>{{ usuario.email }}</dd>
-    <dt>Identificación</dt>
-    <dd>{{ usuario.identificacion }}</dd>
-    <dt>Tipo</dt>
-    <dd>{{ usuario.tipo }}</dd>
-
-  </dl>
+  <br>
+  <div class="row">
+    <div class="col-sm">
+      <h4><strong>Nombre</strong></h4>
+      <span>{{ usuario.nombres }} {{ usuario.apellidos }}</span>
+    </div>
+    <div class="col-sm">
+      <h4><b>Email</b></h4>
+      <span>{{ usuario.email }}</span>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h4><b>Identificación</b></h4>
+      <span>{{ usuario.identificacion }}</span>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h4><b>Tipo</b></h4>
+      <span>{{ usuario.tipo }}</span>
+    </div>
+  </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
-    <a [routerLink]="['/inicio']" class="btn btn-info">VOLVER</a>
-
-  </div>
 </div>

@@ -17,6 +17,7 @@ export class InicioComponent implements OnInit {
   isLoading = true;
   assignations: any;
   cursos= [];
+  
   tipo:any;
 
   idUser:any;
