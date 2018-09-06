@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
 router.get('/getgrupobynumcurso/:nombre/:curso', function(req, res, next) {
 console.log(req.params.nombre);
 console.log(req.params.curso);
-  Grupo.findOne({nombre: req.params.nombre, curso:req.body.curso}, function (err, post) {
+  Grupo.findOne({nombre: req.params.nombre, curso:req.params.curso}, function (err, post) {
     if (err) return next(err);
     console.log(post);
     res.json(post);
@@ -38,6 +38,27 @@ router.post('/', function(req, res, next) {
   });
 });
 
+
+router.put('/limpiargruposcurso/:idcursoseleccionado', function(req, res, next) {
+//  console.log(req);
+  Grupo.findOne({curso: req.params.idcursoseleccionado})
+
+      .exec( function(err, Grupo) {
+
+
+
+        Grupo.estudiantes=[];
+
+
+});
+});
+
+router.put('/actualizargrupos/', function(req, res, next) {
+  Grupo.findByIdAndUpdate(req.body._id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 /* UPDATE Curso */
 router.put('/:id', function(req, res, next) {
   Grupo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {

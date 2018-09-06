@@ -13,7 +13,8 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
 
 <div class="container">
   <h2>Estudiantes del Paralelo</h2>
-  <button type="button" class="btn btn-info" (click)="saveGrupos()" >Actualizar Grupos</button>
+  <button type="button" class="btn btn-info" (click)="actgrupos()" >Actualizar Grupos</button>
+  <button type="button" class="btn btn-success right" disabled={{buttonDisabled}} (click)="actualizarGrupos()" >Actualizar</button>
 
   <table class="table">
     <thead>
@@ -23,7 +24,8 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
         <th>nombres</th>
         <th>apellidos</th>
         <th>tipo</th>
-        <th>Grupo</th>
+        <th>Grupo Actual</th>
+        <th>Cambiar grupo</th>
 
 
 
@@ -36,9 +38,9 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
         <td>{{ list.nombres }}</td>
         <td>{{ list.apellidos }}</td>
         <td>{{ list.tipo }}</td>
-        <input type="number"  [(ngModel)]="list.grupo" name="grupo" required>
 
         <td>{{ list.grupo }}</td>
+        <input type="number"  [(ngModel)]="list.grupo" name="grupo" required>
 
 
       </tr>

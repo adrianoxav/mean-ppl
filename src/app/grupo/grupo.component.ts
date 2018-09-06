@@ -18,8 +18,12 @@ export class GrupoComponent implements OnInit {
   estudiantes=[];
   cursoSeleccionado:any;
   numgrupos:any;
+  clean:any;
+  grupos=[];
+  buttonDisabled = true;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
   ngOnInit() {
+    this.buttonDisabled = true;
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
@@ -43,30 +47,48 @@ export class GrupoComponent implements OnInit {
 
 
 
-  saveGrupos() {
-    let httpOptions = {
-      headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
-    };
-    console.log(this.estudiantes);
-    for(let est of this.estudiantes){
-    //let grupo = { grupo:est.grupo, curso:est.curso};
-    this.http.get('http://localhost:3000/grupo/getgrupobynumcurso/'+ est.grupo + '/' + est.curso,httpOptions).subscribe(data => {
-      console.log(data);
-    });
+  actualizarGrupos() {
 
-}
-  /*  this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
-      .subscribe(res => {
+    for(let i of this.grupos){
+        i.estudiantes=[];
+    }
 
-        }, (err) => {
-          console.log(err);
-        }
-      );*/
+    for(let i of this.estudiantes){
+      for(let j of this.grupos){
+          if(i.grupo==j.nombre){
+            j.estudiantes.push(i._id);
+          }
+
+    }
   }
 
 
+console.log(this.grupos);
+this.saveGrupos();
+}
+
+saveGrupos(){
+
+    for(let grup of this.grupos){
+
+    this.http.put('http://localhost:3000/grupo/actualizargrupos/',grup,httpOptions).toPromise().then(data => {
+      console.log(data);
+  });
+
+
+
+
+}
+this.buttonDisabled = true;
+
+
+
+}
+
 
   onChange(newValue) {
+    this.buttonDisabled = true;
+
     this.cursoSeleccionado=newValue;
     this.estudiantes=[];
       console.log(newValue);
@@ -78,11 +100,32 @@ export class GrupoComponent implements OnInit {
              console.log(data);
              this.estudiantes.push(data);
            });}
+
+           for (let j of data.grupos){
+             this.http.get('http://localhost:3000/grupo/'+j,httpOptions).toPromise().then(data => {
+                  //console.log(data);
+                  this.grupos.push(data);
+                });
+           }
       });
 
-
-      // ... do other stuff here ...
-  }
+}
 
 
+actgrupos(){
+  this.buttonDisabled = null;
+
+  for (let j of this.grupos){
+    for (let est of j.estudiantes){
+      for (let estudiante of this.estudiantes){
+          if(est==estudiante._id){
+            estudiante.grupo=j.nombre;
+          }
+      }
+    }
+  // ... do other stuff here ...
+}
+console.log(this.estudiantes)
+
+}
 }
