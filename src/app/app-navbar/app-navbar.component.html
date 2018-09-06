@@ -1,153 +1,118 @@
 
-
-
 <head>
-    <title>PPL</title>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">
+		<title>PPL</title>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
+		<!-- Global CSS -->
+		<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+		<!-- Plugins CSS -->
+		<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">
 
-    <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+		<!-- Theme CSS -->
+		<link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
 
 </head>
 
 <nav class="home-page">
-    <div class="wrapper">
-        <!-- ******HEADER****** -->
-        <header class="header">
-            <div class="top-bar">
-                <div class="container">
-	                <div class="row">
-	                    <ul class="social-icons col-md-6 col-12 d-none d-md-block">
-	                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-	                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-	                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-	                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-	                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-	                        <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
+		<div class="wrapper">
+				<!-- ******HEADER****** -->
+				<header class="header">
+						<nav class="navbar navbar-expand-lg navbar-light bg-light top-var">
+						  <a class="navbar-brand">{{tip}}</a>
+						  <div class="collapse navbar-collapse">
+						  	<ul class="navbar-nav mr-auto">
+								  <li class="nav-item">
+								  	<a class="nav-link" *ngIf="token" [routerLink]="['/profile']">
+								  		{{nombres}} {{apellidos}}
+								  	</a>
+								  </li>
+								  <li class="nav-item" *ngIf="token">
+								  	<a class="nav-link" (click)="logOut()" [routerLink]="['/login']"> Cerrar Sesión </a>
+								  </li>
+								</ul>
+							</div>
+						</nav>
+						<div class="header-main container">
+						<div class="logo col-md-6 col-sm-6 col-xs-6">
+								<img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/ppl_logo.png" alt="Logo">
+						</div>
 
-	                    </ul><!--//social-icons-->
-                      <h3 class="active col-md-6 text-right" style="color:white;" style="font-size:300%;"><a href="#">{{tip}}</a></h3>
+						<div class="logo col-md-6 col-sm-6 col-xs-6">
+								<a href="http://www.fcnm.espol.edu.ec/"><img class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/fcnm_logo.png" alt="Logo"></a>
+						</div>
+					</div>
+				</header><!--//header-->
 
-	                </div><!--//row-->
-                </div>
-            </div><!--//to-bar-->
-            <div class="header-main container">
-            <div class="logo col-md-6 col-sm-6 col-xs-6">
-                <img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/ppl_logo.png" alt="Logo">
-            </div>
+				<!-- ******NAV****** -->
+				<div class="main-nav-wrapper">
 
-            <div class="logo col-md-6 col-sm-6 col-xs-6">
-                <a href="http://www.fcnm.espol.edu.ec/"><img class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/fcnm_logo.png" alt="Logo"></a>
-            </div>
-        </div>
-        </header><!--//header-->
+			<!--      CONTAINER PARA PROFESORES    -->
+						<div class="container">
+							<nav class="main-nav navbar navbar-expand-md" role="navigation">
 
-        <!-- ******NAV****** -->
-        <div class="main-nav-wrapper" *ngIf="token">
+									<div class="navbar-collapse collapse" id="navbar-collapse">
+											<ul class="nav navbar-nav">
+													<li class="nav-item"><a class="active nav-link" [routerLink]="['/inicio']">Inicio</a></li>					
+													<li class="nav-item"><a class="active nav-link" [routerLink]="['/videos']">Videos</a></li>
+													<li class="nav-item"><a class="active nav-link" [routerLink]="['/assessments']">Assessments</a></li>
+													<li class="nav-item"><a class="active nav-link" [routerLink]="['/evaluaciones']">Evaluaciones</a></li>
+													<!--Sección que solo ven los profesores-->
+													<li class="nav-item" *ngIf="(tip == 'Profesor')"><a class="active nav-link">|</a></li>
+													<li class="nav-item">
+														<a class="active nav-link" *ngIf="(tip == 'Profesor')" [routerLink]="['/cuestionarios']">Cuestionarios</a>
+													</li>
+													<li class="nav-item" *ngIf="(tip == 'Profesor')">
+														<a class="active nav-link" [routerLink]="['/usuarios']">Usuarios</a></li>
+													<li class="nav-item" *ngIf="(tip == 'Profesor')">
+														<a class="active nav-link" [routerLink]="['/assignations']">Asignaciones</a></li>
+													<li class="nav-item" *ngIf="(tip == 'Profesor')">
+														<a class="active nav-link" [routerLink]="['/cursos']">Cursos</a></li>
+													<li class="nav-item" *ngIf="(tip == 'Profesor')">
+														<a class="active nav-link" [routerLink]="['/grupo']">Grupos</a></li>
+													<li class="nav-item" *ngIf="(tip == 'Profesor')">
+														<a class="active nav-link" [routerLink]="['/preguntas']">Preguntas</a></li>
+													<!--Fin de la sección que solo ven los profesores-->													
+												</ul><!--//nav-->
+									</div><!--//navabr-collapse-->
 
-      <!--      CONTAINER PARA PROFESORES    -->
-            <div class="container" *ngIf="tipo">
-	            <nav class="main-nav navbar navbar-expand-md" role="navigation">
+						</nav><!--//main-nav-->
+					</div><!--//container-->
+				</div><!--//main-nav-container-->
+				<!-- ******CONTENT****** -->
+		</div><!--//wrapper-->
 
-	                <div class="navbar-collapse collapse" id="navbar-collapse">
-	                    <ul class="nav navbar-nav">
+		<!--
+		<div class="config-wrapper d-none d-md-block">
+				<div class="config-wrapper-inner">
+						<a id="config-trigger" class="config-trigger" href="#"><i class="fa fa-cog"></i></a>
+						<div id="config-panel" class="config-panel" style="display: block;">
+								<p>Elegir Tema</p>
+								<ul id="color-options" class="list-unstyled list-inline">
+										<li class="list-inline-item default active"><a data-style="assets/css/styles.css" data-logo="assets/images/logo.png" href="#"></a></li>
+										<li class="list-inline-item green"><a data-style="assets/css/styles-green.css" data-logo="assets/images/logo-green.png" href="#"></a></li>
+										<li class="list-inline-item purple"><a data-style="assets/css/styles-purple.css" data-logo="assets/images/logo-purple.png" href="#"></a></li>
+										<li class="list-inline-item red"><a data-style="assets/css/styles-red.css" data-logo="assets/images/logo-red.png" href="#"></a></li>
+								</ul><!--//color-options
+								<a id="config-close" class="close" href="#"><i class="fa fa-times-circle"></i></a>
+						</div><!--//configure-panel
+				</div><!--//config-wrapper-inner
+		</div>-->
 
-	                        <li class="nav-item"><a class="active nav-link" [routerLink]="['/inicio']">Inicio</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/usuarios']">Usuarios</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/assignations']">Asignaciones</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/cursos']">Cursos</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/grupo']">Grupos</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/preguntas']">Preguntas</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/cuestionarios']">Cuestionarios</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/videos']">Videos</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/assessments']">Assessments</a></li>
-                          <li class="nav-item"><a class="active nav-link" [routerLink]="['/evaluaciones']">Evaluaciones</a></li>
-                          <li class="nav-item">
-                            <a class="active nav-link" [routerLink]="['/profile']">{{nombres }} {{apellidos }}  <span class="glyphicon glyphicon-user" ></span> </a>
-                            </li>
-
-
-                          <li class="nav-item"><a class="active nav-link" (click)="logOut()">Cerrar Sesión</a></li>
-
-
-
-
-	 	                    </ul><!--//nav-->
-	                </div><!--//navabr-collapse-->
-
-		        </nav><!--//main-nav-->
-	        </div><!--//container-->
-
-
-  <!--      CONTAINER PARA ESTUDIANTES    -->
-          <div class="container" *ngIf="!tipo">
-            <nav class="main-nav navbar navbar-expand-md" role="navigation">
-
-                <div class="navbar-collapse collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-
-                        <li class="nav-item"><a class="active nav-link" [routerLink]="['/inicio']">Inicio</a></li>
-                        <li class="nav-item"><a class="active nav-link" [routerLink]="['/personas']">Grupo</a></li>
-                        <li class="nav-item"><a class="active nav-link" [routerLink]="['/assessments']">Assessments</a></li>
-                        <li class="nav-item"><a class="active nav-link" [routerLink]="['/evaluaciones']">Evaluaciones</a></li>
-                        <li class="nav-item">
-                          <a class="active nav-link" [routerLink]="['/inicio']">{{nombres }} {{apellidos }}  <span class="glyphicon glyphicon-user" ></span> </a>
-                          </li>
-
-
-                        <li class="nav-item"><a class="active nav-link" (click)="logOut()">Cerrar Sesión</a></li>
-
-
-
-
-                      </ul><!--//nav-->
-                </div><!--//navabr-collapse-->
-
-          </nav><!--//main-nav-->
-        </div><!--//container-->
-        </div><!--//main-nav-container-->
-
-        <!-- ******CONTENT****** -->
-
-    </div><!--//wrapper-->
-
-    <!--
-    <div class="config-wrapper d-none d-md-block">
-        <div class="config-wrapper-inner">
-            <a id="config-trigger" class="config-trigger" href="#"><i class="fa fa-cog"></i></a>
-            <div id="config-panel" class="config-panel" style="display: block;">
-                <p>Elegir Tema</p>
-                <ul id="color-options" class="list-unstyled list-inline">
-                    <li class="list-inline-item default active"><a data-style="assets/css/styles.css" data-logo="assets/images/logo.png" href="#"></a></li>
-                    <li class="list-inline-item green"><a data-style="assets/css/styles-green.css" data-logo="assets/images/logo-green.png" href="#"></a></li>
-                    <li class="list-inline-item purple"><a data-style="assets/css/styles-purple.css" data-logo="assets/images/logo-purple.png" href="#"></a></li>
-                    <li class="list-inline-item red"><a data-style="assets/css/styles-red.css" data-logo="assets/images/logo-red.png" href="#"></a></li>
-                </ul><!--//color-options
-                <a id="config-close" class="close" href="#"><i class="fa fa-times-circle"></i></a>
-            </div><!--//configure-panel
-        </div><!--//config-wrapper-inner
-    </div>-->
-
-    <!-- Javascript -->
-    <script type="text/javascript" src="assets/plugins/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/popper.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jflickrfeed/jflickrfeed.min.js"></script>
-    <script type="text/javascript" src="assets/js/main.js"></script>
+		<!-- Javascript -->
+		<script type="text/javascript" src="assets/plugins/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="assets/plugins/popper.min.js"></script>
+		<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+		<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="assets/plugins/jflickrfeed/jflickrfeed.min.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
 
 
 

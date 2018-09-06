@@ -13,7 +13,6 @@ const cors = require('cors');
 var DataTable = require('mongoose-datatable');
 
 
-
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
