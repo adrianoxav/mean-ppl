@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import * as XLSX from 'ts-xlsx';
+import { NotificationsService  } from 'angular2-notifications';
+
 let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
 };
@@ -19,7 +21,7 @@ export class MateriaEditComponent implements OnInit {
 
 
 
-      constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+      constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,private _service: NotificationsService) { }
 
       ngOnInit() {
         this.getCurso(this.route.snapshot.params['id']);
@@ -33,17 +35,30 @@ export class MateriaEditComponent implements OnInit {
         });
       }
 
-      updateCurso(id) {
+      updateCurso() {
     //    this.curso.updated_date = Date.now();
-        this.http.put('http://localhost:3000/materia/'+id, this.materia,httpOptions)
-          .subscribe(res => {
-              let id = res['_id'];
-              this.router.navigate(['/materia-details', id]);
-            }, (err) => {
-              console.log(err);
-            }
-          );
+        this.http.put('http://localhost:3000/materia/'+this.id, this.materia,httpOptions)
+        .subscribe(res => {
+          console.log(res);
+            let id = res['_id'];
+            this._service.success(
+  					'Exito',
+  					'materia creado exitosamente',
+  					{
+  							timeOut: 5000,
+  							showProgressBar: true,
+  							pauseOnHover: false,
+  							clickToClose: false
+  					}
+  				)
+            this.router.navigate(['/materia-details', id]);
+
+
+          }, (err) => {
+            console.log(err);
+          }
+        );
       }
 
-    
+
 }

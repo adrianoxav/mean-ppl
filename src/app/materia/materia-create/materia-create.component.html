@@ -11,11 +11,14 @@
           <label for="name">Código de Materia</label>
           <input type="text" class="form-control" [(ngModel)]="materia.cod_materia" name="cod_materia" required>
         </div>
+        <input type="checkbox" id="pre" [(ngModel)]="materia.pre" name="pre" value="pre"> <label for="pre">Es pre Universitario?</label>
 
 
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!curso.form.valid">Crear Materia</button>
         </div>
+
+
       </form>
 
   </div>

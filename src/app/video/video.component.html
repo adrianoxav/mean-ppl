@@ -22,6 +22,12 @@
         <td>{{ video.modulo }}</td>
         <td>{{ video.img_url }}</td>
         <td>{{ video.url }}</td>
+        <td class="video">
+    <video controls (click)="toggleVideo()" #videoPlayer>
+        <source src="{{video.url}}" type="video/mp4" />
+        Browser not supported
+    </video>
+</td>
 
 
         <td><a [routerLink]="['/video-details', video._id]">Detalles</a></td>

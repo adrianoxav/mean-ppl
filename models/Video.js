@@ -13,6 +13,10 @@ var VideoSchema = new mongoose.Schema({
   modulo: String,
   img_url: String,
   url: String,
+  'idMateria': {
+  type: String,
+  ref: 'Materia'
+  },
 
   updated_date: { type: Date, default: Date.now },
 });

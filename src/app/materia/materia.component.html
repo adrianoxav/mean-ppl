@@ -10,6 +10,8 @@
         <th>Nombre</th>
 
         <th>Código de Materia</th>
+        <th>PRE</th>
+
 
 
       </tr>
@@ -19,6 +21,13 @@
         <td>{{ materia.nombre }}</td>
 
         <td>{{ materia.cod_materia }}</td>
+        <a *ngIf="materia.pre" title="pre" >
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </a>
+                  <a *ngIf="!materia.pre" title="pre" >
+                              <i class="fa fa-window-minimize" aria-hidden="true"></i>
+                            </a>
+
 
 
 

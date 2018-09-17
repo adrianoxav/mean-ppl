@@ -9,7 +9,7 @@ var MateriaSchema = new mongoose.Schema({
   'default' : shortid.generate
 },
   nombre: String,
-
+  pre: Boolean,
   cod_materia: String,
 
   updated_date: { type: Date, default: Date.now },
