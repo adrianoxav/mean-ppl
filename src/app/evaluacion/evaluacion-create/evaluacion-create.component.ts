@@ -18,7 +18,9 @@ public  fechaInicioTomada= new Date();
   cuestionario: any;
   fechaini: any;
   fechafin: any;
-
+  user={};
+  idUser:any;
+  cursos=[];
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -33,7 +35,19 @@ public  fechaInicioTomada= new Date();
       this.cuestionarios = data;
     });
     console.log(this.cuestionarios);
+    this.idUser=localStorage.getItem('idUser');
 
+      this.http.get('http://localhost:3000/user/'+this.idUser,httpOptions).subscribe(data => {
+        this.user=data;
+        console.log(this.user);
+
+        for(let i of this.user.curso){
+          this.http.get('http://localhost:3000/curso/'+i,httpOptions).subscribe(data => {
+            this.cursos.push(data);
+          });
+        //  console.log(this.cursos);
+        }
+      });
   }
 
   saveEvaluacion() {
@@ -42,12 +56,7 @@ public  fechaInicioTomada= new Date();
     this.fechaTerminada=new Date(this.fechafin);
     //this.evaluacion.fechaInicioTomada=this.fechaInicioTomada;
   //  this.evaluacion.fechaTerminada=this.fechaTerminada;
-  console.log(this.fechaini);
-  console.log(this.fechafin);
-    console.log(this.evaluacion.fechaInicioTomada);
-    console.log(this.evaluacion.fechaTerminada);
-    console.log(this.fechaInicioTomada);
-    console.log(this.fechaTerminada);
+
 
         this.http.post('http://localhost:3000/evaluacion', this.evaluacion,httpOptions)
       .subscribe(res => {
@@ -67,13 +76,15 @@ public  fechaInicioTomada= new Date();
       // ... do other stuff here ...
   }
 
-  onChange1(newValue) {
-      console.log(newValue);
-      this.evaluacion.fechaInicioTomada = newValue;
-      console.log(this.evaluacion.fechaInicioTomada);
 
-      // ... do other stuff here ...
-  }
+    onChange1(newValue) {
+        console.log(newValue);
+        this.evaluacion.idCurso = newValue;
+        console.log(this.evaluacion.idCurso);
+
+        // ... do other stuff here ...
+    }
+
 
 
 

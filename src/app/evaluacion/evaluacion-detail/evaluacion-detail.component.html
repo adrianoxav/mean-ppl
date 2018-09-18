@@ -10,14 +10,11 @@
     <dt>Cuestionario</dt>
     <dd>{{ cuestionario.nombre }}</dd>
     <dt>Fecha de Inicio</dt>
-    <dd>{{ evaluacion.fechaInicioTomada  | date: "dd MMM y" }}</dd>
-    <dt>Desde las:</dt>
-    <dd>{{ evaluacion.fechaInicioTomada  | date:'hh:mm a' }}</dd>
-    <dt>Fecha de Finalización</dt>
-    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y" }}</dd>
+    <dd>{{ evaluacion.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</dd>
 
-    <dt>Hasta:</dt>
-    <dd>{{ evaluacion.fechaTerminada |  date:'hh:mm a' }}</dd>
+    <dt>Fecha de Finalización</dt>
+    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y hh:mm a" }}</dd>
+
 
 
 
@@ -29,7 +26,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>
+  <!--  <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>-->
     <button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">BORRAR</button>
     <a [routerLink]="['/evaluaciones']" class="btn btn-info">VOLVER</a>
 

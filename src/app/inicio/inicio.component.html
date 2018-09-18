@@ -9,19 +9,21 @@
       <th>Materia</th>
       <th>Fecha Inicio</th>
       <th>Fecha Fin</th>
-      <th>A Evaluar</th>
+      <th>Estudiante a Evaluar</th>
       <th>Tipo</th>
+      <th>Acción</th>
+
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let ass of cursos">
-      <td>{{ curso.nombre }}</td>
-      <td>{{ curso.anio }}</td>
-      <td>{{ curso.termino }}</td>
+    <tr *ngFor="let assessment of assessments">
+      <td>{{ assessment.idCurso.nombre }}</td>
+      <td>{{ assessment.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</td>
+      <td>{{ assessment.fechaTerminada  | date: "dd MMM y hh:mm a" }}</td>
 
-      <td>{{ curso.paralelo }}</td>
-      <td>{{ tipo }}</td>
-      <td><a [routerLink]="['/curso-details', curso._id]">Detalles</a></td>
+      <td>{{ assessment.idEstudianteEvaluar.nombres }} {{ assessment.idEstudianteEvaluar.apellidos }}</td>
+      <td>{{ assessment.idEvaluacion.tipo }}</td>
+      <td><a [routerLink]="['/assessment-details', assessment._id]">Realizar</a></td>
 
     </tr>
   </tbody>

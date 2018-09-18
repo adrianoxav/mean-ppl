@@ -17,9 +17,9 @@ export class InicioComponent implements OnInit {
   isLoading = true;
   assignations: any;
   cursos= [];
-  
-  tipo:any;
 
+  tipo:any;
+assessments:any;
   idUser:any;
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -29,7 +29,14 @@ export class InicioComponent implements OnInit {
   };
   this.idUser=localStorage.getItem('idUser');
   this.tipo=localStorage.getItem('tipo');
+  console.log(this.idUser);
 
+
+  this.http.get('http://localhost:3000/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
+    this.assessments=data;
+    console.log(data);
+
+  });
 
 
 

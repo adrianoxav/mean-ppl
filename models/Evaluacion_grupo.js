@@ -3,28 +3,27 @@ var Schema = mongoose.Schema;
 const shortid = require('shortid');
 
 
-var Evaluacion_estudianteSchema = new mongoose.Schema({
+var Evaluacion_grupoSchema = new mongoose.Schema({
   _id: {
   type: String,
   'default' : shortid.generate
 },
-  'idPersona': {
+  'idGrupo': {
 type: String,
-ref: 'Persona'
+ref: 'Grupo'
 },
 'idEvaluacion': {
 type: String,
 ref: 'Evaluacion'
 },
-'idGrupo': {
-type: String,
-ref: 'Evaluacion'
-},
-finalizo: Boolean,
+tipo: String,
 fechaInicioTomada: Date,
 fechaTerminada: Date,
-wfestudiante: Number,
+wfgrupo: Number,
+numestudiantes:Number,
+hanrealizado:Number,
+
   updated_date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Evaluacion_estudiante', Evaluacion_estudianteSchema);
+module.exports = mongoose.model('Evaluacion_grupo', Evaluacion_grupoSchema);

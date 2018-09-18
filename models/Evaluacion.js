@@ -9,11 +9,11 @@ var EvaluacionSchema = new mongoose.Schema({
   'default' : shortid.generate
 },
 'idCurso': {
- type: Schema.Types.ObjectId,
- ref: 'Curso'
- },
+type: String,
+ref: 'Curso'
+},
  'idCuestionario': {
-  type: Schema.Types.ObjectId,
+   type: String,
   ref: 'Cuestionario'
   },
   numero: Number,
