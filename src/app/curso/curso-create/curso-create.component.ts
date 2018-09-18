@@ -22,6 +22,7 @@ export class CursoCreateComponent implements OnInit {
   materias={};
 materia:any;
 cursocreado:any;
+ gruposcreados=[];
 
 
 
@@ -45,30 +46,28 @@ cursocreado:any;
     console.log(this.curso);
     this.http.post('http://localhost:3000/curso', this.curso,httpOptions)
       .subscribe(res => {
+
         console.log(res);
           let id = res['_id'];
           this.cursocreado=res;
           console.log(this.cursocreado);
-          for(var i=0;i<this.curso.numgrupos;i++){
-            let grupo = { nombre:(i+1), curso:id };
+          for(var i=1;i<=(this.curso.numgrupos);i++){
+            let grupo = { nombre:i, curso:id };
             console.log(grupo);
             this.http.post('http://localhost:3000/grupo', grupo,httpOptions)
-              .subscribe(res => {
+              .toPromise().then(res => {
                 console.log(res);
                 this.cursocreado.grupos.push(res['_id']);
-                console.log(this.cursocreado);
-                console.log(this.cursocreado['_id']);
-                this.http.put('http://localhost:3000/cursos/'+this.cursocreado['_id'],this.cursocreado).subscribe(data => {
-                  console.log(data);
 
 
-              });
           }, (err) => {
             console.log(err);
           }
         );
 
           }
+        //  this.updategrupos();
+        this.router.navigate(['/curso-details', id]);
 
 
           this._service.success(
@@ -82,13 +81,22 @@ cursocreado:any;
 					}
 				)
 
-          this.router.navigate(['/curso-details', id]);
 
 
         }, (err) => {
           console.log(err);
         }
       );
+
+  }
+
+  updategrupos(){
+    this.http.put('http://localhost:3000/curso/'+this.cursocreado['_id'],this.cursocreado,httpOptions).toPromise().then(data => {
+      console.log(data);
+
+
+  });
+
   }
   onChange(newValue) {
     this.curso.idMateria=newValue;

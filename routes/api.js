@@ -26,7 +26,7 @@ router.post('/signup', function(req, res) {
       apellidos: req.body.apellidos,
       identificacion: req.body.identificacion,
       tipo: req.body.tipo,
-      //curso: req.body.curso
+      curso: req.body.curso
 
     });
     // save the user

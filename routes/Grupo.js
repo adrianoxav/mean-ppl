@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Grupo = require('../models/Grupo.js');
+var Curso = require('../models/Curso.js');
+
 
 /* GET ALL CursoS */
 router.get('/', function(req, res, next) {
@@ -34,7 +36,11 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   Grupo.create(req.body, function (err, post) {
     if (err) return next(err);
-    res.json(post);
+    //res.json(post);
+    Curso.findByIdAndUpdate(req.body.curso, {$push: {grupos: post._id}}, function (err, post) {
+      if (err) return next(err);
+      res.json(post);
+    });
   });
 });
 

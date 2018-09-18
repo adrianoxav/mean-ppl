@@ -101,6 +101,8 @@ import {OWL_DATE_TIME_LOCALE , OwlDateTimeModule, OwlNativeDateTimeModule} from 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { SignupprofesorComponent } from './signupprofesor/signupprofesor.component';
+
 import { UsuarioComponent } from './usuario/usuario.component';
 
 import { UsuarioModule } from './usuario/usuario.module';
@@ -130,6 +132,13 @@ const appRoutes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+    data: { title: 'Registrarse' }
+
+
+  },
+  {
+    path: 'signupprofesor',
+    component: SignupprofesorComponent,
     data: { title: 'Registrarse' }
 
 
@@ -529,6 +538,7 @@ const appRoutes: Routes = [
     VideoDetailComponent,
     LoginComponent,
     SignupComponent,
+    SignupprofesorComponent,
     UsuarioComponent,
     ProfileComponent,
     ProfileEditComponent,

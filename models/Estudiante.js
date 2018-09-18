@@ -22,10 +22,10 @@ var EstudianteSchema = new Schema({
         type: String,
         required: true
     },
-    curso: {
+    curso:[ {
       type: String,
       ref: 'Curso'
-    }
+    }]
 });
 
 EstudianteSchema.pre('save', function (next) {

@@ -88,7 +88,7 @@ this.buttonDisabled = true;
 
   onChange(newValue) {
     this.buttonDisabled = true;
-
+    this.grupos=[];
     this.cursoSeleccionado=newValue;
     this.estudiantes=[];
       console.log(newValue);

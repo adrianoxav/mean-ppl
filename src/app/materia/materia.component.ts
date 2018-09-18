@@ -19,7 +19,7 @@ let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
 
 @Component({
   selector: 'app-materia',
-  templateUrl: './materia.component.html',
+  templateUrl: './materia.component.html', 
   styleUrls: ['./materia.component.css']
 })
 export class MateriaComponent implements OnInit {

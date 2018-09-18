@@ -37,6 +37,7 @@ this.http.get('http://localhost:3000/pregunta', httpOptions).subscribe(data => {
       };
       this.cuestionario.creado = Date.now();
       this.cuestionario.preguntas=this.selected;
+      console.log(this.cuestionario);
       this.http.post('http://localhost:3000/cuestionario', this.cuestionario,httpOptions)
         .subscribe(res => {
             let id = res['_id'];

@@ -7,11 +7,20 @@
           <label for="name">Pregunta</label>
           <input type="text" class="form-control" [(ngModel)]="pregunta.pregunta" name="pregunta" required>
         </div>
+
         <div class="form-group">
           <label for="name">Tipo</label>
-          <input type="text" class="form-control" [(ngModel)]="pregunta.tipo" name="tipo" required>
-        </div>
+          <select name="tipo" [(ngModel)]="pregunta.tipo" required>
+                 <option value="Preparación" selected="selected">Preparación</option>
+                 <option value="Asistencia">Asistencia</option>
+                 <option value="Contribution">Contribución</option>
+                 <option value="Respeto">Respeto</option>
+                 <option value="Flexibilidad">Flexibilidad</option>
+                 <option value="Feedback">Feedback</option>
 
+
+             </select>
+           </div>
 
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!pregunta.form.valid">Save</button>

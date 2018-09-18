@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
@@ -16,6 +17,9 @@ export class SignupComponent implements OnInit {
   cursos = {};
   idcurso='';
   cursoaActualizar={};
+  cursosSeleccionados=[];
+  selected: String[]=[];
+
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
@@ -27,13 +31,9 @@ export class SignupComponent implements OnInit {
 
   signup() {
     console.log(this.signupData);
-    this.http.get('http://localhost:3000/cursos/'+this.idcurso).subscribe(data => {
-      this.cursoaActualizar=data;
 
-
-  });
   console.log(this.cursoaActualizar);
-  this.signupData.curso=this.idcurso;
+  this.signupData.curso=this.cursosSeleccionados;
   if(this.signupData.tipo=="Estudiante"){
 
   this.http.post('http://localhost:3000/api/suestudiante',this.signupData).subscribe(resp => {
@@ -43,26 +43,40 @@ export class SignupComponent implements OnInit {
       this.http.get('http://localhost:3000/estudiantes/email/'+this.signupData.email).subscribe(data => {
         console.log(data);
         idUser=data._id;
-        let asignacion = { idUser:data._id, idcurso:this.idcurso,tipo:this.signupData.tipo };
-        console.log(asignacion); 
 
-        this.cursoaActualizar.estudiantes.push(idUser);
+        for (let cursosel of this.cursosSeleccionados){
+          this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
+            let cursoactual=data;
 
-        this.http.put('http://localhost:3000/cursos/'+this.idcurso,this.cursoaActualizar).subscribe(data => {
+
+
+          cursoactual.estudiantes.push(idUser);
+        this.http.put('http://localhost:3000/cursos/'+cursosel,cursoactual).subscribe(data => {
           console.log(data);
+
+    });
       });
+      }
         }
         );
     this.router.navigate(['login']);
     }
     else{
-      let asignacion = { idUser:idUser, idcurso:this.idcurso,tipo:this.signupData.tipo };
-        this.cursoaActualizar.estudiantes.push(idUser);
-      this.http.put('http://localhost:3000/cursos/'+this.idcurso,this.cursoaActualizar).subscribe(data => {
+      for (let cursosel of this.cursosSeleccionados){
+        this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
+          let cursoactual=data;
+
+
+
+        cursoactual.estudiantes.push(idUser);
+      this.http.put('http://localhost:3000/cursos/'+cursosel,cursoactual).subscribe(data => {
         console.log(data);
 
-
+  });
     });
+    }
+    this.router.navigate(['login']);
+
     }
 
 
@@ -108,11 +122,22 @@ this.http.post('http://localhost:3000/api/signup',this.signupData).subscribe(res
 }
 
 onChange(newValue) {
+  //this.cursosSeleccionados.push(newValue);
     console.log(newValue);
-    this.signupData.curso = newValue;
-    console.log(this.signupData.curso);
+    //this.signupData.curso.push(newValue);
+    console.log(this.cursosSeleccionados);
 
     // ... do other stuff here ...
 }
+
+select(id: any){
+   let index: number;
+   index = this.cursosSeleccionados.findIndex(num => num == id);
+   if(index==-1){
+   this.cursosSeleccionados.push(id);}
+   else{this.cursosSeleccionados.splice(index,1)};
+   console.log(this.cursosSeleccionados);
+
+ }
 
 }

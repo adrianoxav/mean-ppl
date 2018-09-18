@@ -8,10 +8,7 @@ var PreguntaSchema = new mongoose.Schema({
   type: String,
   'default' : shortid.generate
 },
-  'idCuestionario': {
-type: Schema.Types.ObjectId,
-ref: 'Cuestionario'
-},
+
   pregunta: String,
   tipo: String,
 
