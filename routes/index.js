@@ -11,8 +11,8 @@ module.exports = function(app) {
   app.use('/materia',AuthenticationController.isAuthenticated,  require('./Materia'));
   app.use('/grupo',AuthenticationController.isAuthenticated,  require('./Grupo'));
   //app.use('/evaluacion_estudiante', AuthenticationController.isAuthenticated, require('./Evaluacion_estudiante'));
+  app.use('/evaluacion_estudiante', require('./Evaluacion_estudiante'));
   app.use('/evaluacion_estudiantepeer', require('./Evaluacion_estudiantepeer'));
-
   app.use('/evaluacion',AuthenticationController.isAuthenticated,  require('./Evaluacion'));
   app.use('/persona', AuthenticationController.isAuthenticated,  require('./Persona'));
   app.use('/pregunta_assessment', AuthenticationController.isAuthenticated, require('./Pregunta_assessment'));

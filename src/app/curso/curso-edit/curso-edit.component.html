@@ -1,39 +1,29 @@
 <div class="container">
-  <h1>Edit curso</h1>
+  <h1>Editar curso</h1>
   <div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="updateCurso(curso._id)" #cursoForm="ngForm">
-        <
-        <div class="form-group">
 
-          <label for="name">Materia</label>
-          <select   [(ngModel)]="curso.idMateria" (ngModelChange)="onChange($event)" name="idMateria" required>
-            <option *ngFor="let c of materias" [ngValue]="c._id">{{c.nombre}} Código {{c.cod_materia}}</option>
-         </select>        </div>
          <div class="form-group">
            <label for="name">Nombre</label>
            <input type="text" class="form-control" (ngModelChange)="onChange1($event)" [(ngModel)]="curso.nombre" name="nombre" disabled required>
          </div>
          <div class="form-group">
            <label for="name">Código</label>
-           <input type="text" class="form-control" [(ngModel)]="curso.cod_materia" name="cod_materia" required>
+           <input type="text" class="form-control" [(ngModel)]="curso.cod_materia" name="cod_materia" disabled required>
          </div>
         <div class="form-group">
           <label for="name">Año</label>
-          <input type="text" class="form-control" [(ngModel)]="curso.anio" name="anio" required>
+          <input type="text" class="form-control" [(ngModel)]="curso.anio" name="anio"disabled required>
         </div>
 
         <div class="form-group">
           <label for="name">Término</label>
-
-          <select name="tipo" [(ngModel)]="curso.termino" required>
-                 <option value="1s" >1s</option>
-                 <option value="2s">2s</option>
-             </select>
-                   </div>
+          <input type="text" class="form-control" [(ngModel)]="curso.termino" name="termino"disabled required>
+        </div>
         <div class="form-group">
           <label for="name">Paralelo</label>
-          <input type="number" class="form-control" [(ngModel)]="curso.paralelo" name="paralelo" required>
+          <input type="text" class="form-control" [(ngModel)]="curso.paralelo" name="paralelo"disabled required>
         </div>
       <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!cursoForm.form.valid">Update</button>

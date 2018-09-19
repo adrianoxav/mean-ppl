@@ -18,7 +18,7 @@ export class CuestionarioDetailComponent implements OnInit {
     pregunta:any;
 
     preguntas:any;
-    preg: any;
+    preg= [];
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -62,11 +62,12 @@ export class CuestionarioDetailComponent implements OnInit {
         this.http.get('http://localhost:3000/pregunta/'+i, httpOptions).subscribe(data => {
           i = data;
           console.log(data);
-          preg.push(data.pregunta);
+
+          this.preg.push(data);
         });
 
       }
-console.log(preg);
+console.log(this.preg);
 this.cuestionario.preguntas=preg;
     }
 }

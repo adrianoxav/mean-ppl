@@ -8,22 +8,33 @@ var Evaluacion_estudianteSchema = new mongoose.Schema({
   type: String,
   'default' : shortid.generate
 },
-  'idPersona': {
+  'idEstudiante': {
 type: String,
-ref: 'Persona'
+ref: 'Estudiante'
 },
 'idEvaluacion': {
 type: String,
 ref: 'Evaluacion'
 },
+'idCurso': {
+type: String,
+ref: 'Curso'
+},
 'idGrupo': {
 type: String,
-ref: 'Evaluacion'
+ref: 'Grupo'
+},
+'idEvaluacionGrupo': {
+type: String,
+ref: 'Evaluacion_grupo'
 },
 finalizo: Boolean,
 fechaInicioTomada: Date,
 fechaTerminada: Date,
 wfestudiante: Number,
+tipo: String,
+hanrealizado:Number,
+comentarios:[{type:String}],
   updated_date: { type: Date, default: Date.now },
 });
 

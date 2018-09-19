@@ -12,11 +12,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./curso-edit.component.css']
 })
 export class CursoEditComponent implements OnInit {
-  curso = {};
+  curso = {idMateria: String,numgrupos: Number,nombre:String,cod_materia: String,profesores:[ ],estudiantes:[ ]};
   users : any;
   id:any;
   lista: any;
   arrayBuffer:any;
+  materia:any;
   file:File;
   materias:{};
   profesores=[ ];
@@ -34,11 +35,13 @@ export class CursoEditComponent implements OnInit {
        headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
      };
  this.materia=newValue;
+ let datos:any;
+
  this.http.get('http://localhost:3000/materia/'+this.materia,httpOptions).subscribe(data => {
    console.log(data);
-
-   this.curso.nombre = data.nombre;
-   this.curso.cod_materia = data.cod_materia;
+datos=data;
+   this.curso.nombre = datos.nombre;
+   this.curso.cod_materia = datos.cod_materia;
 
  });
        // ... do other stuff here ...
@@ -49,24 +52,7 @@ export class CursoEditComponent implements OnInit {
 
    }
 
-  Upload() {
-       let fileReader = new FileReader();
-         fileReader.onload = (e) => {
-             this.arrayBuffer = fileReader.result;
-             var data = new Uint8Array(this.arrayBuffer);
-             var arr = new Array();
-             for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-             var bstr = arr.join("");
-             var workbook = XLSX.read(bstr, {type:"binary"});
-             console.log(workbook);
-             var first_sheet_name = workbook.SheetNames[0];
-             var worksheet = workbook.Sheets[first_sheet_name];
-             this.lista= XLSX.utils.sheet_to_json(worksheet,{raw:true});
-             console.log(this.lista);
 
-         }
-         fileReader.readAsArrayBuffer(this.file);
-  }
 
 
       constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
@@ -88,8 +74,10 @@ export class CursoEditComponent implements OnInit {
       }
 
       getCurso(id) {
+        let curs:any;
         this.http.get('http://localhost:3000/curso/'+id,httpOptions).subscribe(data => {
-          this.curso = data;
+          curs=data;
+          this.curso = curs;
           console.log(this.curso);
           for (let i of this.curso.profesores){
           this.http.get('http://localhost:3000/user/'+i,httpOptions).subscribe(data => {
@@ -136,20 +124,22 @@ createUsers(){
   };
     for(let l of this.lista){
 let assign:any;
-
+let r:any;
       this.http.post('http://localhost:3000/api/register', l, httpOptions)
         .subscribe(res => {
-            console.log(res.msg);
+            //console.log(res.msg);
+            r=res;
             let idUser = res['_id'];
 let assignation:any;
-            if(res.msg=="email already exists."){
+            if(r.msg=="email already exists."){
+              let dat:any;
               this.http.get('http://localhost:3000/user/email/'+l.email, httpOptions).subscribe(data => {
                 console.log(data);
-
+                dat=data;
                  assignation = {
                      'idCurso': this.id,
                      'grupo': l.grupo,
-                   'idUser': data._id };
+                   'idUser': dat._id };
                    console.log(assignation);
                    this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
                      .subscribe(res => {

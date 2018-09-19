@@ -14,12 +14,12 @@ import { BookComponent } from './book/book.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
-import { AssignationComponent } from './assignation/assignation.component';
 import { CuestionarioComponent } from './cuestionario/cuestionario.component';
 import { CursoComponent } from './curso/curso.component';
 import { EvaluacionEstudianteComponent } from './evaluacion-estudiante/evaluacion-estudiante.component';
 import { EvaluacionComponent } from './evaluacion/evaluacion.component';
 import { EstudianteComponent } from './estudiante/estudiante.component';
+import { InicioRealizarComponent } from './inicio/inicio-realizar/inicio-realizar.component';
 
 import { PersonaComponent } from './persona/persona.component';
 import { PreguntaAssessmentComponent } from './pregunta-assessment/pregunta-assessment.component';
@@ -29,43 +29,34 @@ import { VideoComponent } from './video/video.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 
-import { AssessmentsModule } from './assessments/assessments.module';
+//import { AssessmentsModule } from './assessments/assessments.module';
 import { AssessmentCreateComponent } from './assessments/assessment-create/assessment-create.component';
 import { AssessmentDetailComponent } from './assessments/assessment-detail/assessment-detail.component';
 import { AssessmentEditComponent } from './assessments/assessment-edit/assessment-edit.component';
 
-import { AssignationModule } from './assignation/assignation.module';
-import { AssignationCreateComponent } from './assignation/assignation-create/assignation-create.component';
-import { AssignationDetailComponent } from './assignation/assignation-detail/assignation-detail.component';
-import { AssignationEditComponent } from './assignation/assignation-edit/assignation-edit.component';
+
 
 
 import { CuestionarioEditComponent } from './cuestionario/cuestionario-edit/cuestionario-edit.component';
 import { CuestionarioCreateComponent } from './cuestionario/cuestionario-create/cuestionario-create.component';
 import { CuestionarioDetailComponent } from './cuestionario/cuestionario-detail/cuestionario-detail.component';
 
-import { CursoModule } from './curso/curso.module';
 import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { CursoCreateComponent } from './curso/curso-create/curso-create.component';
 import { CursoDetailComponent } from './curso/curso-detail/curso-detail.component';
 
-import { EstudianteModule } from './estudiante/estudiante.module';
 
-import { EvaluacionModule } from './evaluacion/evaluacion.module';
 import { EvaluacionEditComponent } from './evaluacion/evaluacion-edit/evaluacion-edit.component';
 import { EvaluacionCreateComponent } from './evaluacion/evaluacion-create/evaluacion-create.component';
 import { EvaluacionDetailComponent } from './evaluacion/evaluacion-detail/evaluacion-detail.component';
 
 
-import { Evaluacion_estudianteModule } from './evaluacion-estudiante/evaluacion-estudiante.module';
 import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evaluacion-estudiante-edit/evaluacion-estudiante-edit.component';
 import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
 import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
 
 import { GrupoComponent } from './grupo/grupo.component';
-import { GrupoModule } from './grupo/grupo.module';
 
-import { MateriaModule } from './materia/materia.module';
 import { MateriaComponent } from './materia/materia.component';
 
 import { MateriaEditComponent } from './materia/materia-edit/materia-edit.component';
@@ -73,22 +64,18 @@ import { MateriaCreateComponent } from './materia/materia-create/materia-create.
 import { MateriaDetailComponent } from './materia/materia-detail/materia-detail.component';
 
 
-import { PersonaModule } from './persona/persona.module';
 import { PersonaEditComponent } from './persona/persona-edit/persona-edit.component';
 import { PersonaCreateComponent } from './persona/persona-create/persona-create.component';
 import { PersonaDetailComponent } from './persona/persona-detail/persona-detail.component';
 
-import { PreguntaModule } from './pregunta/pregunta.module';
 import { PreguntaEditComponent } from './pregunta/pregunta-edit/pregunta-edit.component';
 import { PreguntaCreateComponent } from './pregunta/pregunta-create/pregunta-create.component';
 import { PreguntaDetailComponent } from './pregunta/pregunta-detail/pregunta-detail.component';
 
-import { PreguntaAssessmentModule } from './pregunta-assessment/pregunta-assessment.module';
 import { PreguntaAssessmentCreateComponent } from './pregunta-assessment/pregunta-assessment-create/pregunta-assessment-create.component';
 import { PreguntaAssessmentEditComponent } from './pregunta-assessment/pregunta-assessment-edit/pregunta-assessment-edit.component';
 import { PreguntaAssessmentDetailComponent } from './pregunta-assessment/pregunta-assessment-detail/pregunta-assessment-detail.component';
 
-import { VideoModule } from './video/video.module';
 import { VideoEditComponent } from './video/video-edit/video-edit.component';
 import { VideoCreateComponent } from './video/video-create/video-create.component';
 import { VideoDetailComponent } from './video/video-detail/video-detail.component';
@@ -105,11 +92,10 @@ import { SignupprofesorComponent } from './signupprofesor/signupprofesor.compone
 
 import { UsuarioComponent } from './usuario/usuario.component';
 
-import { UsuarioModule } from './usuario/usuario.module';
 import { UsuarioEditComponent } from './usuario/usuario-edit/usuario-edit.component';
 import { UsuarioCreateComponent } from './usuario/usuario-create/usuario-create.component';
 import { UsuarioDetailComponent } from './usuario/usuario-detail/usuario-detail.component';
-import {ToasterModule, ToasterService} from 'angular5-toaster';
+//import {ToasterModule, ToasterService} from 'angular5-toaster';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { JwtModule } from '@auth0/angular-jwt';
@@ -124,6 +110,11 @@ const appRoutes: Routes = [
     component: InicioComponent,
     data: { title: 'Inicio' }
   },
+  {
+      path: 'inicio-realizar/:id',
+      component: InicioRealizarComponent,
+      data: { title: 'Realizar Assessment' }
+    },
   {
     path: 'login',
     component: LoginComponent,
@@ -200,27 +191,7 @@ const appRoutes: Routes = [
     component: AssessmentEditComponent,
     data: { title: 'Edit Assessment' }
   },
-//assignations
-  {
-    path: 'assignations',
-    component: AssignationComponent,
-    data: { title: 'assignations' }
-  },
-  {
-    path: 'assignation-details/:id',
-    component: AssignationDetailComponent,
-    data: { title: 'assignation Details' }
-  },
-  {
-    path: 'assignation-create',
-    component: AssignationCreateComponent,
-    data: { title: 'Create assignation' }
-  },
-  {
-    path: 'assignation-edit/:id',
-    component: AssignationEditComponent,
-    data: { title: 'Edit assignation' }
-  },
+
 
 //cuestionarios
 {
@@ -488,7 +459,6 @@ const appRoutes: Routes = [
     BookDetailComponent,
     BookCreateComponent,
     BookEditComponent,
-    AssignationComponent,
     CuestionarioComponent,
     CursoComponent,
     MateriaComponent,
@@ -504,10 +474,7 @@ const appRoutes: Routes = [
     AssessmentCreateComponent,
     AssessmentEditComponent,
     AssessmentDetailComponent,
-    AssignationComponent,
-    AssignationCreateComponent,
-    AssignationEditComponent,
-    AssignationDetailComponent,
+
     InicioComponent,
     CuestionarioEditComponent,
     CuestionarioCreateComponent,
@@ -542,7 +509,8 @@ const appRoutes: Routes = [
     UsuarioComponent,
     ProfileComponent,
     ProfileEditComponent,
-    GrupoComponent
+    GrupoComponent,
+    InicioRealizarComponent
 
       ],
   imports: [
@@ -550,7 +518,7 @@ const appRoutes: Routes = [
 
     DataTablesModule,
     SimpleNotificationsModule.forRoot(),
-ToasterModule,
+//ToasterModule,
     BrowserModule,
     BrowserAnimationsModule,
     OwlDateTimeModule,

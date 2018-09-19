@@ -11,14 +11,14 @@ let httpOptions = {
 })
 export class EvaluacionCreateComponent implements OnInit {
 
-  evaluacion = {};
+  evaluacion = {idCuestionario:String,idCurso:String};
 public fechaTerminada = new Date();
 public  fechaInicioTomada= new Date();
   cuestionarios={};
   cuestionario: any;
   fechaini: any;
   fechafin: any;
-  user={};
+  user={curso:[]};
   idUser:any;
   cursos=[];
 
@@ -36,9 +36,10 @@ public  fechaInicioTomada= new Date();
     });
     console.log(this.cuestionarios);
     this.idUser=localStorage.getItem('idUser');
-
+    let datos:any;
       this.http.get('http://localhost:3000/user/'+this.idUser,httpOptions).subscribe(data => {
-        this.user=data;
+        datos=data;
+        this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){

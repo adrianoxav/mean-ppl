@@ -1,37 +1,5 @@
 <div class="container">
   <h1>Assignation
-    <a [routerLink]="['/assignation-create']" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
+  
   </h1>
-  <div *ngIf="!isLoading">
-
-  <table datatable [dtOptions]="dtOptionsAssig" class="row-border hover">
-    <thead>
-      <tr>
-        <th>Persona</th>
-        <th>Identificación</th>
-        <th>Curso</th>
-        <th>Paralelo</th>
-        <th>Tipo</th>
-        <th>Grupo</th>
-        <th>Acciones</th>
-
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let assignation of assignations">
-        <td>{{ assignation.idUser.nombres }} {{ assignation.idUser.apellidos }}</td>
-        <td>{{ assignation.idUser.identificacion }} </td>
-        <td>{{ assignation.idCurso.nombre }}</td>
-        <td>{{ assignation.idCurso.paralelo }}</td>
-        <td>{{ assignation.idUser.tipo }}</td>
-        <td>{{ assignation.grupo }}</td>
-
-        <td><a [routerLink]="['/assignation-details', assignation._id]">Detalles</a></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 </div>

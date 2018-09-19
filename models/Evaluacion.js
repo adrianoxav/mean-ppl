@@ -18,9 +18,10 @@ ref: 'Curso'
   },
   numero: Number,
   tipo: String,
-  capitulo: Number,
+  capitulo: String,
   fechaInicioTomada: Date,
   fechaTerminada: Date,
+  finalizo:Boolean,
   updated_date: { type: Date, default: Date.now },
 });
 

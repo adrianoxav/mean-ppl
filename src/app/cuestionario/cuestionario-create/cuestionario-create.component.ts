@@ -12,10 +12,10 @@ let httpOptions = {
 })
 export class CuestionarioCreateComponent implements OnInit {
 
-    cuestionario={};
+    cuestionario:any;
     preguntas={};
     selected: String[]=[];
-
+    nombre:any;
    creado: any;
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -35,6 +35,8 @@ this.http.get('http://localhost:3000/pregunta', httpOptions).subscribe(data => {
       let httpOptions = {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
+      this.cuestionario.nombre = this.nombre;
+
       this.cuestionario.creado = Date.now();
       this.cuestionario.preguntas=this.selected;
       console.log(this.cuestionario);

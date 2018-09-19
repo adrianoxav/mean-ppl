@@ -14,7 +14,7 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-navbar',
   templateUrl: './app-navbar.component.html',
-  styleUrls: ['./app-navbar.component.css']
+  styleUrls: ['./app-navbar.component.css'] 
 })
 export class AppNavbarComponent implements OnInit {
   title;
@@ -40,6 +40,7 @@ export class AppNavbarComponent implements OnInit {
     this.nombres = localStorage.getItem('nombres');
     this.apellidos = localStorage.getItem('apellidos');
     this.tip = localStorage.getItem('tipo');
+    console.log(this.tip);
     let identificacion = localStorage.getItem('identificacion');
 
 

@@ -41,7 +41,7 @@
 						</nav>
 						<div class="header-main container">
 						<div class="logo col-md-6 col-sm-6 col-xs-6">
-								<img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/ppl_logo.png" alt="Logo">
+								<a href="http://www.fcnm.espol.edu.ec/"><img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/logo_aaresi.png" alt="Logo"></a>
 						</div>
 
 						<div class="logo col-md-6 col-sm-6 col-xs-6">
@@ -59,9 +59,11 @@
 
 									<div class="navbar-collapse collapse" id="navbar-collapse">
 											<ul class="nav navbar-nav">
+												<li class="nav-item"><a class="active nav-link"  *ngIf="(tip == null)" [routerLink]="['/login']">Login</a></li>
+
 													<li class="nav-item"><a class="active nav-link"  *ngIf="(tip == 'Estudiante')" [routerLink]="['/inicio']">Inicio</a></li>
 													<li class="nav-item"><a class="active nav-link"   [routerLink]="['/videos']">Videos</a></li>
-													<li class="nav-item"><a class="active nav-link"   *ngIf="(tip == 'Estudiante')" [routerLink]="['/assessments']">Assessments Concluidos</a></li>
+													<li class="nav-item"><a class="active nav-link"   *ngIf="(tip == 'Estudiante')" [routerLink]="['/assessments']">Assessments Finalizados</a></li>
 													<li class="nav-item" *ngIf="(tip == 'Profesor')"><a class="active nav-link">|</a></li>
 
 													<li class="nav-item"><a class="active nav-link" *ngIf="(tip == 'Profesor')"  [routerLink]="['/evaluaciones']">Evaluaciones</a></li>

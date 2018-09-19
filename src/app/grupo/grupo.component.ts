@@ -12,7 +12,7 @@ let httpOptions = {
 })
 export class GrupoComponent implements OnInit {
   tipo:any;
-  user={};
+  user={curso:[]};
   idUser:any;
   cursos=[];
   estudiantes=[];
@@ -28,9 +28,10 @@ export class GrupoComponent implements OnInit {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
     this.idUser=localStorage.getItem('idUser');
-
+let datos:any
       this.http.get('http://localhost:3000/user/'+this.idUser,httpOptions).subscribe(data => {
-        this.user=data;
+        datos=data;
+        this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){
@@ -92,16 +93,21 @@ this.buttonDisabled = true;
     this.cursoSeleccionado=newValue;
     this.estudiantes=[];
       console.log(newValue);
+      let nom:any;
       this.http.get('http://localhost:3000/curso/'+newValue,httpOptions).subscribe(data => {
-        this.numgrupos=data.numgrupos;
-        console.log(data.estudiantes)
-        for (let i of data.estudiantes){
+        nom=data;
+        this.numgrupos=nom.numgrupos;
+        console.log(nom.estudiantes)
+        for (let i of nom.estudiantes){
+          let noom:any;
+
         this.http.get('http://localhost:3000/estudiantes/'+i,httpOptions).subscribe(data => {
              console.log(data);
+             noom=data;
              this.estudiantes.push(data);
            });}
 
-           for (let j of data.grupos){
+           for (let j of nom.grupos){
              this.http.get('http://localhost:3000/grupo/'+j,httpOptions).toPromise().then(data => {
                   //console.log(data);
                   this.grupos.push(data);

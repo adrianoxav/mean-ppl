@@ -12,7 +12,7 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  signupData = { email:'', password:'' };
+  signupData = { email:'', password:'',curso:[],tipo:"", };
   message = '';
   cursos = {};
   idcurso='';
@@ -35,18 +35,22 @@ export class SignupComponent implements OnInit {
   console.log(this.cursoaActualizar);
   this.signupData.curso=this.cursosSeleccionados;
   if(this.signupData.tipo=="Estudiante"){
-
+    let res:any;
   this.http.post('http://localhost:3000/api/suestudiante',this.signupData).subscribe(resp => {
     console.log(resp);
+    res=resp;
     let idUser = resp['_id'];
-    if(resp.msg=="email already exists. in estudiantes"){
+    if(res.msg=="email already exists. in estudiantes"){
+      let dat:any;
       this.http.get('http://localhost:3000/estudiantes/email/'+this.signupData.email).subscribe(data => {
         console.log(data);
-        idUser=data._id;
+        dat=data;
+        idUser=dat._id;
 
         for (let cursosel of this.cursosSeleccionados){
+          let cursoactual:any;
           this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
-            let cursoactual=data;
+            cursoactual=data;
 
 
 
@@ -63,8 +67,10 @@ export class SignupComponent implements OnInit {
     }
     else{
       for (let cursosel of this.cursosSeleccionados){
+        let cursoactual:any;
+
         this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
-          let cursoactual=data;
+          cursoactual=data;
 
 
 
@@ -83,42 +89,6 @@ export class SignupComponent implements OnInit {
 });
 }
 
-else if(this.signupData.tipo=="Profesor"){
-
-this.http.post('http://localhost:3000/api/signup',this.signupData).subscribe(resp => {
-  console.log(resp);
-  let idUser = resp['_id'];
-
-  if(resp.msg=="email already exists."){
-    this.http.get('http://localhost:3000/users/email/'+this.signupData.email).subscribe(data => {
-      console.log(data);
-      idUser=data._id;
-
-      let asignacion = { idUser:data._id, idcurso:this.idcurso,tipo:this.signupData.tipo };
-      console.log(asignacion);
-
-      this.cursoaActualizar.profesores.push(idUser);
-
-      this.http.put('http://localhost:3000/cursos/'+this.idcurso,this.cursoaActualizar).subscribe(data => {
-        console.log(data);
-    });
-      }
-      );
-  //this.router.navigate(['login']);
-  }
-  else{
-    let asignacion = { idUser:idUser, idcurso:this.idcurso,tipo:this.signupData.tipo };
-      this.cursoaActualizar.profesores.push(idUser);
-    this.http.put('http://localhost:3000/cursos/'+this.idcurso,this.cursoaActualizar).subscribe(data => {
-      console.log(data);
-
-
-  });
-  }
-
-
-});
-}
 }
 
 onChange(newValue) {

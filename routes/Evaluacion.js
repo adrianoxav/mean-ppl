@@ -5,6 +5,8 @@ var Estudiante = require('../models/Estudiante.js');
 var Evaluacion = require('../models/Evaluacion.js');
 var Evaluacion_grupo = require('../models/Evaluacion_grupo.js');
 var Evaluacion_estudiantepeer = require('../models/Evaluacion_estudiantepeer.js');
+var Evaluacion_estudiante = require('../models/Evaluacion_estudiante.js');
+
 var Curso = require('../models/Curso.js');
 var Grupo = require('../models/Grupo.js');
 
@@ -63,20 +65,49 @@ router.post('/', function(req, res, next) {
 
 //Empezamos a verificar los tipos de Assessments
             if(evaluaciongrupo.tipo=="Peer"){
+              for (var k = 0; k < grupo.estudiantes.length; k++) {
+                var newEvaluacionEstudiante = new Evaluacion_estudiante({
+                  idEstudiante: grupo.estudiantes[k],
+                  idEvaluacion: eval._id,
+                  idEvaluacionGrupo: evaluaciongrupo._id,
+                  idCurso: grupo.curso,
+                  idGrupo:grupo._id,
+                  tipo: eval.tipo,
+                  fechaInicioTomada: eval.fechaInicioTomada,
+                  fechaTerminada: eval.fechaTerminada,
+                  wfestudiante: 0,
+                  finalizo:0,
+                  hanrealizado:0,
+                  comentarios: [],
+                });
+
+                newEvaluacionEstudiante.save(function(err,post) {
+                  if (err) {
+                    return res.json({success: false, msg: 'error'});
+                  }
+                //  res.json(post);
+                  var evaluacionestudiante=(post);
+
+                  });
+                }
+
               for (var i = 0; i < grupo.estudiantes.length; i++) {
-                  var estudiante = grupo.estudiantes[i];
+                //assessmentestudiante
                   for (var j = 0; j < grupo.estudiantes.length; j++) {
-                    var nuevoestudiante=grupo.estudiantes[j];
+
                       if(j!=i){
                         var newEvaluacionEstudiantePeer = new Evaluacion_estudiantepeer({
-                          idEstudiante: estudiante,
-                          idEstudianteEvaluar: nuevoestudiante,
+                          idEstudiante: grupo.estudiantes[i],
+                          idEstudianteEvaluar: grupo.estudiantes[j],
+                        //  idEvaluacionEstudiante: evaluacionestudiante._id,
+                          idEvaluacionGrupo: evaluaciongrupo._id,
                           idEvaluacion: eval._id,
+                          idGrupo:grupo._id,
                           idCurso: grupo.curso,
                           tipo: eval.tipo,
                           fechaInicioTomada: eval.fechaInicioTomada,
                           fechaTerminada: eval.fechaTerminada,
-                          wfestudiante: 0,
+                          wfestudianteevaluar: 0,
                           finalizo:0,
                           comentarios: [],
                         });
@@ -86,14 +117,16 @@ router.post('/', function(req, res, next) {
                           }
                         //  res.json(post);
                           console.log(post);
+
                             });
+
+
                       }
                   }
 
                 }
 
               //  res.json(post);
-
 
 
             }

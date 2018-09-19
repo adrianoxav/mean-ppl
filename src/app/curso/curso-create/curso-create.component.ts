@@ -17,7 +17,7 @@ let httpOptions = {
 })
 export class CursoCreateComponent implements OnInit {
 
-  curso = {};
+  curso = {idMateria: String,numgrupos: Number,nombre:String,cod_materia: String};
   users : any;
   materias={};
 materia:any;
@@ -51,7 +51,8 @@ cursocreado:any;
           let id = res['_id'];
           this.cursocreado=res;
           console.log(this.cursocreado);
-          for(var i=1;i<=(this.curso.numgrupos);i++){
+          var nomgrup=this.curso.numgrupos;
+          for(var i=1;i<=Number(nomgrup);i++){
             let grupo = { nombre:i, curso:id };
             console.log(grupo);
             this.http.post('http://localhost:3000/grupo', grupo,httpOptions)
@@ -105,11 +106,12 @@ cursocreado:any;
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
 this.materia=newValue;
+let datos:any;
 this.http.get('http://localhost:3000/materia/'+this.materia,httpOptions).subscribe(data => {
   console.log(data);
-
-  this.curso.nombre = data.nombre;
-  this.curso.cod_materia = data.cod_materia;
+  datos=data;
+  this.curso.nombre = datos.nombre;
+  this.curso.cod_materia = datos.cod_materia;
 
 });
       // ... do other stuff here ...

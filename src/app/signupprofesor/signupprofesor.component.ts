@@ -12,7 +12,7 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./signupprofesor.component.css']
 })
 export class SignupprofesorComponent implements OnInit {
-  signupData = { email:'', password:'' };
+  signupData = { email:'', password:'',curso:[],tipo:"", };
   message = '';
   cursos = {};
   idcurso='';
@@ -24,7 +24,7 @@ export class SignupprofesorComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('http://localhost:3000/cursos').subscribe(data => {
-      console.log(data);
+      console.log(data); 
       this.cursos = data;
     });
   }
@@ -37,19 +37,24 @@ export class SignupprofesorComponent implements OnInit {
 
 
 
+  let res:any;
 
 this.http.post('http://localhost:3000/api/signup',this.signupData).subscribe(resp => {
   console.log(resp);
+  res=resp;
   let idUser = resp['_id'];
 
-  if(resp.msg=="email already exists."){
+  if(res.msg=="email already exists."){
+    let dat:any;
+
     this.http.get('http://localhost:3000/users/email/'+this.signupData.email).subscribe(data => {
-      console.log(data);
-      idUser=data._id;
+      console.log(data);dat=data;
+      idUser=dat._id;
 
       for (let cursosel of this.cursosSeleccionados){
+        let cursoactual:any;
         this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
-          let cursoactual=data;
+          cursoactual=data;
 
 
 
@@ -67,8 +72,9 @@ this.http.post('http://localhost:3000/api/signup',this.signupData).subscribe(res
 }
   else{
     for (let cursosel of this.cursosSeleccionados){
+      let cursoactual:any;
       this.http.get('http://localhost:3000/cursos/'+cursosel).subscribe(data => {
-        let cursoactual=data;
+        cursoactual=data;
 
 
 

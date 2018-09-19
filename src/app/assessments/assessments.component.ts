@@ -7,17 +7,22 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class AssessmentsComponent implements OnInit {
   assessments: any;
-
+  tipo:any;
+  idUser:any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.idUser=localStorage.getItem('idUser');
+    this.tipo=localStorage.getItem('tipo');
+    console.log(this.idUser);
 
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://localhost:3000/assessment',httpOptions).subscribe(data => {
+    this.http.get('http://localhost:3000/evaluacion_estudiante/finalizados/'+this.idUser).subscribe(data => {
+       this.assessments=data;
       console.log(data);
-      this.assessments = data;
+ 
     });
   }
 

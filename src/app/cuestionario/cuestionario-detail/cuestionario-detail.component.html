@@ -6,13 +6,13 @@
     <dt>Creado</dt>
     <dd>{{ cuestionario.creado | date :  "dd MMM y" }}</dd>
     <dt>Preguntas</dt>
-    <ul *ngFor="let pregunta of cuestionario.preguntas">
-      <li>{{ pregunta }}</li>
+    <ul *ngFor="let pregunta of preg;let i=index">
+      <li>{{ pregunta.pregunta }}</li>
 
 
 
     </ul>
- 
+
   </dl>
 </div>
 <div class="row">

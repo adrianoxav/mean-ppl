@@ -57,11 +57,12 @@ console.log(this.evaluacion);
           let preg=[];
           for (i of preguntas){
             console.log(i);
-
+            let dat:any;
             this.http.get('http://localhost:3000/pregunta/'+i,httpOptions).subscribe(data => {
               i = data;
+              dat=data;
               console.log(data);
-              preg.push(data.pregunta);
+              preg.push(dat.pregunta);
             });
 
           }

@@ -20,6 +20,14 @@ ref: 'Estudiante'
 type: String,
 ref: 'Evaluacion'
 },
+'idEvaluacionEstudiante': {
+type: String,
+ref: 'Evaluacion_estudiante'
+},
+'idEvaluacionGrupo': {
+type: String,
+ref: 'Evaluacion_grupo'
+},
 'idCurso': {
 type: String,
 ref: 'Curso'
@@ -32,7 +40,7 @@ tipo: String,
 finalizo: Boolean,
 fechaInicioTomada: Date,
 fechaTerminada: Date,
-wfestudiante: Number,
+wfestudianteevaluar: Number,
 comentarios:[{type:String}],
   updated_date: { type: Date, default: Date.now },
 });
