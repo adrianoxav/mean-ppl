@@ -35,14 +35,16 @@ constructor(private router: Router, private route: ActivatedRoute, private http:
     this.http.get('http://localhost:3000/evaluacion_estudiantepeer/'+id, httpOptions).subscribe(data => {
       this.assessment = data;
       console.log(data);
-      this.http.get('http://localhost:3000/cuestionario/'+data.idEvaluacion.idCuestionario, httpOptions).subscribe(data => {
+      this.http.get('http://localhost:3000/cuestionario/'+this.assessment.idEvaluacion.idCuestionario, httpOptions).subscribe(data => {
         this.assessment.idEvaluacion.idCuestionario = data;
         console.log(data);
         for(let preg of this.assessment.idEvaluacion.idCuestionario.preguntas){
           let pregunta:any;
+          let dat:any;
           this.http.get('http://localhost:3000/pregunta/'+preg, httpOptions).subscribe(data => {
             console.log(data);
-            if(data.tipo=="Feedback"){
+            dat=data;
+            if(dat.tipo=="Feedback"){
               this.comentariosnuevos.push(data);
               this.assessment.comentarios.push("");
 
