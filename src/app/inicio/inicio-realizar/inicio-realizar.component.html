@@ -1,0 +1,78 @@
+<div class="container">
+  <h1>Evaluación {{assessment.idEvaluacion.tipo}}</h1>
+  <div class="row">
+    <div >
+
+      <dl class="list">
+        <h3>Estudiante a Evaluar: {{assessment.idEstudianteEvaluar.nombres}}  {{assessment.idEstudianteEvaluar.apellidos}}</h3>
+        <dt></dt>
+        <dt>En la siguiente evaluación responda en calidad al trabajo correspondiente al Capítulo {{assessment.idEvaluacion.capitulo}}</dt>
+
+
+
+      </dl>
+      <form (ngSubmit)="saveassessment()" #preguntaForm="ngForm">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Pregunta</th>
+              <th>Muy Pobre</th>
+              <th>Debajo del Promedio</th>
+              <th>Promedio</th>
+              <th>Sobre el Promedio</th>
+              <th>Excelente</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pregunta of preguntas; let i = index">
+              <td>{{ pregunta.tipo }}</td>
+              <td class="col-md-6">{{ pregunta.pregunta }}</td>
+              <td><input type="radio" (change)="select()" [(ngModel)]="assessment.puntaje[i]" name="pregunta{{i}}" value="0" required></td>
+              <td><input type="radio" (change)="select()" [(ngModel)]="assessment.puntaje[i]" name="pregunta{{i}}" value="2" required></td>
+              <td><input type="radio" (change)="select()" [(ngModel)]="assessment.puntaje[i]" name="pregunta{{i}}" value="3" required></td>
+              <td><input type="radio" (change)="select()" [(ngModel)]="assessment.puntaje[i]" name="pregunta{{i}}" value="4" required></td>
+              <td><input type="radio" (change)="select()" [(ngModel)]="assessment.puntaje[i]" name="pregunta{{i}}" value="5" required></td>
+
+
+
+
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table col-md-12" style="width:100%">
+          <thead>
+            <tr>
+              <th >Tipo</th>
+              <th class="col-md-4">Pregunta</th>
+              <th class="col-md-5">Comentario</th>
+
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let comentario of comentariosnuevos; let j = index">
+              <td>{{ comentario.tipo }}</td>
+              <td>{{ comentario.pregunta }}</td>
+              <td style="width:500px;"><input type="text" class="form-control" placeholder="                                          " (change)="select1()" name="comentario{{j}}"  [(ngModel)]="assessment.comentarios[j]"  required/></td>
+
+
+
+
+            </tr>
+          </tbody>
+        </table>
+
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!assessment.form.valid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
