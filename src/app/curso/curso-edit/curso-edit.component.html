@@ -1,5 +1,7 @@
 <div class="container">
-  <h1>Editar curso</h1>
+  <a [routerLink]="['/cursos']" class="btn btn-info">VOLVER</a>
+
+  <h1>{{curso.nombre}} Paralelo {{curso.paralelo}}</h1>
   <div class="row">
     <div class="col-md-6">
       <form (ngSubmit)="updateCurso(curso._id)" #cursoForm="ngForm">
@@ -25,24 +27,21 @@
           <label for="name">Paralelo</label>
           <input type="text" class="form-control" [(ngModel)]="curso.paralelo" name="paralelo"disabled required>
         </div>
-      <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!cursoForm.form.valid">Update</button>
-        </div>
+
       </form>
     </div>
   </div>
 
   <div class="container">
-    <h2>Profesores del Paralelo</h2>
-    <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
+    <h2>Profesores</h2>
+    <!--  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
+    </a>-->
     <table class="table">
       <thead>
         <tr>
           <th>email</th>
-          <th>nombres</th>
-          <th>apellidos</th>
+          <th>Profesor</th>
           <th>tipo</th>
 
 
@@ -52,8 +51,7 @@
       <tbody>
         <tr *ngFor="let list of profesores">
           <td>{{ list.email }}</td>
-          <td>{{ list.nombres }}</td>
-          <td>{{ list.apellidos }}</td>
+          <td>{{ list.nombres }} {{ list.apellidos }}</td>
           <td>{{ list.tipo }}</td>
 
 
@@ -63,19 +61,16 @@
   </div>
 
   <div class="container">
-    <h2>Estudiantes del Paralelo</h2>
-    <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
+    <h2>Estudiantes</h2>
+  <!--  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    </a>
+    </a>-->
     <table class="table">
       <thead>
         <tr>
-          <th>identificacion</th>
           <th>email</th>
-          <th>nombres</th>
-          <th>apellidos</th>
-          <th>tipo</th>
-          <th>Grupo</th>
+          <th>Estudiante</th>
+          <th>Identificación</th>
 
 
 
@@ -83,12 +78,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let list of estudiantes">
-          <td>{{ list.identificacion }}</td>
           <td>{{ list.email }}</td>
-          <td>{{ list.nombres }}</td>
-          <td>{{ list.apellidos }}</td>
-          <td>{{ list.tipo }}</td>
-          <td>{{ list.grupo }}</td>
+          <td>{{ list.nombres }} {{ list.apellidos }}</td>
+          <td>{{ list.identificacion }}</td>
 
 
         </tr>

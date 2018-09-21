@@ -7,7 +7,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Numero</th>
+        <th>Nombre</th>
+        <th>Materia</th>
         <th>Tipo</th>
         <th>Capítulo</th>
         <th>Fecha de Inicio</th>
@@ -19,21 +20,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let evaluacion of evaluaciones">
-        <td>{{ evaluacion.numero }}</td>
+        <td>{{ evaluacion.nombre }}</td>
+        <td>{{ evaluacion.idCurso.nombre }}</td>
         <td>{{ evaluacion.tipo }}</td>
         <td>{{ evaluacion.capitulo }}</td>
         <td>{{ evaluacion.fechaInicioTomada | date: "dd MMM y"}}</td>
         <td>{{ evaluacion.fechaInicioTomada |  date:'hh:mm a'}}</td>
         <td>{{ evaluacion.fechaTerminada | date: "dd MMM y"}}</td>
         <td>{{ evaluacion.fechaTerminada |  date:"h:mm a"}}</td>
-  
 
 
 
 
 
 
-        <td><a [routerLink]="['/evaluacion-details', evaluacion._id]">Detalles</a></td>
+
+        <td><a *ngIf=(evaluacion.finalizo) [routerLink]="['/evaluacion-details', evaluacion._id]">Detalles</a></td>
       </tr>
     </tbody>
   </table>

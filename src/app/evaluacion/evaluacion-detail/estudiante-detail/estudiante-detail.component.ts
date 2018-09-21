@@ -5,12 +5,12 @@ let httpOptions = {
 };
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
-  selector: 'app-evaluacion-detail',
-  templateUrl: './evaluacion-detail.component.html',
-  styleUrls: ['./evaluacion-detail.component.css'],
+  selector: 'app-estudiante-detail',
+  templateUrl: './estudiante-detail.component.html',
+  styleUrls: ['./estudiante-detail.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class EvaluacionDetailComponent implements OnInit {
+export class EstudianteDetailComponent implements OnInit {
 
   cuestionario : any;
   pregunta:any;
@@ -28,10 +28,10 @@ export class EvaluacionDetailComponent implements OnInit {
         }
 
         getEvaluacionDetail(id) {
-          this.http.get('http://localhost:3000/evaluacion/'+id,httpOptions).subscribe(data => {
+          this.http.get('http://localhost:3000/evaluacion_estudiante/getdetail/'+id,httpOptions).subscribe(data => {
             this.evaluacion = data;
 console.log(this.evaluacion);
-                      this.http.get('http://localhost:3000/cuestionario/'+this.evaluacion.idCuestionario,httpOptions).subscribe(data => {
+                  /*    this.http.get('http://localhost:3000/cuestionario/'+this.evaluacion.idCuestionario,httpOptions).subscribe(data => {
                         this.cuestionario = data;
                         console.log(data);
                         console.log(this.cuestionario);
@@ -42,7 +42,7 @@ console.log(this.evaluacion);
                         this.evaluacionestudiantes = data;
                         console.log(this.evaluacionestudiantes);
 
-                      });
+                      });*/
           });
 
         }

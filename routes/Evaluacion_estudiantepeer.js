@@ -58,7 +58,11 @@ router.put('/peer/:id', function(req, res, next) {
     console.log(post);
     //let wfsumar=post.wfestudianteevaluar;
     //console.log(wfsumar);
-
+    Evaluacion_estudiante.findOneAndUpdate({idEstudiante: req.body.idEstudiante,idEvaluacion: req.body.idEvaluacion},
+       {haevaluado: true}, function (err, post) {
+      if (err) return next(err);
+      console.log(post);
+    });
     Evaluacion_grupo.findByIdAndUpdate(req.body.idEvaluacionGrupo,
 
       { $inc: { hanrealizado: 1, wfgrupo: req.body.wfestudianteevaluar } }
@@ -71,8 +75,11 @@ router.put('/peer/:id', function(req, res, next) {
       [{idEvaluacionGrupo: req.body.idEvaluacionGrupo},{idEstudiante:req.body.idEstudianteEvaluar}]},
 
 
-      { $inc: { hanrealizado: 1, wfestudiante:  req.body.wfestudianteevaluar  } }
-      ,
+      {
+        $inc: { hanrealizado: 1, wfestudiante:  req.body.wfestudianteevaluar  } ,
+        $push: { comentarios:  req.body.comentarios}
+            }
+     ,
     //  {$push: {"comentarios": req.body.comentarios}},
 
 

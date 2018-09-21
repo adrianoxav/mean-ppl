@@ -5,6 +5,8 @@ import { SimpleChanges } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Url} from '../url';
+
 let httpOptions = {
   headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
 };
@@ -14,9 +16,10 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-navbar',
   templateUrl: './app-navbar.component.html',
-  styleUrls: ['./app-navbar.component.css'] 
+  styleUrls: ['./app-navbar.component.css']
 })
 export class AppNavbarComponent implements OnInit {
+  url = new Url();
   title;
   token: any;
   tipo:any;
@@ -36,6 +39,9 @@ export class AppNavbarComponent implements OnInit {
   }*/
 
   ngOnInit() {
+    var url = this.url.base ;
+
+
     let aValue = localStorage.getItem('jwtToken');
     this.nombres = localStorage.getItem('nombres');
     this.apellidos = localStorage.getItem('apellidos');

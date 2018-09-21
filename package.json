@@ -4,14 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && node ./bin/www",
+    "start": "ng serve && node ./bin/www",
     "serve": "node ./bin/www --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prod": "ng build --prod --aot false --build-optimizer=false"
-
   },
   "private": true,
   "dependencies": {
@@ -56,6 +55,8 @@
     "ngx-datatable": "^1.0.3",
     "ngx-date-time-picker": "^1.1.5",
     "ngx-permissions": "^6.0.1",
+    "node-cron": "^2.0.1",
+    "node-schedule": "^1.3.0",
     "open-iconic": "^1.1.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",

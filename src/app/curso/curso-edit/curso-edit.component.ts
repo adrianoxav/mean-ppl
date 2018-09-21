@@ -80,9 +80,13 @@ datos=data;
           this.curso = curs;
           console.log(this.curso);
           for (let i of this.curso.profesores){
+            let ver:any;
           this.http.get('http://localhost:3000/user/'+i,httpOptions).subscribe(data => {
                console.log(data);
-               this.profesores.push(data);
+               ver=data;
+               if(ver.email=="admin"){}
+               else{
+               this.profesores.push(data);}
              });}
              for (let i of this.curso.estudiantes){
              this.http.get('http://localhost:3000/estudiantes/'+i,httpOptions).subscribe(data => {

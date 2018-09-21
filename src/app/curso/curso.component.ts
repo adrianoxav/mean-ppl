@@ -24,17 +24,21 @@ let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' 
 })
 export class CursoComponent implements OnInit {
 
-  cursos: any; 
+  cursos: any;
   codmateria:any;
   codperiodo:any;
-
+  admin:any;
+  esadmin:Boolean;
   private headers = new Headers({ 'Content-Type': 'application/json', 'token': '$0m3-U/1qu3-K3Y'});
 private options = new RequestOptions({ headers: this.headers });
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-
+    this.admin = localStorage.getItem('nombres');
+    if(this.admin=="admin"){
+      this.esadmin=true;
+    }
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };

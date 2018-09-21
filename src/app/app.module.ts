@@ -54,6 +54,7 @@ import { EvaluacionDetailComponent } from './evaluacion/evaluacion-detail/evalua
 import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evaluacion-estudiante-edit/evaluacion-estudiante-edit.component';
 import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
 import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
+import { EstudianteDetailComponent } from './evaluacion/evaluacion-detail/estudiante-detail/estudiante-detail.component';
 
 import { GrupoComponent } from './grupo/grupo.component';
 
@@ -167,6 +168,11 @@ const appRoutes: Routes = [
     path: 'usuario-edit/:id',
     component: UsuarioEditComponent,
     data: { title: 'Edit usuario' }
+  },
+  {
+    path: 'estudiante-detail/:id',
+    component: EstudianteDetailComponent,
+    data: { title: 'Estudiante detail' }
   },
 
   //assesstments
@@ -474,7 +480,7 @@ const appRoutes: Routes = [
     AssessmentCreateComponent,
     AssessmentEditComponent,
     AssessmentDetailComponent,
-
+    EstudianteDetailComponent,
     InicioComponent,
     CuestionarioEditComponent,
     CuestionarioCreateComponent,

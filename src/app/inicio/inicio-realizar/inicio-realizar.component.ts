@@ -111,6 +111,8 @@ constructor(private router: Router, private route: ActivatedRoute, private http:
             console.log(err);
           }
         );
+        window.location.reload();
+
         this.router.navigate(['/inicio']);
 
     }

@@ -1,33 +1,60 @@
 <div class="container">
   <h1>{{ evaluacion.title }}</h1>
-  <dl class="list">
-    <dt>Número</dt>
-    <dd>{{ evaluacion.numero }}</dd>
-    <dt>Tipo</dt>
+  <dl class="grid-dl">
+    <dt>Nombre:</dt>
+    <dd>{{ evaluacion.nombre }}</dd>
+    <dt>Tipo:</dt>
     <dd>{{ evaluacion.tipo }}</dd>
-    <dt>Capítulo</dt>
+    <dt>Capítulo:</dt>
     <dd>{{ evaluacion.capitulo }}</dd>
-    <dt>Cuestionario</dt>
+    <dt>Cuestionario:</dt>
     <dd>{{ cuestionario.nombre }}</dd>
-    <dt>Fecha de Inicio</dt>
+    <dt>Fecha de Inicio:</dt>
     <dd>{{ evaluacion.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</dd>
 
-    <dt>Fecha de Finalización</dt>
-    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y hh:mm a" }}</dd>
-
-
-
-
-    <dt>Preguntas</dt>
-    <tr *ngFor="let pregunta of cuestionario.preguntas">
-      <td>{{ pregunta }}</td>
+    <dt>Fecha de Finalización:</dt>    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y hh:mm a" }}</dd>
 
   </dl>
+
+  <div align="center">
+<h1 class="center">Resultados</h1>  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombres</th>
+        <th>Evaluó?</th>
+        <th>Cúantos lo evaluaron?</th>
+        <th>Grupo</th>
+        <th>Wf Grupal</th>
+        <th>Wf Individual</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let resul of evaluacionestudiantes">
+        <td>{{ resul.idEstudiante.nombres }} {{ resul.idEstudiante.apellidos }}</td>
+        <td class="glyphicon glyphicon-ok" *ngIf="resul.haevaluado"></td>
+        <td class="glyphicon glyphicon-remove" *ngIf="!resul.haevaluado"></td>
+        <td>{{ resul.hanrealizado }}</td>
+        <td data-format="#.00">{{ resul.idGrupo.nombre }}</td>
+        <td >{{ resul.idEvaluacionGrupo.wfgrupo | number : '1.3-3'}}</td>
+        <td>{{ resul.wfestudiante | number : '1.3-3'}}</td>
+
+
+
+
+
+
+
+        <td><a *ngIf=(resul.finalizo) [routerLink]="['/estudiante-detail', resul._id]">Detalles</a></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="row">
   <div class="col-md-12">
   <!--  <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>-->
-    <button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">BORRAR</button>
     <a [routerLink]="['/evaluaciones']" class="btn btn-info">VOLVER</a>
 
   </div>

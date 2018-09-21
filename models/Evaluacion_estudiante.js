@@ -28,7 +28,14 @@ ref: 'Grupo'
 type: String,
 ref: 'Evaluacion_grupo'
 },
-finalizo: Boolean,
+finalizo: {
+type: Boolean,
+'default': false
+},
+haevaluado: {
+type: Boolean,
+'default': false
+},
 fechaInicioTomada: Date,
 fechaTerminada: Date,
 wfestudiante: Number,

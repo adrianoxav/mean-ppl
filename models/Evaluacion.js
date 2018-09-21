@@ -16,12 +16,15 @@ ref: 'Curso'
    type: String,
   ref: 'Cuestionario'
   },
-  numero: Number,
+  nombre: String,
   tipo: String,
   capitulo: String,
   fechaInicioTomada: Date,
   fechaTerminada: Date,
-  finalizo:Boolean,
+  finalizo: {
+  type: Boolean,
+  'default': false
+},
   updated_date: { type: Date, default: Date.now },
 });
 
