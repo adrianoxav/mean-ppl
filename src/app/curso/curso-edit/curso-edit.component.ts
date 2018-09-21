@@ -37,7 +37,7 @@ export class CursoEditComponent implements OnInit {
  this.materia=newValue;
  let datos:any;
 
- this.http.get('http://localhost:3000/materia/'+this.materia,httpOptions).subscribe(data => {
+ this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/materia/'+this.materia,httpOptions).subscribe(data => {
    console.log(data);
 datos=data;
    this.curso.nombre = datos.nombre;
@@ -65,7 +65,7 @@ datos=data;
         let httpOptions = {
           headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         };
-    /*    this.http.get('http://localhost:3000/materia',httpOptions).subscribe(data => {
+    /*    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/materia',httpOptions).subscribe(data => {
           console.log(data);
           this.materias = data;
         });*/
@@ -75,13 +75,13 @@ datos=data;
 
       getCurso(id) {
         let curs:any;
-        this.http.get('http://localhost:3000/curso/'+id,httpOptions).subscribe(data => {
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/curso/'+id,httpOptions).subscribe(data => {
           curs=data;
           this.curso = curs;
           console.log(this.curso);
           for (let i of this.curso.profesores){
             let ver:any;
-          this.http.get('http://localhost:3000/user/'+i,httpOptions).subscribe(data => {
+          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/user/'+i,httpOptions).subscribe(data => {
                console.log(data);
                ver=data;
                if(ver.email=="admin"){}
@@ -89,7 +89,7 @@ datos=data;
                this.profesores.push(data);}
              });}
              for (let i of this.curso.estudiantes){
-             this.http.get('http://localhost:3000/estudiantes/'+i,httpOptions).subscribe(data => {
+             this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/estudiantes/'+i,httpOptions).subscribe(data => {
                   console.log(data);
                   this.estudiantes.push(data);
                 });}
@@ -98,7 +98,7 @@ datos=data;
 
       updateCurso(id) {
     //    this.curso.updated_date = Date.now();
-        this.http.put('http://localhost:3000/curso/'+id, this.curso,httpOptions)
+        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:80/curso/'+id, this.curso,httpOptions)
           .subscribe(res => {
               let id = res['_id'];
               this.router.navigate(['/curso-details', id]);
@@ -112,7 +112,7 @@ datos=data;
         let httpOptions = {
           headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         };
-        this.http.post('http://localhost:3000/asignacion', asig,httpOptions)
+        this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/asignacion', asig,httpOptions)
           .subscribe(res => {
               let id = res['_id'];
               this.router.navigate(['/assignation-details', id]);
@@ -129,7 +129,7 @@ createUsers(){
     for(let l of this.lista){
 let assign:any;
 let r:any;
-      this.http.post('http://localhost:3000/api/register', l, httpOptions)
+      this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/api/register', l, httpOptions)
         .subscribe(res => {
             //console.log(res.msg);
             r=res;
@@ -137,7 +137,7 @@ let r:any;
 let assignation:any;
             if(r.msg=="email already exists."){
               let dat:any;
-              this.http.get('http://localhost:3000/user/email/'+l.email, httpOptions).subscribe(data => {
+              this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/user/email/'+l.email, httpOptions).subscribe(data => {
                 console.log(data);
                 dat=data;
                  assignation = {
@@ -145,7 +145,7 @@ let assignation:any;
                      'grupo': l.grupo,
                    'idUser': dat._id };
                    console.log(assignation);
-                   this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
+                   this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/asignacion', assignation,httpOptions)
                      .subscribe(res => {
                          console.log(res);
                        }, (err) => {
@@ -164,7 +164,7 @@ let assignation:any;
                  'grupo': l.grupo,
                'idUser': idUser };
                console.log(assignation);
-               this.http.post('http://localhost:3000/asignacion', assignation,httpOptions)
+               this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/asignacion', assignation,httpOptions)
                  .subscribe(res => {
                      console.log(res);
                    }, (err) => {

@@ -21,13 +21,13 @@ export class UsuarioDetailComponent implements OnInit {
   }
 
   getUsuarioDetail(id) {
-    this.http.get('http://localhost:3000/user/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/user/'+id, httpOptions).subscribe(data => {
       this.usuario = data;
     });
   }
 
   deletePersona(id) {
-    this.http.delete('http://localhost:3000/user/'+id, httpOptions)
+    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:80/user/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/usuarios']);
         }, (err) => {

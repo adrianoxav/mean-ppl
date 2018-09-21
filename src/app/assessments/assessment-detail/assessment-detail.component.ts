@@ -23,13 +23,13 @@ let httpOptions = {
 
     getAssessmentDetail(id) {
 
-      this.http.get('http://localhost:3000/assessment/'+id,httpOptions).subscribe(data => {
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/assessment/'+id,httpOptions).subscribe(data => {
         this.assessment = data;
       });
     }
 
     deleteAssessment(id) {
-      this.http.delete('http://localhost:3000/assessment/'+id,httpOptions)
+      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:80/assessment/'+id,httpOptions)
         .subscribe(res => {
             this.router.navigate(['/assessments']);
           }, (err) => {

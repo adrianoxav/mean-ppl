@@ -19,10 +19,10 @@ export class AssessmentsComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://localhost:3000/evaluacion_estudiante/finalizados/'+this.idUser).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/evaluacion_estudiante/finalizados/'+this.idUser).subscribe(data => {
        this.assessments=data;
       console.log(data);
- 
+
     });
   }
 
