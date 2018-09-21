@@ -26,13 +26,13 @@ export class MateriaDetailComponent implements OnInit {
 
       getCursoDetail(id) {
 
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/materia/'+id,httpOptions).subscribe(data => {
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/materia/'+id,httpOptions).subscribe(data => {
           this.materia = data;
         });
       }
 
       deleteCurso(id) {
-        this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:80/materia/'+id,httpOptions)
+        this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:3000/materia/'+id,httpOptions)
           .subscribe(res => {
               this.router.navigate(['/materias']);
             }, (err) => {
