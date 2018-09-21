@@ -55,6 +55,7 @@ import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evalu
 import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
 import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
 import { EstudianteDetailComponent } from './evaluacion/evaluacion-detail/estudiante-detail/estudiante-detail.component';
+import { EstudianteDetalleComponent } from './assessments/estudiante-detalle/estudiante-detalle.component';
 
 import { GrupoComponent } from './grupo/grupo.component';
 
@@ -404,7 +405,11 @@ const appRoutes: Routes = [
   redirectTo: '/preguntas',
   pathMatch: 'full'
 },
-
+{
+  path: 'estudiante-detalle/:id',
+  component: EstudianteDetalleComponent,
+  data: { title: 'evaluacionestudiante Detalle' }
+},
 //videos
 
 {
@@ -486,6 +491,7 @@ const appRoutes: Routes = [
     CuestionarioCreateComponent,
     CuestionarioDetailComponent,
     CursoEditComponent,
+    EstudianteDetalleComponent,
     CursoCreateComponent,
     CursoDetailComponent,
     MateriaEditComponent,

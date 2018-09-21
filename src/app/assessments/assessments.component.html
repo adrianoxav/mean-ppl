@@ -13,11 +13,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let assessment of assessments">
-        <td>{{ assessment.wfestudiante }}</td>
-        <td>{{ assessment.idEvaluacion.numero }}</td>
+        <td>{{ assessment.wfestudiante| number : '1.3-3' }}</td>
+        <td>{{ assessment.idEvaluacion.nombre }}</td>
         <td>{{ assessment.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</td>
         <td>{{ assessment.fechaTerminada  | date: "dd MMM y hh:mm a" }}</td>
-        <td><a [routerLink]="['/assessment-details', assessment._id]">Detalles</a></td>
+        <td><a [routerLink]="['/estudiante-detalle', assessment._id]">Detalles</a></td>
       </tr>
     </tbody>
   </table>

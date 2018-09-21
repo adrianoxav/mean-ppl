@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 /* GET Evaluacion-estudianteSpeer */
 router.get('/finalizados/:idUser', function(req, res, next) {
 
-  Evaluacion_estudiante.find({idEstudiante:req.params.idUser, finalizo:false}).populate('idEstudiante').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso').exec(function (err, products) {
+  Evaluacion_estudiante.find({idEstudiante:req.params.idUser, finalizo:true}).populate('idEstudiante').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso').exec(function (err, products) {
     if (err) return next(err);
     res.json(products);
   });

@@ -11,8 +11,9 @@ let httpOptions = {
   styleUrls: ['./cuestionario-create.component.css']
 })
 export class CuestionarioCreateComponent implements OnInit {
+  cuestionario = {nombre: String,creado: Number,preguntas:[]};
 
-    cuestionario:any;
+
     preguntas={};
     selected: String[]=[];
     nombre:any;
@@ -24,6 +25,7 @@ export class CuestionarioCreateComponent implements OnInit {
       console.log(this.cuestionario);
 //this.creado = Date.now();
 //this.cuestionario.preguntas=[];
+this.nombre="";
 this.http.get('http://localhost:3000/pregunta', httpOptions).subscribe(data => {
   console.log(data);
   this.preguntas = data;
@@ -35,9 +37,11 @@ this.http.get('http://localhost:3000/pregunta', httpOptions).subscribe(data => {
       let httpOptions = {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
-      this.cuestionario.nombre = this.nombre;
 
-      this.cuestionario.creado = Date.now();
+      this.cuestionario.nombre = this.nombre;
+      let dates:any;
+      dates=Date.now();
+      this.cuestionario.creado = dates;
       this.cuestionario.preguntas=this.selected;
       console.log(this.cuestionario);
       this.http.post('http://localhost:3000/cuestionario', this.cuestionario,httpOptions)
