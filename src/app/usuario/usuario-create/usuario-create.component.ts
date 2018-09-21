@@ -21,7 +21,7 @@ export class UsuarioCreateComponent implements OnInit {
   }
 
   saveUsuario() {
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:3000/api/register', this.usuario, httpOptions)
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/api/register', this.usuario, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/usuario-details', id]);

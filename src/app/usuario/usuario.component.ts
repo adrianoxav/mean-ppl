@@ -21,7 +21,7 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/user',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/user',httpOptions).subscribe(data => {
       console.log(data);
       this.usuarios = data },
       error => console.log(error),

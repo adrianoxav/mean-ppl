@@ -33,7 +33,7 @@ export class CuestionarioDetailComponent implements OnInit {
       let httpOptions = {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/cuestionario/'+id,httpOptions).subscribe(data => {
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/cuestionario/'+id,httpOptions).subscribe(data => {
         this.cuestionario = data;
         console.log(data);
         this.getPreguntas(this.cuestionario.preguntas);
@@ -45,7 +45,7 @@ export class CuestionarioDetailComponent implements OnInit {
     }
 
     deleteCuestionario(id) {
-      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:3000/cuestionario/'+id,httpOptions)
+      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:80/cuestionario/'+id,httpOptions)
         .subscribe(res => {
             this.router.navigate(['/cuestionarios']);
           }, (err) => {
@@ -59,7 +59,7 @@ export class CuestionarioDetailComponent implements OnInit {
       for (i of preguntas){
         console.log(i);
 
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/pregunta/'+i, httpOptions).subscribe(data => {
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/pregunta/'+i, httpOptions).subscribe(data => {
           i = data;
           console.log(data);
 

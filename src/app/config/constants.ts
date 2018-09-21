@@ -2,7 +2,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 class Constants {
     //IP SERVER API
-    static SERVER_API: string = 'http://www.aprendizajeactivo.espol.edu.ec:3000/';
+    static SERVER_API: string = 'http://www.aprendizajeactivo.espol.edu.ec:80/';
 
     static jwtCT() {
 

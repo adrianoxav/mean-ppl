@@ -20,14 +20,14 @@ export class PersonaEditComponent implements OnInit {
   }
 
   getPersona(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/persona/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/persona/'+id, httpOptions).subscribe(data => {
       this.persona = data;
     });
   }
 
   updatePersona(id) {
 //    this.persona.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/persona/'+id, this.persona, httpOptions)
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:80/persona/'+id, this.persona, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/persona-details', id]);

@@ -20,14 +20,14 @@ export class AssessmentEditComponent implements OnInit {
   }
 
   getAssessment(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/assessment/'+id).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/assessment/'+id).subscribe(data => {
       this.assessment = data;
     });
   }
 
   updateAssessment(id) {
 //    this.assessment.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/assessment/'+id, this.assessment)
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:80/assessment/'+id, this.assessment)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/assessment-details', id]);
