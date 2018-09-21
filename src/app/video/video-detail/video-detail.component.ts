@@ -22,14 +22,14 @@ export class VideoDetailComponent implements OnInit {
     }
 
     getVideoDetail(id) {
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/video/'+id, httpOptions).subscribe(data => {
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/video/'+id, httpOptions).subscribe(data => {
         this.video = data;
         console.log(this.video);
       });
     }
 
     deleteVideo(id) {
-      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:80/video/'+id, httpOptions)
+      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:3000/video/'+id, httpOptions)
         .subscribe(res => {
             this.router.navigate(['/videos']);
             console.log(this.video);

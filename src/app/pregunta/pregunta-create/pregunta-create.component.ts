@@ -21,7 +21,7 @@ export class PreguntaCreateComponent implements OnInit {
   }
 
   savePregunta() {
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/pregunta', this.pregunta, httpOptions)
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:3000/pregunta', this.pregunta, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/pregunta-details', id]);

@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/cursos').subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/cursos').subscribe(data => {
       console.log(data);
       this.cursos = data;
     });
@@ -36,26 +36,26 @@ export class SignupComponent implements OnInit {
   this.signupData.curso=this.cursosSeleccionados;
   if(this.signupData.tipo=="Estudiante"){
     let res:any;
-  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:80/api/suestudiante',this.signupData).subscribe(resp => {
+  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:3000/api/suestudiante',this.signupData).subscribe(resp => {
     console.log(resp);
     res=resp;
     let idUser = resp['_id'];
     if(res.msg=="email already exists. in estudiantes"){
       let dat:any;
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/estudiantes/email/'+this.signupData.email).subscribe(data => {
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/estudiantes/email/'+this.signupData.email).subscribe(data => {
         console.log(data);
         dat=data;
         idUser=dat._id;
 
         for (let cursosel of this.cursosSeleccionados){
           let cursoactual:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/cursos/'+cursosel).subscribe(data => {
+          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/cursos/'+cursosel).subscribe(data => {
             cursoactual=data;
 
 
 
           cursoactual.estudiantes.push(idUser);
-        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:80/cursos/'+cursosel,cursoactual).subscribe(data => {
+        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/cursos/'+cursosel,cursoactual).subscribe(data => {
           console.log(data);
 
     });
@@ -69,13 +69,13 @@ export class SignupComponent implements OnInit {
       for (let cursosel of this.cursosSeleccionados){
         let cursoactual:any;
 
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:80/cursos/'+cursosel).subscribe(data => {
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/cursos/'+cursosel).subscribe(data => {
           cursoactual=data;
 
 
 
         cursoactual.estudiantes.push(idUser);
-      this.http.put('http://www.aprendizajeactivo.espol.edu.ec:80/cursos/'+cursosel,cursoactual).subscribe(data => {
+      this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/cursos/'+cursosel,cursoactual).subscribe(data => {
         console.log(data);
 
   });
