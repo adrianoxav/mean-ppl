@@ -21,13 +21,13 @@ export class PersonaDetailComponent implements OnInit {
   }
 
   getPersonaDetail(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/persona/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/persona/'+id, httpOptions).subscribe(data => {
       this.persona = data;
     });
   }
 
   deletePersona(id) {
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:3000/persona/'+id, httpOptions)
+    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/persona/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/personas']);
         }, (err) => {

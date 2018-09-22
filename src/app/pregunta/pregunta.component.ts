@@ -16,7 +16,7 @@ export class PreguntaComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/pregunta', httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta', httpOptions).subscribe(data => {
       console.log(data);
       this.preguntas = data;
     });

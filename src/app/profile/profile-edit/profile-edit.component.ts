@@ -21,7 +21,7 @@ export class ProfileEditComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/user/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+id, httpOptions).subscribe(data => {
       this.usuario = data;
       console.log(data);
     });
@@ -32,7 +32,7 @@ export class ProfileEditComponent implements OnInit {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
 //    this.usuario.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/api/update/'+id, this.usuario, httpOptions)
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/api/update/'+id, this.usuario, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/profile']);

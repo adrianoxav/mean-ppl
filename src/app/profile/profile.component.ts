@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
       let httpOptions = {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/user/'+this.idUser, httpOptions).subscribe(data => {
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser, httpOptions).subscribe(data => {
         this.usuario = data;
       });    }
 

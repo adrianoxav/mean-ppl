@@ -38,7 +38,7 @@ private options = new RequestOptions({ headers: this.headers });
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/materia',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia',httpOptions).subscribe(data => {
       console.log(data);
       this.materias = data;
     });

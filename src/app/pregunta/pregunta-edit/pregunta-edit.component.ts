@@ -19,14 +19,14 @@ export class PreguntaEditComponent implements OnInit {
   }
 
   getPregunta(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/pregunta/'+id, this.httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, this.httpOptions).subscribe(data => {
       this.pregunta = data;
     });
   }
 
   updatePregunta(id) {
   //    this.pregunta.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/pregunta/'+id, this.pregunta, this.httpOptions)
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, this.pregunta, this.httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/pregunta-details', id]);

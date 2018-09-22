@@ -15,7 +15,7 @@ export class EvaluacionEstudianteComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/evaluacion_estudiante',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante',httpOptions).subscribe(data => {
       console.log(data);
       this.evaluacion_estudiantes = data;
     });

@@ -33,7 +33,7 @@ cursocreado:any;
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/materia',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia',httpOptions).subscribe(data => {
       console.log(data);
       this.materias = data;
     });
@@ -44,7 +44,7 @@ cursocreado:any;
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
     console.log(this.curso);
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:3000/curso', this.curso,httpOptions)
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/curso', this.curso,httpOptions)
       .subscribe(res => {
 
         console.log(res);
@@ -55,7 +55,7 @@ cursocreado:any;
           for(var i=1;i<=Number(nomgrup);i++){
             let grupo = { nombre:i, curso:id };
             console.log(grupo);
-            this.http.post('http://www.aprendizajeactivo.espol.edu.ec:3000/grupo', grupo,httpOptions)
+            this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/grupo', grupo,httpOptions)
               .toPromise().then(res => {
                 console.log(res);
                 this.cursocreado.grupos.push(res['_id']);
@@ -92,7 +92,7 @@ cursocreado:any;
   }
 
   updategrupos(){
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:3000/curso/'+this.cursocreado['_id'],this.cursocreado,httpOptions).toPromise().then(data => {
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+this.cursocreado['_id'],this.cursocreado,httpOptions).toPromise().then(data => {
       console.log(data);
 
 
@@ -107,7 +107,7 @@ cursocreado:any;
     };
 this.materia=newValue;
 let datos:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/materia/'+this.materia,httpOptions).subscribe(data => {
+this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia/'+this.materia,httpOptions).subscribe(data => {
   console.log(data);
   datos=data;
   this.curso.nombre = datos.nombre;

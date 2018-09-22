@@ -21,10 +21,10 @@ export class EvaluacionComponent implements OnInit {
   ngOnInit() {
 
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
       this.usuario = data;
     });
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:3000/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
       this.allevaluaciones = data;
       for(let curso of this.usuario.curso){
 
