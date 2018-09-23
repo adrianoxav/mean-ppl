@@ -22,13 +22,13 @@ export class PreguntaAssessmentDetailComponent implements OnInit {
     }
 
     getPregunta_assessmentDetail(id) {
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta_assessment/'+id, httpOptions).subscribe(data => {
+      this.http.get('http://localhost:443/pregunta_assessment/'+id, httpOptions).subscribe(data => {
         this.pregunta_assessment = data;
       });
     }
 
     deletePregunta_assessment(id) {
-      this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta_assessment/'+id, httpOptions)
+      this.http.delete('http://localhost:443/pregunta_assessment/'+id, httpOptions)
         .subscribe(res => {
             this.router.navigate(['/pregunta_assessments']);
           }, (err) => {

@@ -20,7 +20,7 @@ export class VideoEditComponent implements OnInit {
   }
 
   getVideo(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/video/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://localhost:443/video/'+id, httpOptions).subscribe(data => {
       this.video = data;
       console.log(this.video);
     });
@@ -28,7 +28,7 @@ export class VideoEditComponent implements OnInit {
 
   updateVideo(id) {
   //    this.video.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/video/'+id, this.video, httpOptions)
+    this.http.put('http://localhost:443/video/'+id, this.video, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/video-details', id]);

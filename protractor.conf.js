@@ -12,7 +12,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://www.aprendizajeactivo.espol.edu.ec:443/',
+  baseUrl: 'http://localhost:443/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

@@ -25,7 +25,7 @@ export class EvaluacionEstudianteCreateComponent implements OnInit {
     }
 
     saveEvaluacion_estudiante() {
-      this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante', this.evaluacion_estudiante,httpOptions)
+      this.http.post('http://localhost:443/evaluacion_estudiante', this.evaluacion_estudiante,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/evaluacion_estudiante-details', id]);

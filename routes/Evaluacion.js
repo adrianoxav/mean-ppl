@@ -67,6 +67,8 @@ router.post('/', function(req, res, next) {
             fechaTerminada: eval.fechaTerminada,
             wfgrupo: 0,
             hanrealizado:0,
+            finalizo:0,
+
             numestudiantes: grupo.estudiantes.length,
           });
           newEvaluacionGrupo.save(function(err,post) {
@@ -90,6 +92,8 @@ router.post('/', function(req, res, next) {
                   fechaTerminada: eval.fechaTerminada,
                   wfestudiante: 0,
                   hanrealizado:0,
+                  finalizo:0,
+                  evaluaste:0,
                   comentarios: [],
                 });
 

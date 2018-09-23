@@ -24,14 +24,14 @@ export class EvaluacionEditComponent implements OnInit {
         }
 
         getEvaluacion(id) {
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/'+id,httpOptions).subscribe(data => {
+          this.http.get('http://localhost:443/evaluacion/'+id,httpOptions).subscribe(data => {
             this.evaluacion = data;
           });
         }
 
         updateEvaluacion(id) {
       //    this.evaluacion.updated_date = Date.now();
-          this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/'+id, this.evaluacion,httpOptions)
+          this.http.put('http://localhost:443/evaluacion/'+id, this.evaluacion,httpOptions)
             .subscribe(res => {
                 let id = res['_id'];
                 this.router.navigate(['/evaluacion-details', id]);

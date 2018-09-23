@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login() {
-  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signinEstudiante',this.loginData).subscribe(resp => {
+  this.http.post('http://localhost:443/api/signinEstudiante',this.loginData).subscribe(resp => {
     this.data = resp;
     console.log(resp);
     localStorage.setItem('jwtToken', this.data.token);
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   }, err => {
     console.log(err);
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signin',this.loginData).subscribe(resp => {
+    this.http.post('http://localhost:443/api/signin',this.loginData).subscribe(resp => {
       this.data = resp;
       console.log(resp);
       localStorage.setItem('jwtToken', this.data.token);

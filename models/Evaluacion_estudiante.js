@@ -32,6 +32,7 @@ finalizo: {
 type: Boolean,
 'default': false
 },
+evaluaste:Number,
 haevaluado: {
 type: Boolean,
 'default': false

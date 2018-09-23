@@ -52,31 +52,28 @@ router.put('/:id', function(req, res, next) {
 
 /* UPDATE Evaluacion-estudiante Peer */
 router.put('/peer/:id', function(req, res, next) {
-  Evaluacion_estudiantepeer.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Evaluacion_estudiantepeer.findOneAndUpdate({_id:req.params.id,finalizo:false}, req.body, function (err, post) {
     if (err) return next(err);
     var evaluacion_estudiantepeer=(post);
     console.log(post);
     //let wfsumar=post.wfestudianteevaluar;
     //console.log(wfsumar);
-    Evaluacion_estudiante.findOneAndUpdate({idEstudiante: req.body.idEstudiante,idEvaluacion: req.body.idEvaluacion},
-       {haevaluado: true}, function (err, post) {
+    Evaluacion_estudiante.findOneAndUpdate({idEstudiante: req.body.idEstudiante,idEvaluacion: req.body.idEvaluacion,finalizo:false} , function (err, post) {
       if (err) return next(err);
       console.log(post);
-    });
-    Evaluacion_grupo.findByIdAndUpdate(req.body.idEvaluacionGrupo,
+
+    Evaluacion_grupo.findByIdAndUpdate({_id:req.body.idEvaluacionGrupo,finalizo:false},
 
       { $inc: { hanrealizado: 1, wfgrupo: req.body.wfestudianteevaluar } }
 
 
       , function (err, post) {
       console.log(post);
-      Evaluacion_estudiante.findOneAndUpdate({$and:
-
-      [{idEvaluacionGrupo: req.body.idEvaluacionGrupo},{idEstudiante:req.body.idEstudianteEvaluar}]},
+      Evaluacion_estudiante.findOneAndUpdate({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudianteEvaluar,finalizo:false},
 
 
       {
-        $inc: { hanrealizado: 1, wfestudiante:  req.body.wfestudianteevaluar  } ,
+        $inc: { hanrealizado: 1, wfestudiante:  req.body.wfestudianteevaluar,evaluaste:1  } ,
         $push: { comentarios:  req.body.comentarios}
             }
      ,
@@ -89,11 +86,11 @@ router.put('/peer/:id', function(req, res, next) {
           console.log("esta debe ser la eval estudiante XD");
 
         console.log(post);
-
+  });
       });
     });
   });
-  res.json(evaluacion_estudiantepeer);
+  //res.json(evaluacion_estudiantepeer);
 
 });
 

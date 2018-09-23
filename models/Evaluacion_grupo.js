@@ -19,6 +19,10 @@ ref: 'Evaluacion'
 tipo: String,
 fechaInicioTomada: Date,
 fechaTerminada: Date,
+finalizo: {
+type: Boolean,
+'default': false
+},
 wfgrupo: Number,
 numestudiantes:Number,
 hanrealizado:Number,
