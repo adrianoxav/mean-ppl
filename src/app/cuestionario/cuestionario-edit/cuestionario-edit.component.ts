@@ -21,7 +21,7 @@ export class CuestionarioEditComponent implements OnInit {
     }
 
     getCuestionario(id) {
-      this.http.get('http://localhost:443/cuestionario/'+id).subscribe(data => {
+      this.http.get('http://aprendizajeactivo.espol.edu.ec:443/cuestionario/'+id).subscribe(data => {
         this.cuestionario = data;
       });
     }
@@ -31,7 +31,7 @@ export class CuestionarioEditComponent implements OnInit {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
       this.cuestionario.creado = Date.now();
-      this.http.put('http://localhost:443/cuestionario/'+id, this.cuestionario,httpOptions)
+      this.http.put('http://aprendizajeactivo.espol.edu.ec:443/cuestionario/'+id, this.cuestionario,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/cuestionario-details', id]);

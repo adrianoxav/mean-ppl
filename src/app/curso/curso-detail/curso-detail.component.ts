@@ -26,13 +26,13 @@ export class CursoDetailComponent implements OnInit {
 
       getCursoDetail(id) {
 
-        this.http.get('http://localhost:443/curso/'+id,httpOptions).subscribe(data => {
+        this.http.get('http://aprendizajeactivo.espol.edu.ec:443/curso/'+id,httpOptions).subscribe(data => {
           this.curso = data;
         });
       }
 
       deleteCurso(id) {
-        this.http.delete('http://localhost:443/curso/'+id,httpOptions)
+        this.http.delete('http://aprendizajeactivo.espol.edu.ec:443/curso/'+id,httpOptions)
           .subscribe(res => {
               this.router.navigate(['/cursos']);
             }, (err) => {

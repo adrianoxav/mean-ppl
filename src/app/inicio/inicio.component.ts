@@ -32,7 +32,7 @@ assessments:any;
   console.log(this.idUser);
 
 
-  this.http.get('http://localhost:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
+  this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
     this.assessments=data;
     console.log(data);
 

@@ -25,13 +25,13 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 var originsWhitelist = [
-  'http://localhost:4200'
+  'http://aprendizajeactivo.espol.edu.ec:4434200'
 ];
 
 app.use(bodyParser.json());
 
 var originsWhitelist = [
-  'http://localhost:4200'
+  'http://aprendizajeactivo.espol.edu.ec:4434200'
 ];
 var corsOptions = {
   origin: function(origin, callback){

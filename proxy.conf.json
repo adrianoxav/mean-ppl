@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://localhost:443",
+    "target": "http://aprendizajeactivo.espol.edu.ec:443",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

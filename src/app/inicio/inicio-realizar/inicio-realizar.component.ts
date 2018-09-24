@@ -32,16 +32,16 @@ constructor(private router: Router, private route: ActivatedRoute, private http:
   }
 
   getAssessmentDetail(id) {
-    this.http.get('http://localhost:443/evaluacion_estudiantepeer/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/'+id, httpOptions).subscribe(data => {
       this.assessment = data;
       console.log(data);
-      this.http.get('http://localhost:443/cuestionario/'+this.assessment.idEvaluacion.idCuestionario, httpOptions).subscribe(data => {
+      this.http.get('http://aprendizajeactivo.espol.edu.ec:443/cuestionario/'+this.assessment.idEvaluacion.idCuestionario, httpOptions).subscribe(data => {
         this.assessment.idEvaluacion.idCuestionario = data;
         console.log(data);
         for(let preg of this.assessment.idEvaluacion.idCuestionario.preguntas){
           let pregunta:any;
           let dat:any;
-          this.http.get('http://localhost:443/pregunta/'+preg, httpOptions).subscribe(data => {
+          this.http.get('http://aprendizajeactivo.espol.edu.ec:443/pregunta/'+preg, httpOptions).subscribe(data => {
             console.log(data);
             dat=data;
             if(dat.tipo=="Feedback"){
@@ -104,7 +104,7 @@ constructor(private router: Router, private route: ActivatedRoute, private http:
 
       this.assessment.wfestudianteevaluar=suma/(this.assessment.puntaje.length*5);
       console.log(this.assessment);
-      this.http.put('http://localhost:443/evaluacion_estudiantepeer/peer/'+this.assessment._id, this.assessment, httpOptions)
+      this.http.put('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/peer/'+this.assessment._id, this.assessment, httpOptions)
         .subscribe(res => {
             //let id = res['_id'];
           }, (err) => {

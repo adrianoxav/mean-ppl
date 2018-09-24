@@ -21,7 +21,7 @@ export class PersonaCreateComponent implements OnInit {
   }
 
   savePersona() {
-    this.http.post('http://localhost:443/persona', this.persona, httpOptions)
+    this.http.post('http://aprendizajeactivo.espol.edu.ec:443/persona', this.persona, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/persona-details', id]);

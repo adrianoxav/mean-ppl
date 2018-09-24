@@ -191,12 +191,13 @@ router.post('/', function(req, res, next) {
 
                     var evalestudiantes=post;
                     for (let evalestudiante of evalestudiantes){ //recorro los eval estudiantes donde va la nota final
+                      evalestudiante.finalizo=true;
                       if(evalestudiante.haevaluado==false){
                         evalestudiante.wfestudiante=0}
                         else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado==0){
                             evalestudiante.wfestudiante=evalgrupo.wfgrupo;
                         }
-                        else{
+                        else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado>0){
                           let prome=(evalestudiante.wfestudiante/evalestudiante.hanrealizado);
                           console.log("OJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
                           console.log(evalestudiante);
@@ -204,10 +205,10 @@ router.post('/', function(req, res, next) {
                           console.log(evalgrupo.wfgrupo);
                           evalestudiante.wfestudiante=Math.sqrt(prome/evalgrupo.wfgrupo);
                         }
-                        evalestudiante.finalizo=true;
                         //guardo la evaluacion estudiante
                         Evaluacion_estudiante.findByIdAndUpdate(evalestudiante._id,evalestudiante, function (err, post) {
                           if (err) return next(err);
+                          console.log(post);
                         });
 
                       }

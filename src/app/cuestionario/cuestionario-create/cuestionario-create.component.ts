@@ -26,7 +26,7 @@ export class CuestionarioCreateComponent implements OnInit {
 //this.creado = Date.now();
 //this.cuestionario.preguntas=[];
 this.nombre="";
-this.http.get('http://localhost:443/pregunta', httpOptions).subscribe(data => {
+this.http.get('http://aprendizajeactivo.espol.edu.ec:443/pregunta', httpOptions).subscribe(data => {
   console.log(data);
   this.preguntas = data;
 });
@@ -44,7 +44,7 @@ this.http.get('http://localhost:443/pregunta', httpOptions).subscribe(data => {
       this.cuestionario.creado = dates;
       this.cuestionario.preguntas=this.selected;
       console.log(this.cuestionario);
-      this.http.post('http://localhost:443/cuestionario', this.cuestionario,httpOptions)
+      this.http.post('http://aprendizajeactivo.espol.edu.ec:443/cuestionario', this.cuestionario,httpOptions)
         .subscribe(res => {
             let id = res['_id'];
             this.router.navigate(['/cuestionario-details', id]);
