@@ -35,7 +35,7 @@
 
 
 
-        <td><a *ngIf=(evaluacion.finalizo) [routerLink]="['/evaluacion-details', evaluacion._id]">Detalles</a></td>
+        <td><a [routerLink]="['/evaluacion-details', evaluacion._id]">Detalles</a></td>
       </tr>
     </tbody>
   </table>

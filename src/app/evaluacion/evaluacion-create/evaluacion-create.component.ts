@@ -52,10 +52,8 @@ public  fechaInicioTomada= new Date();
   }
 
   saveEvaluacion() {
-    console.log(this.evaluacion);
-    this.fechaInicioTomada=new Date(this.fechaini);
-    this.fechaTerminada=new Date(this.fechafin);
-    //this.evaluacion.fechaInicioTomada=this.fechaInicioTomada;
+
+    //this.evaluacion.fechaInicioTomada=this.fechzaInicioTomada;
   //  this.evaluacion.fechaTerminada=this.fechaTerminada;
 
 
