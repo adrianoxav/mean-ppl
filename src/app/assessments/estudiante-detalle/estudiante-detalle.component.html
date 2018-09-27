@@ -12,10 +12,12 @@
     <dd>{{ evaluacion.idGrupo.nombre }}</dd>
     <dt>Evaluación:</dt>    <dd>{{ evaluacion.idEvaluacion.nombre}}</dd>
     <dt>Capítulo:</dt>    <dd>{{ evaluacion.idEvaluacion.capitulo}}</dd>
-    <dt>A cuántos Compañeros evaluó?:</dt>
-    <dd>{{ evaluacion.evaluaste }}</dd>
+    <dt>Cuántos Compañeros tuvo que evaluar?:</dt>
+    <dd>{{ evaluacion.numGrupo }}</dd>
     <dt>Cuántos Compañeros lo Evaluaron?:</dt>
     <dd>{{ evaluacion.hanrealizado }}</dd>
+    <dt>A cuántos Compañeros Evaluó?:</dt>
+    <dd>{{ evaluacion.evaluaste }}</dd>
     <dt>WF Grupal:</dt>
     <dd>{{ evaluacion.idEvaluacionGrupo.wfgrupo | number : '1.3-3'}}</dd>
     <dt>WF Individual:</dt>

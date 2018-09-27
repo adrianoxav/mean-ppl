@@ -22,14 +22,14 @@ export class PreguntaDetailComponent implements OnInit {
   }
 
   getPreguntaDetail(id) {
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, httpOptions).subscribe(data => {
       this.pregunta = data;
       console.log(data);
     });
   }
 
   deletePregunta(id) {
-    this.http.delete('http://aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, httpOptions)
+    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/preguntas']);
         }, (err) => {

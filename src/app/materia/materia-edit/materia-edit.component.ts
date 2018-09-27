@@ -30,14 +30,14 @@ export class MateriaEditComponent implements OnInit {
       }
 
       getCurso(id) {
-        this.http.get('http://aprendizajeactivo.espol.edu.ec:443/materia/'+id,httpOptions).subscribe(data => {
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia/'+id,httpOptions).subscribe(data => {
           this.materia = data;
         });
       }
 
       updateCurso() {
     //    this.curso.updated_date = Date.now();
-        this.http.put('http://aprendizajeactivo.espol.edu.ec:443/materia/'+this.id, this.materia,httpOptions)
+        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/materia/'+this.id, this.materia,httpOptions)
         .subscribe(res => {
           console.log(res);
             let id = res['_id'];

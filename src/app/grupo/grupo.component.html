@@ -13,10 +13,41 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
 
 <div class="container">
   <h2>Estudiantes del Paralelo</h2>
-  <button type="button" class="btn btn-info" (click)="actgrupos()" >Recargar Grupos</button>
-  <button type="button" class="btn btn-success right" disabled={{buttonDisabled}} (click)="actualizarGrupos()" >Actualizar</button>
+  <button type="button"  class="btn btn-info"  disabled={{buttonrecDisabled}} (click)="actgrupos()" >Recargar Grupos</button>
+  <button type="button" align="center" class="btn btn-warning" disabled={{buttonactDisabled}} (click)="editargrupos()" >Editar Grupos</button>
+  <button type="button" align="right" class="btn btn-success right" disabled={{buttonDisabled}} (click)="actualizarGrupos()" >Actualizar</button>
 
-  <table class="table">
+
+  <div *ngIf="!isLoading && tables">
+  <table datatable [dtOptions]="dtOptionsGrupo" class="row-border hover">
+    <thead>
+      <tr>
+        <th>identificacion</th>
+        <th>email</th>
+        <th>nombres</th>
+        <th>apellidos</th>
+        <th>tipo</th>
+        <th>Grupo Actual</th>
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of estudiantestable">
+        <td>{{ list.identificacion }}</td>
+        <td>{{ list.email }}</td>
+        <td>{{ list.nombres }}</td>
+        <td>{{ list.apellidos }}</td>
+        <td>{{ list.tipo }}</td>
+
+        <td>{{ list.grupo }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <table   *ngIf="!tables" class="table">
     <thead>
       <tr>
         <th>identificacion</th>

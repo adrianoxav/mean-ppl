@@ -18,7 +18,7 @@ videoplayer:any;
 
   ngOnInit() {
 
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/video', httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/video', httpOptions).subscribe(data => {
       console.log(data);
       this.videos = data;
     });

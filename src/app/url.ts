@@ -1,8 +1,8 @@
 import {Headers} from '@angular/http';
 export class Url {
  //base ='http://162.243.83.72/';
-//  base= 'http://aprendizajeactivo.espol.edu.ec:443/',
- base='http://aprendizajeactivo.espol.edu.ec:443/';
+//  base= 'http://www.aprendizajeactivo.espol.edu.ec:443/',
+ base='http://www.aprendizajeactivo.espol.edu.ec:443/';
  examen ='examen/';
  ciudad ='ciudad/';
  crn ='crn/';

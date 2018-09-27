@@ -7,7 +7,7 @@
           <label for="name">Curso</label>
 
 
-             <select   [(ngModel)]="evaluacion.idCurso" (ngModelChange)="onChange1($event)" name="idCuestionario" required>
+             <select   [(ngModel)]="idCurso" (ngModelChange)="onChange1($event)" name="idCuestionario" required>
                <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
          </select>
 
@@ -23,10 +23,10 @@
           <label for="name">Tipo</label>
           <select name="tipo" [(ngModel)]="evaluacion.tipo" required>
                  <option value="Peer" selected="selected">Peer</option>
-                 <option value="Classwork">Classwork</option>
+        <!--         <option value="Classwork">Classwork</option>
                  <option value="Team">Team</option>
                  <option value="Self">Self</option>
-
+-->
              </select>
            </div>
         <div class="form-group">
@@ -37,7 +37,7 @@
           <label for="name">Cuestionario</label>
 
 
-             <select   [(ngModel)]="evaluacion.idCuestionario" (ngModelChange)="onChange($event)" name="idCuestionario" required>
+             <select   [(ngModel)]="idCuestionario" (ngModelChange)="onChange($event)" name="idCuestionario" required>
                <option *ngFor="let c of cuestionarios" [ngValue]="c._id">{{c.nombre}}</option>
          </select>
 

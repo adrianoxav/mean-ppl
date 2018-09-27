@@ -12,37 +12,14 @@ export class EvaluacionComponent implements OnInit {
   allevaluaciones: any;
   usuario:any;
   evaluaciones= [];
-  dtOptionsEval: any = {};
+  dtOptionsEva: any = {};
   isLoading = true;
 
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-
-
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
-      this.usuario = data;
-    });
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
-      this.allevaluaciones = data;
-      for(let curso of this.usuario.curso){
-
-        for(let evalu of this.allevaluaciones){
-          if(curso==evalu.idCurso._id){
-          this.evaluaciones.push(evalu)
-          console.log(curso);
-          console.log(evalu.idCurso);
-        }
-
-        }
-
-      }
-      console.log(this.evaluaciones);
-
-    });
-
-    this.dtOptionsEval={
+    this.dtOptionsEva={
        language:{
            "sProcessing":     "Procesando...",
            "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -70,9 +47,41 @@ export class EvaluacionComponent implements OnInit {
          },
          "order": [[2,"desc"], [1,"desc"]],
          "autoWidth": false,
-         "lengthMenu": [50, 100, 150, 200]
+         "lengthMenu": [150, 300 ]
 
      }
+
+
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
+      this.usuario = data;
+    });
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
+      this.allevaluaciones = data;
+      console.log(data);
+      for(let curso of this.usuario.curso){
+
+        for(let evalu of this.allevaluaciones){
+          if(curso==evalu.idCurso._id){
+            evalu.idCurso=evalu.idCurso.nombre;
+          this.evaluaciones.push(evalu)
+          console.log(curso);
+          console.log(evalu.idCurso);
+        }
+
+        }
+
+      }
+      for (let e of this.evaluaciones){
+
+      }
+      console.log(this.evaluaciones);
+
+    },
+    error => console.log(error),
+    () => this.isLoading = false
+  );
+
+
 
   }
 }

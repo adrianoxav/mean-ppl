@@ -20,9 +20,17 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('tipo')=="Estudiante"){
+
+      this.router.navigate(['/inicio']);
+    }
+    if(localStorage.getItem('tipo')=="Profesor"){
+
+      this.router.navigate(['/evaluaciones']);
+    }
   }
   login() {
-  this.http.post('http://aprendizajeactivo.espol.edu.ec:443/api/signinEstudiante',this.loginData).subscribe(resp => {
+  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signinEstudiante',this.loginData).toPromise().then(resp => {
     this.data = resp;
     console.log(resp);
     localStorage.setItem('jwtToken', this.data.token);
@@ -33,12 +41,15 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('identificacion', this.data.user.identificacion);
     localStorage.setItem('idUser', this.data.user._id);
     localStorage.setItem('curso', this.data.user.curso);
+    if(localStorage.getItem('tipo')=="Estudiante"){
       window.location.reload();
-    this.router.navigate(['/inicio']);
 
-  }, err => {
-    console.log(err);
-    this.http.post('http://aprendizajeactivo.espol.edu.ec:443/api/signin',this.loginData).subscribe(resp => {
+      this.router.navigate(['/inicio']);
+    }
+
+});
+//    console.log(err);
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signin',this.loginData).toPromise().then(resp => {
       this.data = resp;
       console.log(resp);
       localStorage.setItem('jwtToken', this.data.token);
@@ -49,17 +60,15 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('identificacion', this.data.user.identificacion);
       localStorage.setItem('idUser', this.data.user._id);
       localStorage.setItem('curso', this.data.user.curso);
-  window.location.reload();
-      this.router.navigate(['/evaluaciones']);
 
 
-    }, err => {
-      console.log(err);
-        });
+      if(localStorage.getItem('tipo')=="Profesor"){
+        window.location.reload();
+
+        this.router.navigate(['/evaluaciones']);
+      }
+    });
   //  this.message = err.error.msg;
-  });
-
-
 
 
 

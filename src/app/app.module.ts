@@ -7,6 +7,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { AuthGuard } from './auth/auth.guard';
 import { DataTablesModule } from 'angular-datatables';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { DataTableModule } from 'angular5-data-table';
+
 
 
 import { AppComponent } from './app.component';
@@ -104,6 +106,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileModule } from './profile/profile.module'
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { SortService } from './sort.service';
+import { ExcelService } from './excel.service';
 
 
 const appRoutes: Routes = [
@@ -535,6 +539,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     OwlDateTimeModule,
              OwlNativeDateTimeModule,
+             DataTableModule.forRoot(),
+
   //  routing,
     FormsModule,
     HttpClientModule,
@@ -544,7 +550,7 @@ const appRoutes: Routes = [
     ),
     ProfileModule
   ],
-  providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG',},AuthGuard] ,
+  providers: [{provide: OWL_DATE_TIME_LOCALE, useValue: 'en-SG',},AuthGuard,SortService,ExcelService] ,
 
 
   bootstrap: [AppComponent]

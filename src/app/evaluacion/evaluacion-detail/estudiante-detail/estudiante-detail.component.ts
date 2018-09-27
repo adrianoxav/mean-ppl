@@ -28,17 +28,17 @@ export class EstudianteDetailComponent implements OnInit {
         }
 
         getEvaluacionDetail(id) {
-          this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante/getdetail/'+id,httpOptions).subscribe(data => {
+          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante/getdetail/'+id,httpOptions).subscribe(data => {
             this.evaluacion = data;
 console.log(this.evaluacion);
-                  /*    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/cuestionario/'+this.evaluacion.idCuestionario,httpOptions).subscribe(data => {
+                  /*    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cuestionario/'+this.evaluacion.idCuestionario,httpOptions).subscribe(data => {
                         this.cuestionario = data;
                         console.log(data);
                         console.log(this.cuestionario);
 
                       });
 
-                      this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante/poreval/'+this.evaluacion._id,httpOptions).subscribe(data => {
+                      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante/poreval/'+this.evaluacion._id,httpOptions).subscribe(data => {
                         this.evaluacionestudiantes = data;
                         console.log(this.evaluacionestudiantes);
 
@@ -48,7 +48,7 @@ console.log(this.evaluacion);
         }
 
         deleteEvaluacion(id) {
-          this.http.delete('http://aprendizajeactivo.espol.edu.ec:443/evaluacion/'+id,httpOptions)
+          this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/'+id,httpOptions)
             .subscribe(res => {
                 this.router.navigate(['/evaluaciones']);
               }, (err) => {
@@ -63,7 +63,7 @@ console.log(this.evaluacion);
           for (i of preguntas){
             console.log(i);
             let dat:any;
-            this.http.get('http://aprendizajeactivo.espol.edu.ec:443/pregunta/'+i,httpOptions).subscribe(data => {
+            this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta/'+i,httpOptions).subscribe(data => {
               i = data;
               dat=data;
               console.log(data);

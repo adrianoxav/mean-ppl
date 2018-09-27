@@ -2,23 +2,31 @@
   <h1>Assessments Finalizados
 
   </h1>
-  <table class="table">
+  <div *ngIf="!isLoading">
+  <table datatable [dtOptions]="dtOptionsAssess" class="row-border hover">
     <thead>
       <tr>
-        <th>Puntaje</th>
-        <th>Evaluacion</th>
+        <th>Materia</th>
+        <th>Capítulo</th>
+        <th>Evaluación</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
+        <th>Puntaje</th>
+        <th>Acciones</th>
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let assessment of assessments">
-        <td>{{ assessment.wfestudiante| number : '1.3-3' }}</td>
-        <td>{{ assessment.idEvaluacion.nombre }}</td>
+        <td>{{ assessment.materia }}</td>
+        <td>{{ assessment.capitulo }}</td>
+        <td>{{ assessment.nombre }}</td>
         <td>{{ assessment.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</td>
         <td>{{ assessment.fechaTerminada  | date: "dd MMM y hh:mm a" }}</td>
+        <td>{{ assessment.wfestudiante | number : '1.3-3' }}</td>
         <td><a [routerLink]="['/estudiante-detalle', assessment._id]">Detalles</a></td>
       </tr>
     </tbody>
   </table>
+</div>
 </div>

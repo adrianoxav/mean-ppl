@@ -20,7 +20,7 @@ export class VideoCreateComponent implements OnInit {
   }
 
   saveVideo() {
-    this.http.post('http://aprendizajeactivo.espol.edu.ec:443/video', this.video, httpOptions)
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/video', this.video, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           console.log(this.video);

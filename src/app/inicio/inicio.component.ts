@@ -17,13 +17,25 @@ export class InicioComponent implements OnInit {
   isLoading = true;
   assignations: any;
   cursos= [];
-
+  validar:any;
   tipo:any;
 assessments:any;
   idUser:any;
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('tipo')=="Estudiante"){
+
+      this.router.navigate(['/inicio']);
+    }
+    else if(localStorage.getItem('tipo')=="Profesor"){
+
+      this.router.navigate(['/evaluaciones']);
+    }
+    else{
+      this.router.navigate(['/login']);
+
+    }
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
@@ -32,10 +44,17 @@ assessments:any;
   console.log(this.idUser);
 
 
-  this.http.get('http://aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
+  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
     this.assessments=data;
     console.log(data);
+    if(this.assessments.length==0){
+      this.validar=true;
 
+    }
+    else
+    this.validar=false;
+
+    console.log(this.validar);
   });
 
 

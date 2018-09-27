@@ -6,6 +6,7 @@ var Evaluacion = require('../models/Evaluacion.js');
 var Evaluacion_grupo = require('../models/Evaluacion_grupo.js');
 var Evaluacion_estudiantepeer = require('../models/Evaluacion_estudiantepeer.js');
 var Evaluacion_estudiante = require('../models/Evaluacion_estudiante.js');
+var moment = require('moment');
 
 var Curso = require('../models/Curso.js');
 var Grupo = require('../models/Grupo.js');
@@ -93,6 +94,7 @@ router.post('/', function(req, res, next) {
                   wfestudiante: 0,
                   hanrealizado:0,
                   finalizo:0,
+                  numGrupo:grupo.estudiantes.length-1,
                   evaluaste:0,
                   comentarios: [],
                 });
@@ -157,7 +159,9 @@ router.post('/', function(req, res, next) {
 
     ///FUNCION QUE REALIZA EL TASK DE CERRAR LOS ASSESSMENTS
     var date = new Date(req.body.fechaTerminada);
-
+    //var date    = moment.tz(req.body.fechaTerminada, "America/Guayaquil");
+    console.log("FECHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log(date);
     var j = schedule.scheduleJob(date, function(){
       console.log('The world is going to end today.');
       Evaluacion.findByIdAndUpdate(eval.id,{finalizo:true}, function (err, post) {
@@ -195,7 +199,7 @@ router.post('/', function(req, res, next) {
                       if(evalestudiante.haevaluado==false){
                         evalestudiante.wfestudiante=0}
                         else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado==0){
-                            evalestudiante.wfestudiante=evalgrupo.wfgrupo;
+                            evalestudiante.wfestudiante=1;
                         }
                         else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado>0){
                           let prome=(evalestudiante.wfestudiante/evalestudiante.hanrealizado);
@@ -250,6 +254,19 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   Evaluacion.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
+    Evaluacion_grupo.deleteMany({idEvaluacion:req.params.id}, function (err, post) {
+      if (err) return next(err);
+      Evaluacion_estudiante.deleteMany({idEvaluacion:req.params.id}, function (err, post) {
+        if (err) return next(err);
+        Evaluacion_estudiantepeer.deleteMany({idEvaluacion:req.params.id}, function (err, post) {
+          if (err) return next(err);
+
+          console.log(post);
+          });
+        console.log(post);
+        });
+      console.log(post);
+      });
     res.json(post);
   });
 });

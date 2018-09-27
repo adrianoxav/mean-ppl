@@ -22,7 +22,7 @@ export class AssessmentCreateComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.post('http://aprendizajeactivo.espol.edu.ec:443/assessment', this.assessment,httpOptions)
+    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/assessment', this.assessment,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/assessment-details', id]);

@@ -52,9 +52,10 @@ router.put('/:id', function(req, res, next) {
 
 /* UPDATE Evaluacion-estudiante Peer */
 router.put('/peer/:id', function(req, res, next) {
+  var evaluacion_estudiantepeer;
   Evaluacion_estudiantepeer.findOneAndUpdate({_id:req.params.id,finalizo:false}, req.body, function (err, post) {
     if (err) return next(err);
-    var evaluacion_estudiantepeer=(post);
+    evaluacion_estudiantepeer=(post);
     console.log(post);
     //let wfsumar=post.wfestudianteevaluar;
     //console.log(wfsumar);
@@ -84,24 +85,35 @@ router.put('/peer/:id', function(req, res, next) {
           console.log("esta debe ser la eval estudiante XD");
 
         console.log(post);
-        Evaluacion_estudiante.findOneAndUpdate({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false},
-          {
-            $set: { haevaluado:  true},
-            $inc: { evaluaste: 1  } 
-
-                }
+        Evaluacion_estudiante.findOne({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false}
           ,
       //  {$push: {"comentarios": req.body.comentarios}},
 
 
 
            function (err, post) {
+             var evalu=post;
+             evalu.evaluaste=evalu.evaluaste+1;
+             if(evalu.evaluaste==evalu.numGrupo){
+               evalu.haevaluado=true;
+             }
             console.log("esta debe ser la eval estudiante XD");
+            Evaluacion_estudiante.findOneAndUpdate({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false},evalu
+              ,
+          //  {$push: {"comentarios": req.body.comentarios}},
 
+
+
+               function (err, post) {
+                console.log("esta debe ser la eval estudiante XD");
+
+              console.log(post);
+        });
           console.log(post);
     });
   });
       });
+      res.json(evaluacion_estudiantepeer);
 
   });
   //res.json(evaluacion_estudiantepeer);

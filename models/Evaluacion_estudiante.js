@@ -33,6 +33,7 @@ type: Boolean,
 'default': false
 },
 evaluaste:Number,
+numGrupo:Number,
 haevaluado: {
 type: Boolean,
 'default': false

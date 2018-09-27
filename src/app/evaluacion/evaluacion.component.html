@@ -4,7 +4,8 @@
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>
   </h1>
-  <table class="table">
+  <div *ngIf="!isLoading">
+  <table datatable [dtOptions]="dtOptionsEva" class="row-border hover">
     <thead>
       <tr>
         <th>Nombre</th>
@@ -15,20 +16,25 @@
         <th>Hora de Inicio</th>
         <th>Fecha Terminada</th>
         <th>Hora de Finalización</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let evaluacion of evaluaciones">
         <td>{{ evaluacion.nombre }}</td>
-        <td>{{ evaluacion.idCurso.nombre }}</td>
+        <td>{{ evaluacion.idCurso }}</td>
         <td>{{ evaluacion.tipo }}</td>
         <td>{{ evaluacion.capitulo }}</td>
         <td>{{ evaluacion.fechaInicioTomada | date: "dd MMM y"}}</td>
         <td>{{ evaluacion.fechaInicioTomada |  date:'hh:mm a'}}</td>
         <td>{{ evaluacion.fechaTerminada | date: "dd MMM y"}}</td>
-        <td>{{ evaluacion.fechaTerminada |  date:"h:mm a"}}</td>
 
+        <td>{{ evaluacion.fechaTerminada |  date:"h:mm a"}}</td>
+        <td  *ngIf="evaluacion.finalizo">Finalizada</td>
+        <td  *ngIf="!evaluacion.finalizo">Activa</td>
 
 
 
@@ -39,4 +45,5 @@
       </tr>
     </tbody>
   </table>
+  </div>
 </div>

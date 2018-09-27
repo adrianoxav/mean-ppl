@@ -42,7 +42,7 @@ private options = new RequestOptions({ headers: this.headers });
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/curso',httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso',httpOptions).subscribe(data => {
       console.log(data);
       this.cursos = data;
     });

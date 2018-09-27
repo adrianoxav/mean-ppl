@@ -21,7 +21,7 @@ export class UsuarioEditComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://aprendizajeactivo.espol.edu.ec:443/user/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+id, httpOptions).subscribe(data => {
       this.usuario = data;
     });
   }
@@ -31,7 +31,7 @@ export class UsuarioEditComponent implements OnInit {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
 //    this.usuario.updated_date = Date.now();
-    this.http.put('http://aprendizajeactivo.espol.edu.ec:443/user/'+id, this.usuario, httpOptions)
+    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+id, this.usuario, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/usuario-details', id]);
