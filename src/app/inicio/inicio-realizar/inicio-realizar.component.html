@@ -4,7 +4,9 @@
     <div >
 
       <dl class="list">
-        <h3>Estudiante a Evaluar: {{assessment.idEstudianteEvaluar.nombres}}  {{assessment.idEstudianteEvaluar.apellidos}}</h3>
+        <h3 *ngIf="!isLoading && (assessment.idEvaluacion.tipo=='Peer' || assessment.idEvaluacion.tipo=='Self')">Estudiante a Evaluar: {{assessment.idEstudianteEvaluar.nombres}}  {{assessment.idEstudianteEvaluar.apellidos}}</h3>
+        <h3 *ngIf="!isLoading && assessment.idEvaluacion.tipo=='Team'">Grupo a Evaluar: {{ assessment.idGrupo.nombre }}</h3>
+
         <dt></dt>
         <dt>En la siguiente evaluación responda en calidad al trabajo correspondiente al Capítulo {{assessment.idEvaluacion.capitulo}}</dt>
 
@@ -44,7 +46,7 @@
           </tbody>
         </table>
 
-        <table class="table col-md-12" style="width:100%">
+        <table *ngIf="(assessment.idEvaluacion.tipo=='Peer' || assessment.idEvaluacion.tipo=='Team')" class="table col-md-12" style="width:100%">
           <thead>
             <tr>
               <th >Tipo</th>
@@ -59,7 +61,7 @@
             <tr *ngFor="let comentario of comentariosnuevos; let j = index">
               <td>{{ comentario.tipo }}</td>
               <td>{{ comentario.pregunta }}</td>
-              <td style="width:500px;"><input type="text" class="form-control" placeholder="                                          " (change)="select1()" name="comentario{{j}}"  [(ngModel)]="assessment.comentarios[j]"  required/></td>
+              <td style="width:500px;"><input type="text" class="form-control" placeholder="                                          " (change)="select1()" name="comentario{{j}}"  [(ngModel)]="assessment.comentarios[j]"  /></td>
 
 
 

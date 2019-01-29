@@ -4,6 +4,11 @@
     <div class="col-md-6">
       <form (ngSubmit)="saveVideo()" #videoForm="ngForm">
         <div class="form-group">
+          <label for="name">Materia</label>
+          <select   [(ngModel)]="video.idMateria" (ngModelChange)="onChange($event)" name="idMateria" required>
+            <option *ngFor="let c of materias" [ngValue]="c._id">{{c.nombre}} Código {{c.cod_materia}}</option>
+         </select>        </div>
+        <div class="form-group">
           <label for="name">Tema</label>
           <input type="text" class="form-control" [(ngModel)]="video.tema" name="tema" required>
         </div>
@@ -12,13 +17,10 @@
           <input type="text" class="form-control" [(ngModel)]="video.descripcion" name="descripcion" required>
         </div>
         <div class="form-group">
-          <label for="name">Módulo</label>
+          <label for="name">Capítulo</label>
           <input type="text" class="form-control" [(ngModel)]="video.modulo" name="modulo" required>
         </div>
-        <div class="form-group">
-          <label for="name">Image_Url</label>
-          <input type="text" class="form-control" [(ngModel)]="video.img_url" name="img_url" required>
-        </div>
+
         <div class="form-group">
           <label for="name">Url</label>
           <input type="text" class="form-control" [(ngModel)]="video.url" name="url" required>

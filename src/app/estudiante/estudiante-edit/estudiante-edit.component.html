@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Editar Estudiante</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="updateUsuario(usuario._id)" #usuarioForm="ngForm">
+        <div class="form-group">
+          <label for="name">Nombres</label>
+          <input type="text" class="form-control" [(ngModel)]="usuario.nombres" name="nombres" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Apellidos</label>
+          <input type="text" class="form-control" [(ngModel)]="usuario.apellidos" name="apellidos" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Email</label>
+          <input type="text" class="form-control" [(ngModel)]="usuario.email" name="email" disabled required>
+        </div>
+        <div class="form-group">
+          <label for="name">Identificación</label>
+          <input type="text" class="form-control" [(ngModel)]="usuario.identificacion" name="identificacion" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Tipo</label>
+          <select name="tipo" [(ngModel)]="usuario.tipo" disabled required>
+                 <option value="Estudiante" selected="selected">Estudiante</option>
+             </select>
+           </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!usuarioForm.form.valid">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

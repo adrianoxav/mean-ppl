@@ -12,12 +12,18 @@ import { ActivatedRoute, Router } from '@angular/router';
     encapsulation: ViewEncapsulation.None
 })
 export class PreguntaDetailComponent implements OnInit {
-
+  admin:any;
+  esadmin:Boolean;
   pregunta = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
+    this.admin = localStorage.getItem('email');
+
+    if(this.admin=="adminfisica"){
+      this.esadmin=true;
+    }
     this.getPreguntaDetail(this.route.snapshot.params['id']);
   }
 

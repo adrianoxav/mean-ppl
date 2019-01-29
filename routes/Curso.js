@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Curso = require('../models/Curso.js');
+var Grupo = require('../models/Grupo.js');
+
 var respuesta = require('../utils/responses');
 
 /* GET ALL CursoS */
@@ -43,7 +45,57 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
+router.put('/eliminarestudiante/:id', function(req, res, next) {
+  Curso.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    var cursoactual=post;
+    for (let i=0;i< post.estudiantes.length;i++){
+      if(post.estudiantes[i]==req.body._id){
+        post.estudiantes.splice(i, 1);
 
+      }
+      var cursoactual=post;
+    }
+  Curso.findByIdAndUpdate(req.params.id,cursoactual ,
+     function (err, cursos) {
+    if (err) return next(err);
+    console.log(cursos);
+    for(let grupo of cursos.grupos){
+      Grupo.findById(grupo, function (err, grupoactual) {
+        if (err) return next(err);
+for(var i = grupoactual.estudiantes.length - 1; i >= 0; i--) {
+          if(grupoactual.estudiantes[i]==req.body._id){
+            grupoactual.estudiantes.splice(i, 1);
+            console.log(grupo);
+            console.log(grupoactual.estudiantes[i]);
+            Grupo.findByIdAndUpdate(req.params.id,grupoactual ,
+               function (err, post) {
+              if (err) return next(err);
+
+              console.log(post);
+            });
+
+          }
+        }
+
+      console.log(post);
+    });
+
+
+    }
+  //  Grupo.updateMany({curso:req.params.id,estudiantes: req.body.id}, { $pull: { estudiantes:  req.body.id  } }
+  //    ,
+  //      {safe: true, upsert: true}, function (err, post) {
+  //    if (err) return next(err);
+  //    console.log(post);
+
+  //  });
+    console.log(post);
+  });
+  res.json(post);
+});
+
+});
 
 //router.post('/anadirProfesoraCurso', anadirProfesoraCurso)
 

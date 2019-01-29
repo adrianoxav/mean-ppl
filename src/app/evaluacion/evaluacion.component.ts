@@ -54,15 +54,22 @@ export class EvaluacionComponent implements OnInit {
 
     this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
       this.usuario = data;
-    });
+
     this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
       this.allevaluaciones = data;
       console.log(data);
       for(let curso of this.usuario.curso){
 
         for(let evalu of this.allevaluaciones){
+          console.log(evalu);
           if(curso==evalu.idCurso._id){
             evalu.idCurso=evalu.idCurso.nombre;
+            var l:any;
+            this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
+              l=data;
+              evalu.paralelo=l.paralelo;
+            });
+          //
           this.evaluaciones.push(evalu)
           console.log(curso);
           console.log(evalu.idCurso);
@@ -80,7 +87,7 @@ export class EvaluacionComponent implements OnInit {
     error => console.log(error),
     () => this.isLoading = false
   );
-
+  });
 
 
   }

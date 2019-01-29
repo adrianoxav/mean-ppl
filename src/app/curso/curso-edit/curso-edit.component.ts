@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./curso-edit.component.css']
 })
 export class CursoEditComponent implements OnInit {
-  curso = {idMateria: String,numgrupos: Number,nombre:String,cod_materia: String,profesores:[ ],estudiantes:[ ]};
+  curso = {_id:"",idMateria: String,numgrupos: Number,nombre:String,cod_materia: String,profesores:[ ],estudiantes:[ ],grupos:[ ]};
   users : any;
   id:any;
   lista: any;
@@ -22,8 +22,20 @@ export class CursoEditComponent implements OnInit {
   materias:{};
   profesores=[ ];
   estudiantes=[ ];
+  estudiantestab=[ ];
+  cursoaActualizar={};
+  cursosSeleccionados=[];
+estudianteEliminar:any;
+habilitado:Boolean;
+dtOptionsEstu: any = {};
+tables:Boolean;
+selected: String[]=[];
+cursos = {};
 
-
+admin:any;
+esadmin:Boolean;
+isLoading = true;
+cursoactual
   incomingfile(event)
    {
    this.file= event.target.files[0];
@@ -52,12 +64,41 @@ datos=data;
 
    }
 
+   onChange2(newValue) {
+     //this.cursosSeleccionados.push(newValue);
+       console.log(newValue);
+       //this.signupData.curso.push(newValue);
+       console.log(this.cursosSeleccionados);
 
+       // ... do other stuff here ...
+   }
+
+   select(id: any){
+      let index: number;
+      index = this.cursosSeleccionados.findIndex(num => num == id);
+      if(index==-1){
+      this.cursosSeleccionados.push(id);}
+      else{this.cursosSeleccionados.splice(index,1)};
+      console.log(this.cursosSeleccionados);
+
+    }
 
 
       constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
       ngOnInit() {
+        this.admin = localStorage.getItem('email');
+
+        if(this.admin=="adminfisica"){
+          this.esadmin=true;
+        }
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos').subscribe(data => {
+          console.log(data);
+          this.cursos = data;
+        });
+        this.tables=false;
+
+
         this.getCurso(this.route.snapshot.params['id']);
         this.id=this.route.snapshot.params['id'];
         console.log(this.id);
@@ -70,31 +111,93 @@ datos=data;
           this.materias = data;
         });*/
         console.log(this.curso);
+        this.dtOptionsEstu={
+           language:{
+               "sProcessing":     "Procesando...",
+               "sLengthMenu":     "Mostrar _MENU_ registros",
+               "sZeroRecords":    "No se encontraron resultados",
+               "sEmptyTable":     "Ningún dato disponible en esta tabla",
+               "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+               "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+               "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+               "sInfoPostFix":    "",
+               "sSearch":         "Buscar:",
+              "sSearchPlaceholder":  "Ingrese valor a buscar",
+               "sUrl":            "",
+               "sInfoThousands":  ",",
+               "sLoadingRecords": "Cargando...",
+               "oPaginate": {
+                 "sFirst":    "Primero",
+                 "sLast":     "Último",
+                 "sNext":     "Siguiente",
+                 "sPrevious": "Anterior"
+               },
+               "oAria": {
+                 "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+               }
+             },
+             "order": [[2,"desc"], [1,"desc"]],
+             "autoWidth": false,
+             "lengthMenu": [150, 200]
 
+         }
       }
+      Upload() {
+      let fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            this.arrayBuffer = fileReader.result;
+            var data = new Uint8Array(this.arrayBuffer);
+            var arr = new Array();
+            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            var bstr = arr.join("");
+            var workbook = XLSX.read(bstr, {type:"binary"});
+            console.log(workbook);
+            var first_sheet_name = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[first_sheet_name];
+            this.lista= XLSX.utils.sheet_to_json(worksheet,{raw:true});
+            console.log(this.lista);
+
+         }
+        fileReader.readAsArrayBuffer(this.file);
+ }
 
       getCurso(id) {
+        this.estudiantes=[];
+        this.profesores=[];
+        this.curso = {_id:"",idMateria: String,numgrupos: Number,nombre:String,cod_materia:String,profesores:[ ],estudiantes:[ ],grupos:[ ]};
         let curs:any;
         this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+id,httpOptions).subscribe(data => {
           curs=data;
           this.curso = curs;
           console.log(this.curso);
-          for (let i of this.curso.profesores){
+          for (let i of curs.estudiantes){
+            let noom:any;
+
+          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
+               console.log(data);
+               noom=data;
+               this.estudiantes.push(data);
+             },
+             error => console.log(error),
+             () => this.isLoading = false
+           );
+
+         }
+          for (let j of curs.profesores){
             let ver:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+i,httpOptions).subscribe(data => {
+          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+j,httpOptions).subscribe(data => {
                console.log(data);
                ver=data;
-               if(ver.email=="admin"){}
+               if(ver.email=="adminfisica"){}
                else{
                this.profesores.push(data);}
              });}
-             for (let i of this.curso.estudiantes){
-             this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
-                  console.log(data);
-                  this.estudiantes.push(data);
-                });}
-        });
-      }
+
+
+      });
+    }
+
 
       updateCurso(id) {
     //    this.curso.updated_date = Date.now();
@@ -122,62 +225,111 @@ datos=data;
           );
       }
 
+
 createUsers(){
   let httpOptions = {
     headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
   };
-    for(let l of this.lista){
+      let c=this.getCurso(this.route.snapshot.params['id']);
+
 let assign:any;
 let r:any;
-      this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/register', l, httpOptions)
+let nuevalista=[ ];
+let l=[];
+nuevalista.push(this.cursosSeleccionados, this.lista);
+console.log(nuevalista);
+      this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/register/', nuevalista, httpOptions)
         .subscribe(res => {
-            //console.log(res.msg);
-            r=res;
-            let idUser = res['_id'];
-let assignation:any;
-            if(r.msg=="email already exists."){
-              let dat:any;
-              this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/email/'+l.email, httpOptions).subscribe(data => {
-                console.log(data);
-                dat=data;
-                 assignation = {
-                     'idCurso': this.id,
-                     'grupo': l.grupo,
-                   'idUser': dat._id };
-                   console.log(assignation);
-                   this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/asignacion', assignation,httpOptions)
-                     .subscribe(res => {
-                         console.log(res);
-                       }, (err) => {
-                         console.log(err);
-                       }
-                     );
+            console.log(res);
 
-              }
+});
 
-            );
+}
+acteditest(){
+  this.habilitado=true;
+  this.estudiantestab=this.estudiantes;
 
-            }
-            else{
-             assignation = {
-                 'idCurso': this.id,
-                 'grupo': l.grupo,
-               'idUser': idUser };
-               console.log(assignation);
-               this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/asignacion', assignation,httpOptions)
+}
+eliminarEstudiante(id){
+
+  console.log(id);
+  console.log(this.curso);
+var estu:any;
+/*  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+id,httpOptions).subscribe(data => {
+       console.log(data);
+       estu=data;
+       var j= estu.curso.indexOf( this.curso._id );
+           estu.curso.splice( j, 1 );
+           this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+id, estu,httpOptions)
+             .subscribe(res => {
+                 console.log(res);
+               }, (err) => {
+                 console.log(err);
+               }
+);
+
+});*/
+  var i = this.curso.estudiantes.indexOf( id );
+      this.curso.estudiantes.splice( i, 1 );
+
+
+  this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+this.curso._id, this.curso,httpOptions)
+    .subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      }
+    );
+    for(let grup of this.curso.grupos){
+      let ver:any;
+
+      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+grup,httpOptions).toPromise().then(data => {
+           console.log(data);
+           ver=data;
+           var i = ver.estudiantes.indexOf( id );
+           console.log(i)
+             if(i!=-1){
+               ver.estudiantes.splice( i, 1 );
+               console.log(ver);
+
+               this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+grup, ver,httpOptions)
                  .subscribe(res => {
                      console.log(res);
                    }, (err) => {
                      console.log(err);
                    }
-                 );
-                }
-
-
-
-    }
 );
+             }
+         });
+    }
+
+
+console.log(this.curso);
+this.profesores=[];
+this.estudiantes=[];
+
+  this.ngOnInit();
+  window.location.reload();
+
 
 }
+cargarEstudiantes(curso){
+  this.tables=true;
+
+  for (let i of curso.estudiantes){
+    let noom:any;
+
+  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
+       console.log(data);
+       noom=data;
+       this.estudiantes.push(data);
+     },
+     error => console.log(error),
+     () => this.isLoading = false
+   );
+
+ }
 }
+
+
 }

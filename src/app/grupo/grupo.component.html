@@ -7,13 +7,13 @@ Seleccionar Paralelo</p>
 Número de Grupos del Paralelo: {{ numgrupos }}</h1>
 <p>
 
-<select   [(ngModel)]="cursoSeleccionado" (ngModelChange)="onChange($event)" name="idCurso" required>
+<select  disabled={{gruposel}} [(ngModel)]="cursoSeleccionado" (ngModelChange)="onChange($event)" name="idCurso" required>
   <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
 </select>
 
 <div class="container">
   <h2>Estudiantes del Paralelo</h2>
-  <button type="button"  class="btn btn-info"  disabled={{buttonrecDisabled}} (click)="actgrupos()" >Recargar Grupos</button>
+  <button type="button" *ngIf="!isLoading" class="btn btn-info"  disabled={{buttonrecDisabled}} (click)="actgrupos()" >Recargar Grupos</button>
   <button type="button" align="center" class="btn btn-warning" disabled={{buttonactDisabled}} (click)="editargrupos()" >Editar Grupos</button>
   <button type="button" align="right" class="btn btn-success right" disabled={{buttonDisabled}} (click)="actualizarGrupos()" >Actualizar</button>
 
@@ -46,8 +46,9 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
     </tbody>
   </table>
   </div>
+  <table *ngIf="!tables" datatable [dtOptions]="dtOptionsGrupo" class="row-border hover">
 
-  <table   *ngIf="!tables" class="table">
+
     <thead>
       <tr>
         <th>identificacion</th>
@@ -71,7 +72,7 @@ Número de Grupos del Paralelo: {{ numgrupos }}</h1>
         <td>{{ list.tipo }}</td>
 
         <td>{{ list.grupo }}</td>
-        <input type="number"  [(ngModel)]="list.grupo" name="grupo" required>
+        <td><input type="number"  [(ngModel)]="list.grupo" name="grupo" required></td>
 
 
       </tr>

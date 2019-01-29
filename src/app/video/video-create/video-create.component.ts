@@ -12,11 +12,16 @@ let httpOptions = {
 export class VideoCreateComponent implements OnInit {
 
   video = {};
-
+  materias={};
+materia:any;
   constructor(private http: HttpClient, private router: Router) { }
 
 
   ngOnInit() {
+    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia',httpOptions).subscribe(data => {
+      console.log(data);
+      this.materias = data;
+    });
   }
 
   saveVideo() {
@@ -24,7 +29,7 @@ export class VideoCreateComponent implements OnInit {
       .subscribe(res => {
           let id = res['_id'];
           console.log(this.video);
-          this.router.navigate(['/video-details', id]);
+          this.router.navigate(['/videos']);
         }, (err) => {
           console.log(err);
         }

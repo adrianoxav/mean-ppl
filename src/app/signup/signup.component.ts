@@ -30,6 +30,8 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    if(this.cursosSeleccionados.length==0){}
+    else{
     console.log(this.signupData);
 
   console.log(this.cursoaActualizar);
@@ -41,46 +43,11 @@ export class SignupComponent implements OnInit {
     res=resp;
     let idUser = resp['_id'];
     if(res.msg=="email already exists. in estudiantes"){
-      let dat:any;
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/email/'+this.signupData.email).subscribe(data => {
-        console.log(data);
-        dat=data;
-        idUser=dat._id;
+      this.router.navigate(['login']);
 
-        for (let cursosel of this.cursosSeleccionados){
-          let cursoactual:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
-            cursoactual=data;
-
-
-
-          cursoactual.estudiantes.push(idUser);
-        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
-          console.log(data);
-
-    });
-      });
-      }
-        }
-        );
-    this.router.navigate(['login']);
     }
     else{
-      for (let cursosel of this.cursosSeleccionados){
-        let cursoactual:any;
 
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
-          cursoactual=data;
-
-
-
-        cursoactual.estudiantes.push(idUser);
-      this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
-        console.log(data);
-
-  });
-    });
-    }
     this.router.navigate(['login']);
 
     }
@@ -88,7 +55,7 @@ export class SignupComponent implements OnInit {
 
 });
 }
-
+}
 }
 
 onChange(newValue) {

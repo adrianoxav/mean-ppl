@@ -10,10 +10,16 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class CuestionarioComponent implements OnInit {
 
   cuestionarios: any;
-
+  admin:any;
+  esadmin:Boolean;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.admin = localStorage.getItem('email');
+
+    if(this.admin=="adminfisica"){
+      this.esadmin=true;
+    }
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };

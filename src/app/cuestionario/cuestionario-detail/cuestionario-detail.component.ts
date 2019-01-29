@@ -16,13 +16,19 @@ export class CuestionarioDetailComponent implements OnInit {
 
     cuestionario :any;
     pregunta:any;
-
+    admin:any;
+    esadmin:Boolean;
     preguntas:any;
     preg= [];
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }
 
     ngOnInit() {
+      this.admin = localStorage.getItem('email');
+
+      if(this.admin=="adminfisica"){
+        this.esadmin=true;
+      }
       this.getCuestionarioDetail(this.route.snapshot.params['id']);
 
 

@@ -1,6 +1,6 @@
 
 <head>
-		<title>PPL</title>
+		<title>AA</title>
 		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,8 +42,8 @@
 						</nav>
 						<div class="header-main container">
 						<div class="logo col-md-6 col-sm-6 col-xs-6">
-			<!-- 			<a ><img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/ppl_logo.png" alt="Logo"></a>   -->
-								<a ><img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/logopre.png" alt="Logo"></a>
+			<!--	 				<a ><img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/ppl_logo.png" alt="Logo"></a>-->
+						<a ><img id="logo" class="img-responsive center-block" src="http://www.ppl.espol.edu.ec//assets/images/logopre.png" alt="Logo"></a>
 						</div>
 
 						<div class="logo col-md-6 col-sm-6 col-xs-6">
@@ -75,14 +75,17 @@
 														<a class="active nav-link" *ngIf="(tip == 'Profesor')" [routerLink]="['/cuestionarios']">Cuestionarios</a>
 													</li>
 													<li class="nav-item" *ngIf="(tip == 'Profesor')">
-														<a class="active nav-link" [routerLink]="['/usuarios']">Usuarios</a></li>
-
+														<a class="active nav-link" [routerLink]="['/usuarios']">Profesores</a></li>
+														<li class="nav-item" *ngIf="(tip == 'Profesor')">
+															<a class="active nav-link" [routerLink]="['/estudiante']">Estudiantes</a></li>
 													<li class="nav-item" *ngIf="(tip == 'Profesor')">
 														<a class="active nav-link" [routerLink]="['/cursos']">Cursos</a></li>
 													<li class="nav-item" *ngIf="(tip == 'Profesor')">
 														<a class="active nav-link" [routerLink]="['/grupo']">Grupos</a></li>
 													<li class="nav-item" *ngIf="(tip == 'Profesor')">
 														<a class="active nav-link" [routerLink]="['/preguntas']">Preguntas</a></li>
+														<li class="nav-item"><a class="active nav-link"  *ngIf="(tip == null)" [routerLink]="['/forgotPassword']">Recuperar Clave</a></li>
+
 													<!--Fin de la sección que solo ven los profesores-->
 												</ul><!--//nav-->
 									</div><!--//navabr-collapse-->

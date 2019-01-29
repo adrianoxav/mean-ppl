@@ -19,6 +19,8 @@ module.exports = function(app) {
   app.use('/pregunta',AuthenticationController.isAuthenticated,   require('./Pregunta'));
   app.use('/video_curso',AuthenticationController.isAuthenticated,   require('./Video_curso'));
   app.use('/video', AuthenticationController.isAuthenticated, require('./Video'));
+  app.use('/videos', require('./Video'));
+
   app.use('/book', require('./book'));
   app.use('/user',AuthenticationController.isAuthenticated,  require('./User'));
   app.use('/users',  require('./User'));

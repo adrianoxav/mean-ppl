@@ -24,12 +24,14 @@ export class SignupprofesorComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos').subscribe(data => {
-      console.log(data); 
+      console.log(data);
       this.cursos = data;
     });
   }
 
   signup() {
+    if(this.cursosSeleccionados.length==0){}
+    else{
     console.log(this.signupData);
 
   console.log(this.cursoaActualizar);
@@ -93,6 +95,7 @@ this.router.navigate(['login']);
 
 });
 
+}
 }
 
 onChange(newValue) {

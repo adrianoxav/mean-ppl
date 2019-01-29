@@ -12,7 +12,8 @@
 <div class="row">
   <div class="col-md-12">
     <a [routerLink]="['/pregunta-edit', pregunta._id]" class="btn btn-success">EDITAR</a>
-    <button class="btn btn-danger" type="button" (click)="deletePregunta(pregunta._id)">BORRAR</button>
+
+    <button  *ngIf=(esadmin) class="btn btn-danger" type="button" (click)="deletePregunta(pregunta._id)">BORRAR</button>
     <a [routerLink]="['/preguntas']" class="btn btn-info">VOLVER</a>
 
   </div>

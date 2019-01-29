@@ -10,7 +10,12 @@ router.get('/', function(req, res, next) {
     res.json(products);
   });
 });
-
+router.get('/getpormateria/:idMateria', function(req, res, next) {
+  Video.find({idMateria:req.params.idMateria},function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
 /* GET SINGLE Video BY ID */
 router.get('/:id', function(req, res, next) {
   Video.findById(req.params.id, function (err, post) {

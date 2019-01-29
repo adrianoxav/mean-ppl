@@ -5,12 +5,12 @@ let httpOptions = {
 };
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
-  selector: 'app-estudiante-detail',
-  templateUrl: './estudiante-detail.component.html',
-  styleUrls: ['./estudiante-detail.component.css'],
+  selector: 'app-estudiante-details',
+  templateUrl: './estudiante-details.component.html',
+  styleUrls: ['./estudiante-details.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class EstudianteDetailComponent implements OnInit {
+export class EstudianteDetailsComponent implements OnInit {
 
   cuestionario : any;
   pregunta:any;

@@ -2,7 +2,9 @@
   <h1>Assessments por Realizar
 
   </h1>
-
+  <a (click)="recargar()" class="btn btn-default btn-lg">Recargar
+    <span class="	glyphicon glyphicon-refresh" aria-hidden="true"></span>
+  </a>
 <table class="table">
   <thead>
     <tr>
@@ -21,9 +23,10 @@
       <td>{{ assessment.fechaInicioTomada  | date: "dd MMM y hh:mm a" }}</td>
       <td>{{ assessment.fechaTerminada  | date: "dd MMM y hh:mm a" }}</td>
 
-      <td>{{ assessment.idEstudianteEvaluar.nombres }} {{ assessment.idEstudianteEvaluar.apellidos }}</td>
+      <td *ngIf="(assessment.idEvaluacion.tipo=='Peer') || (assessment.idEvaluacion.tipo=='Self')">{{ assessment.idEstudianteEvaluar.nombres }} {{ assessment.idEstudianteEvaluar.apellidos }}</td>
+      <td *ngIf="assessment.idEvaluacion.tipo=='Team'"> Grupo {{ assessment.idGrupo.nombre }}</td>
       <td>{{ assessment.idEvaluacion.tipo }}</td>
-      <td><a [routerLink]="['/inicio-realizar', assessment._id]">Realizar</a></td>
+      <td ><a [routerLink]="['/inicio-realizar', assessment._id]">Realizar</a></td>
 
     </tr>
   </tbody>

@@ -58,7 +58,8 @@ router.post('/', function(req, res, next) {
           var grupo=(post);
           console.log(post);
 
-
+  //Empezamos a verificar los tipos de Assessments
+      if(req.body.tipo=="Peer"){
           var newEvaluacionGrupo = new Evaluacion_grupo({
             idCurso: grupo.curso,
             idGrupo:grupo._id,
@@ -79,8 +80,7 @@ router.post('/', function(req, res, next) {
           //  res.json(post);
             var evaluaciongrupo=(post);
 
-//Empezamos a verificar los tipos de Assessments
-            if(evaluaciongrupo.tipo=="Peer"){
+
               for (var k = 0; k < grupo.estudiantes.length; k++) {
                 var newEvaluacionEstudiante = new Evaluacion_estudiante({
                   idEstudiante: grupo.estudiantes[k],
@@ -147,10 +147,153 @@ router.post('/', function(req, res, next) {
               //  res.json(post);
 
 
-            }
 
-        //    else{}              ojo que esto va cuando esten hechos los demas assessments
+
           });
+          }
+
+        else if(req.body.tipo=="Team"){
+              var newEvaluacionGrupo = new Evaluacion_grupo({
+                idCurso: grupo.curso,
+                idGrupo:grupo._id,
+                idEvaluacion: eval._id,
+                tipo: eval.tipo,
+                fechaInicioTomada: eval.fechaInicioTomada,
+                fechaTerminada: eval.fechaTerminada,
+                wfgrupo: 0,
+                hanrealizado:0,
+                finalizo:0,
+
+                numestudiantes: grupo.estudiantes.length,
+              });
+              newEvaluacionGrupo.save(function(err,post) {
+                if (err) {
+                  return res.json({success: false, msg: 'error'});
+                }
+              //  res.json(post);
+                var evaluaciongrupo=(post);
+
+
+                  for (var k = 0; k < grupo.estudiantes.length; k++) {
+                    var newEvaluacionEstudiante = new Evaluacion_estudiante({
+                      idEstudiante: grupo.estudiantes[k],
+                      idEvaluacion: eval._id,
+                      idEvaluacionGrupo: evaluaciongrupo._id,
+                      idCurso: grupo.curso,
+                      idGrupo:grupo._id,
+                      tipo: eval.tipo,
+                      fechaInicioTomada: eval.fechaInicioTomada,
+                      fechaTerminada: eval.fechaTerminada,
+                      wfestudiante: 0,
+                      hanrealizado:0,
+                      finalizo:0,
+                      numGrupo:1,
+                      evaluaste:0,
+                      comentarios: [],
+                    });
+
+                    newEvaluacionEstudiante.save(function(err,post) {
+                      if (err) {
+                        return res.json({success: false, msg: 'error'});
+                      }
+                    //  res.json(post);
+                      var evaluacionestudiante=(post);
+                      var newEvaluacionEstudiantePeer = new Evaluacion_estudiantepeer({
+                        idEstudiante: evaluacionestudiante.idEstudiante,
+                      //  idEstudianteEvaluar: grupo.estudiantes[j],
+                        idEvaluacionEstudiante: evaluacionestudiante._id,
+                        idEvaluacionGrupo: evaluaciongrupo._id,
+                        idEvaluacion: eval._id,
+                        idGrupo:grupo._id,
+                        idCurso: grupo.curso,
+                        tipo: eval.tipo,
+                        fechaInicioTomada: eval.fechaInicioTomada,
+                        fechaTerminada: eval.fechaTerminada,
+                        wfestudianteevaluar: 0,
+                        finalizo:0,
+                        comentarios: [],
+                      });
+                      newEvaluacionEstudiantePeer.save(function(err,post) {
+                        if (err) {
+                          return res.json({success: false, msg: 'error'});
+                        }
+                      //  res.json(post);
+                        console.log(post);
+
+                          });
+                      });
+                    }
+
+
+
+                  //  res.json(post);
+
+
+
+
+              });
+              }
+
+      else if(req.body.tipo=="Self"){
+        for (var k = 0; k < grupo.estudiantes.length; k++) {
+          var newEvaluacionEstudiante = new Evaluacion_estudiante({
+            idEstudiante: grupo.estudiantes[k],
+            idEvaluacion: eval._id,
+          //  idEvaluacionGrupo: evaluaciongrupo._id,
+            idCurso: grupo.curso,
+            idGrupo:grupo._id,
+            tipo: eval.tipo,
+            fechaInicioTomada: eval.fechaInicioTomada,
+            fechaTerminada: eval.fechaTerminada,
+            wfestudiante: 0,
+            hanrealizado:0,
+            finalizo:0,
+            numGrupo:1,
+            evaluaste:0,
+            comentarios: [],
+          });
+          newEvaluacionEstudiante.save(function(err,post) {
+            if (err) {
+              return res.json({success: false, msg: 'error'});
+            }
+          //  res.json(post);
+            var evaluacionestudiante=(post);
+
+            });
+        }
+
+        for (var i = 0; i < grupo.estudiantes.length; i++) {
+          //assessmentestudiante
+
+                  var newEvaluacionEstudiantePeer = new Evaluacion_estudiantepeer({
+                    idEstudiante: grupo.estudiantes[i],
+                    idEstudianteEvaluar: grupo.estudiantes[i],
+                  //  idEvaluacionEstudiante: evaluacionestudiante._id,
+                //    idEvaluacionGrupo: evaluaciongrupo._id,
+                    idEvaluacion: eval._id,
+                    idGrupo:grupo._id,
+                    idCurso: grupo.curso,
+                    tipo: eval.tipo,
+                    fechaInicioTomada: eval.fechaInicioTomada,
+                    fechaTerminada: eval.fechaTerminada,
+                    wfestudianteevaluar: 0,
+                    finalizo:0,
+                    comentarios: [],
+                  });
+                  newEvaluacionEstudiantePeer.save(function(err,post) {
+                    if (err) {
+                      return res.json({success: false, msg: 'error'});
+                    }
+                  //  res.json(post);
+                    console.log(post);
+
+                      });
+
+
+
+
+          }
+        }
         });
 
       }//end del for
@@ -164,18 +307,25 @@ router.post('/', function(req, res, next) {
     console.log(date);
     var j = schedule.scheduleJob(date, function(){
       console.log('The world is going to end today.');
-      Evaluacion.findByIdAndUpdate(eval.id,{finalizo:true}, function (err, post) {
+      Evaluacion.findOneAndUpdate({_id:eval.id,finalizo:false},{finalizo:true}, function (err, post) {
+
 
         var evalu=post;
+
+                if(post==null){
+                  console.log("NO HARE NADAAAAAAAAAAAAAAAAAAAAAAAAAAAA, ME ELIMINARON LO QUE TENÍA PROGRAMADO :(");
+
+                }
+                else{
         //Cierro las evaluaciones por estudiante
-        Evaluacion_estudiantepeer.updateMany({idEvaluacion: evalu._id},{finalizo:true}, function (err, post) {
+        Evaluacion_estudiantepeer.updateMany({idEvaluacion: eval.id},{finalizo:true}, function (err, post) {
 
 
           if (err) return next(err);
           var evalupeer=(post);
 
         });
-        if(evalu.tipo=="Peer"){
+        if(eval.tipo=="Peer"){
 
         Evaluacion_grupo.find({idEvaluacion: evalu._id},function (err, post) {
           if (err) return next(err);
@@ -229,9 +379,73 @@ router.post('/', function(req, res, next) {
 
 
       }
+      else if(eval.tipo=="Team"){
+
+      Evaluacion_grupo.find({idEvaluacion: evalu._id},function (err, post) {
+        if (err) return next(err);
+        var evalgrupos=(post);
+        for (let evalgrupo of evalgrupos){ //recorro los grupos
+          if(evalgrupo.hanrealizado==0){
+            evalgrupo.wfgrupo=0}
+            else{
+              evalgrupo.wfgrupo=(evalgrupo.wfgrupo/evalgrupo.hanrealizado);
+            }
+            evalgrupo.finalizo=true;
+            Evaluacion_grupo.findByIdAndUpdate(evalgrupo._id,evalgrupo, function (err, post) {
+              if (err) return next(err);
+              var evalgrupoact=(post);
+              Evaluacion_estudiante.find({idEvaluacionGrupo: evalgrupo._id},function (err, post) {//traigo al fin a los estudiantes
+                if (err) return next(err);
+
+                  var evalestudiantes=post;
+                  for (let evalestudiante of evalestudiantes){ //recorro los eval estudiantes donde va la nota final
+                    evalestudiante.finalizo=true;
+                    if(evalestudiante.haevaluado==false){
+                      evalestudiante.wfestudiante=0}
+                      else if(evalestudiante.haevaluado==true && evalgrupo.hanrealizado==1){
+                          evalestudiante.wfestudiante=1;
+                      }
+                      else if(evalestudiante.haevaluado==true && evalgrupo.hanrealizado>0){
+
+                        evalestudiante.wfestudiante=evalgrupo.wfgrupo;
+                      }
+                      //guardo la evaluacion estudiante
+                      Evaluacion_estudiante.findByIdAndUpdate(evalestudiante._id,evalestudiante, function (err, post) {
+                        if (err) return next(err);
+                        console.log(post);
+                      });
+
+                    }
+                });
+              });
+        }
+
+        console.log("cerrado el proceso");
+      });
+
+
+      if (err) return next(err);
+      var evalu=(post);
+
+
+    }
 
 
 ////////////////      else{} //para cuando haya mas assessments
+
+
+else if(eval.tipo=="Self"){
+  Evaluacion_estudiante.updateMany({idEvaluacion: eval.id},{finalizo:true}, function (err, post) {
+
+
+    if (err) return next(err);
+    console.log(post);
+
+  });
+
+}
+
+}
       });
 
 
@@ -242,6 +456,150 @@ res.json(eval);
   });
 });
 
+
+router.put('/terminarevaluacion/:idEvaluacion', function(req, res, next) {
+  Evaluacion.findOneAndUpdate({_id:req.params.idEvaluacion,finalizo:false},{finalizo:true}, function (err, post) {
+
+
+    var evalu=post;
+
+            if(post==null){
+              console.log("NO HARE NADAAAAAAAAAAAAAAAAAAAAAAAAAAAA, ME ELIMINARON LO QUE TENÍA PROGRAMADO :(");
+
+            }
+            else{
+    //Cierro las evaluaciones por estudiante
+    Evaluacion_estudiantepeer.updateMany({idEvaluacion: req.params.idEvaluacion},{finalizo:true}, function (err, post) {
+
+
+      if (err) return next(err);
+      var evalupeer=(post);
+
+    });
+    if(evalu.tipo=="Peer"){
+
+    Evaluacion_grupo.find({idEvaluacion: evalu._id},function (err, post) {
+      if (err) return next(err);
+      var evalgrupos=(post);
+      for (let evalgrupo of evalgrupos){ //recorro los grupos
+        if(evalgrupo.hanrealizado==0){
+          evalgrupo.wfgrupo=0}
+          else{
+            evalgrupo.wfgrupo=(evalgrupo.wfgrupo/evalgrupo.hanrealizado);
+          }
+          evalgrupo.finalizo=true;
+          Evaluacion_grupo.findByIdAndUpdate(evalgrupo._id,evalgrupo, function (err, post) {
+            if (err) return next(err);
+            var evalgrupoact=(post);
+            Evaluacion_estudiante.find({idEvaluacionGrupo: evalgrupoact._id},function (err, post) {//traigo al fin a los estudiantes
+              if (err) return next(err);
+
+                var evalestudiantes=post;
+                for (let evalestudiante of evalestudiantes){ //recorro los eval estudiantes donde va la nota final
+                  evalestudiante.finalizo=true;
+                  if(evalestudiante.haevaluado==false){
+                    evalestudiante.wfestudiante=0}
+                    else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado==0){
+                        evalestudiante.wfestudiante=1;
+                    }
+                    else if(evalestudiante.haevaluado==true && evalestudiante.hanrealizado>0){
+                      let prome=(evalestudiante.wfestudiante/evalestudiante.hanrealizado);
+                      console.log("OJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                      console.log(evalestudiante);
+                      console.log(prome);
+                      console.log(evalgrupo.wfgrupo);
+                      evalestudiante.wfestudiante=Math.sqrt(prome/evalgrupo.wfgrupo);
+                    }
+                    //guardo la evaluacion estudiante
+                    Evaluacion_estudiante.findByIdAndUpdate(evalestudiante._id,evalestudiante, function (err, post) {
+                      if (err) return next(err);
+                      console.log(post);
+                    });
+
+                  }
+              });
+            });
+      }
+
+      console.log("cerrado el proceso");
+    });
+
+
+    if (err) return next(err);
+    var evalu=(post);
+
+
+  }
+  else if(evalu.tipo=="Team"){
+
+  Evaluacion_grupo.find({idEvaluacion: evalu._id},function (err, post) {
+    if (err) return next(err);
+    var evalgrupos=(post);
+    for (let evalgrupo of evalgrupos){ //recorro los grupos
+      if(evalgrupo.hanrealizado==0){
+        evalgrupo.wfgrupo=0}
+        else{
+          evalgrupo.wfgrupo=(evalgrupo.wfgrupo/evalgrupo.hanrealizado);
+        }
+        evalgrupo.finalizo=true;
+        Evaluacion_grupo.findByIdAndUpdate(evalgrupo._id,evalgrupo, function (err, post) {
+          if (err) return next(err);
+          var evalgrupoact=(post);
+          Evaluacion_estudiante.find({idEvaluacionGrupo: evalgrupo._id},function (err, post) {//traigo al fin a los estudiantes
+            if (err) return next(err);
+
+              var evalestudiantes=post;
+              for (let evalestudiante of evalestudiantes){ //recorro los eval estudiantes donde va la nota final
+                evalestudiante.finalizo=true;
+                if(evalestudiante.haevaluado==false){
+                  evalestudiante.wfestudiante=0}
+                  else if(evalestudiante.haevaluado==true && evalgrupo.hanrealizado==1){
+                      evalestudiante.wfestudiante=1;
+                  }
+                  else if(evalestudiante.haevaluado==true && evalgrupo.hanrealizado>0){
+
+                    evalestudiante.wfestudiante=evalgrupo.wfgrupo;
+                  }
+                  //guardo la evaluacion estudiante
+                  Evaluacion_estudiante.findByIdAndUpdate(evalestudiante._id,evalestudiante, function (err, post) {
+                    if (err) return next(err);
+                    console.log(post);
+                  });
+
+                }
+            });
+          });
+    }
+
+    console.log("cerrado el proceso");
+  });
+
+
+  if (err) return next(err);
+  var evalu=(post);
+
+
+  }
+
+
+  ////////////////      else{} //para cuando haya mas assessments
+
+
+  else if(evalu.tipo=="Self"){
+  Evaluacion_estudiante.updateMany({idEvaluacion: req.params.idEvaluacion},{finalizo:true}, function (err, post) {
+
+
+  if (err) return next(err);
+  console.log(post);
+
+  });
+
+  }
+
+  }
+    res.json(post);
+  });
+});
 /* UPDATE Evaluacion */
 router.put('/:id', function(req, res, next) {
   Evaluacion.findByIdAndUpdate(req.params.id, req.body, function (err, post) {

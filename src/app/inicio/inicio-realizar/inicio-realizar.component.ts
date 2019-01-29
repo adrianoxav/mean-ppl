@@ -93,8 +93,10 @@ constructor(private router: Router, private route: ActivatedRoute, private http:
     saveassessment(){
       this.assessment.idCurso=this.assessment.idCurso._id;
       this.assessment.idEstudiante=this.assessment.idEstudiante._id;
+      if(this.assessment.idEvaluacion.tipo=="Peer" || this.assessment.idEvaluacion.tipo=="Self")
       this.assessment.idEstudianteEvaluar=this.assessment.idEstudianteEvaluar._id;
       this.assessment.idEvaluacion=this.assessment.idEvaluacion._id;
+      if(this.assessment.idEvaluacion.tipo=="Peer" || this.assessment.idEvaluacion.tipo=="Team")
       this.assessment.idEvaluacionGrupo=this.assessment.idEvaluacionGrupo._id;
       this.assessment.finalizo=true;
 

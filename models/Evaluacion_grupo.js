@@ -26,7 +26,7 @@ type: Boolean,
 wfgrupo: Number,
 numestudiantes:Number,
 hanrealizado:Number,
-
+comentarios:[{type:String}],
   updated_date: { type: Date, default: Date.now },
 });
 

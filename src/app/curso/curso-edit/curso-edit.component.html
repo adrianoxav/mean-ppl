@@ -61,11 +61,15 @@
   </div>
 
   <div class="container">
+    <button  *ngIf="!isLoading" type="button"  class="btn btn-info"  disabled={{buttonrecDisabled}} (click)="acteditest()" >CLick para Editar Estudiantes</button>
+
     <h2>Estudiantes</h2>
   <!--  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </a>-->
-    <table class="table">
+
+    <div *ngIf="!isLoading && !habilitado">
+      <table  class="table">
       <thead>
         <tr>
           <th>email</th>
@@ -74,26 +78,62 @@
 
 
 
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let list of estudiantes">
           <td>{{ list.email }}</td>
-          <td>{{ list.nombres }} {{ list.apellidos }}</td>
+          <td>{{ list.apellidos }} {{ list.nombres }}</td>
           <td>{{ list.identificacion }}</td>
+
+          <td *ngIf=(habilitado)><a  title="Eliminar" data-toggle="modal" data-target="#deleteConfirmation" (click)="eliminarEstudiante(list._id)">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                         </a></td>
 
 
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="container">
+    <div *ngIf="!isLoading && habilitado">
+    <table datatable [dtOptions]="dtOptionsEstu" class="row-border hover">
+      <thead>
+        <tr>
+          <th>email</th>
+          <th>Estudiante</th>
+          <th>Identificación</th>
+          <th *ngIf=(habilitado)>Eliminar?</th>
 
-<!--  <h1>Subir Lista de Estudiantes al curso</h1>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of estudiantes">
+          <td>{{ list.email }}</td>
+          <td>{{ list.apellidos }} {{ list.nombres }}</td>
+          <td>{{ list.identificacion }}</td>
+
+          <td *ngIf=(habilitado)><a  title="Eliminar" data-toggle="modal" data-target="#deleteConfirmation" (click)="eliminarEstudiante(list._id)">
+                           <i class="fa fa-trash-o" aria-hidden="true"></i>
+                         </a></td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <div *ngIf=(esadmin) class="container">
+
+  <h1>Subir Lista de Estudiantes al curso</h1>
 
   <input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Subir archivo .xlsx" accept=".xlsx">
-  <button type="button" class="btn btn-info" (click)="Upload()" >Importar Estudiantes</button>
-  <button type="button" class="btn btn-success" (click)="createUsers()" >Añadir al Curso</button>
+  <button  type="button" class="btn btn-info" (click)="Upload()" >Importar Estudiantes</button>
+  <button  type="button" class="btn btn-success" (click)="createUsers()" >Añadir al Curso</button>
 
 
   <div class="container">
@@ -126,6 +166,29 @@
       </tbody>
     </table>
   </div>
--->
+<div  >
+  <label for="name">Elegir Cursos</label>
+
+
+   <!--  <select multiple  [(ngModel)]="idcurso" (ngModelChange)="onChange($event)" name="idCurso" required>
+       <option *ngFor="let c of cursos" [ngValue]="c._id">{{c.nombre}} Paralelo {{c.paralelo}}</option>
+ </select>-->
+ <tr *ngFor="let c of cursos">
+   <td>
+
+       <!-- evento change y atributo por defecto checked false, se agrega como id el id de la persona
+     para luego saber que checkbox le pertenece a cada persona-->
+       <input  [checked]="false" (change)="select(c._id)" id="{{c._id}}" type="checkbox" class="filled-in" required />
+
+       <label  attr.for="{{c._id}}"></label>
+
+
+     </td>
+   <td>{{c.nombre}} Paralelo {{c.paralelo}}</td>
+
+
+
+ </tr>
+ </div>
 </div>
 </div>

@@ -12,24 +12,24 @@
     <dd>{{ evaluacion.idGrupo.nombre }}</dd>
     <dt>Evaluación:</dt>    <dd>{{ evaluacion.idEvaluacion.nombre}}</dd>
     <dt>Capítulo:</dt>    <dd>{{ evaluacion.idEvaluacion.capitulo}}</dd>
-    <dt>Cuántos Compañeros tuvo que evaluar?:</dt>
-    <dd>{{ evaluacion.numGrupo }}</dd>
-    <dt>Cuántos Compañeros lo Evaluaron?:</dt>
-    <dd>{{ evaluacion.hanrealizado }}</dd>
+    <dt *ngIf="evaluacion.tipo=='Peer'">Cuántos Compañeros tuvo que evaluar?:</dt>
+    <dd *ngIf="evaluacion.tipo=='Peer'">{{ evaluacion.numGrupo }}</dd>
+    <dt *ngIf="evaluacion.tipo=='Peer'">Cuántos Compañeros lo Evaluaron?:</dt>
+    <dd *ngIf="evaluacion.tipo=='Peer'">{{ evaluacion.hanrealizado }}</dd>
     <dt>A cuántos Compañeros Evaluó?:</dt>
     <dd>{{ evaluacion.evaluaste }}</dd>
-    <dt>WF Grupal:</dt>
-    <dd>{{ evaluacion.idEvaluacionGrupo.wfgrupo | number : '1.3-3'}}</dd>
+    <dt *ngIf="evaluacion.tipo=='Peer'">WF Grupal:</dt>
+    <dd *ngIf="evaluacion.tipo=='Peer'">{{ evaluacion.idEvaluacionGrupo.wfgrupo | number : '1.3-3'}}</dd>
     <dt>WF Individual:</dt>
     <dd>{{ evaluacion.wfestudiante | number : '1.3-3'}}</dd>
 
 
   </dl>
 
-  <div align="center">
+  <div *ngIf="evaluacion.tipo=='Peer'" align="center">
 <h1 class="center">Retroalimentación</h1>  </div>
 
-<table class="table" >
+<table *ngIf="evaluacion.tipo=='Peer'" class="table" >
   <thead>
     <tr>
       <th># de Estudiante</th>

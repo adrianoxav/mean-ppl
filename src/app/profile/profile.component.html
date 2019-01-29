@@ -25,6 +25,26 @@
       <span>{{ usuario.tipo }}</span>
     </div>
   </div>
-</div>
-<div class="row">
+
+
+
+
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Cursos</th>
+      <th>Paralelo</th>
+
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursos">
+      <td>{{ curso.nombre }}</td>
+      <td>{{ curso.paralelo }}</td>
+
+    </tr>
+  </tbody>
+</table>
 </div>

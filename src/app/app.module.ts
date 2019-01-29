@@ -47,16 +47,18 @@ import { CursoEditComponent } from './curso/curso-edit/curso-edit.component';
 import { CursoCreateComponent } from './curso/curso-create/curso-create.component';
 import { CursoDetailComponent } from './curso/curso-detail/curso-detail.component';
 
+import { EstudianteEditComponent } from './estudiante/estudiante-edit/estudiante-edit.component';
+import { EstudianteDetailComponent } from './estudiante/estudiante-detail/estudiante-detail.component';
 
 import { EvaluacionEditComponent } from './evaluacion/evaluacion-edit/evaluacion-edit.component';
 import { EvaluacionCreateComponent } from './evaluacion/evaluacion-create/evaluacion-create.component';
 import { EvaluacionDetailComponent } from './evaluacion/evaluacion-detail/evaluacion-detail.component';
+import { EstudianteDetailsComponent } from './evaluacion/evaluacion-detail/estudiante-details/estudiante-details.component';
 
 
 import { EvaluacionEstudianteEditComponent } from './evaluacion-estudiante/evaluacion-estudiante-edit/evaluacion-estudiante-edit.component';
 import { EvaluacionEstudianteCreateComponent } from './evaluacion-estudiante/evaluacion-estudiante-create/evaluacion-estudiante-create.component';
 import { EvaluacionEstudianteDetailComponent } from './evaluacion-estudiante/evaluacion-estudiante-detail/evaluacion-estudiante-detail.component';
-import { EstudianteDetailComponent } from './evaluacion/evaluacion-detail/estudiante-detail/estudiante-detail.component';
 import { EstudianteDetalleComponent } from './assessments/estudiante-detalle/estudiante-detalle.component';
 
 import { GrupoComponent } from './grupo/grupo.component';
@@ -93,6 +95,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupprofesorComponent } from './signupprofesor/signupprofesor.component';
+import { ForgotPasswordComponent } from './forgotPassword/forgotPassword.component';
 
 import { UsuarioComponent } from './usuario/usuario.component';
 
@@ -147,7 +150,10 @@ const appRoutes: Routes = [
   component: ProfileComponent,
   data: { title: 'profile' }
 },
-
+{
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent
+},
 {
   path: 'profile-edit/:id',
   component: ProfileEditComponent,
@@ -180,6 +186,29 @@ const appRoutes: Routes = [
     data: { title: 'Estudiante detail' }
   },
 
+
+////estudiante
+
+{
+  path: 'estudiante-details/:id',
+  component: EstudianteDetailComponent,
+  data: { title: 'estudiante Details' }
+},
+{
+  path: 'estudiante-detalles/:id',
+  component: EstudianteDetailsComponent,
+  data: { title: 'estudiante Details' }
+},
+{
+  path: 'estudiante-edit/:id',
+  component: EstudianteEditComponent,
+  data: { title: 'Edit estudiante' }
+},
+{
+  path: 'estudiante-detail/:id',
+  component: EstudianteDetailComponent,
+  data: { title: 'Estudiante detail' }
+},
   //assesstments
 
   {
@@ -464,12 +493,16 @@ const appRoutes: Routes = [
 ];
 @NgModule({
   declarations: [
+    ForgotPasswordComponent,
     AppNavbarComponent,
     AppComponent,
     UsuarioComponent,
     UsuarioDetailComponent,
     UsuarioCreateComponent,
     UsuarioEditComponent,
+    EstudianteDetailComponent,
+EstudianteDetailsComponent,
+    EstudianteEditComponent,
     BookComponent,
     BookDetailComponent,
     BookCreateComponent,

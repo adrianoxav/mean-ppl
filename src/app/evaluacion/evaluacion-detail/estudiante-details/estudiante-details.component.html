@@ -1,0 +1,77 @@
+<div class="container">
+  <h1>{{ evaluacion.idEstudiante.nombres }} {{ evaluacion.idEstudiante.apellidos }}</h1>
+  <dl class="grid-dl">
+    <dt>Realizó el assessment?:</dt>
+    <dd class="glyphicon glyphicon-ok" *ngIf="evaluacion.haevaluado"></dd>
+    <dd class="glyphicon glyphicon-remove" *ngIf="!evaluacion.haevaluado"></dd>
+    <dt>Materia:</dt>
+    <dd>{{ evaluacion.idCurso.nombre }}</dd>
+    <dt>Paralelo:</dt>
+    <dd>{{ evaluacion.idCurso.paralelo }}</dd>
+    <dt>Grupo:</dt>
+    <dd>{{ evaluacion.idGrupo.nombre }}</dd>
+    <dt>Evaluación:</dt>    <dd>{{ evaluacion.idEvaluacion.nombre}}</dd>
+    <dt>Capítulo:</dt>    <dd>{{ evaluacion.idEvaluacion.capitulo}}</dd>
+    <dt *ngIf="evaluacion.tipo=='Peer'">Cuántos Compañeros tuvo que evaluar?:</dt>
+    <dd *ngIf="evaluacion.tipo=='Peer'">{{ evaluacion.numGrupo }}</dd>
+    <dt *ngIf="evaluacion.tipo=='Peer'">Cuántos Compañeros lo Evaluaron?:</dt>
+    <dd *ngIf="evaluacion.tipo=='Peer'">{{ evaluacion.hanrealizado }}</dd>
+    <dt *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Self')">A cuántos Compañeros Evaluó?:</dt>
+    <dd *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Self')">{{ evaluacion.evaluaste }}</dd>
+    <dt *ngIf="(evaluacion.tipo=='Team')">Grupo a Evaluar?:</dt>
+    <dd *ngIf="(evaluacion.tipo=='Team')">{{ evaluacion.idGrupo.nombre }}</dd>
+    <dt *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Team')">WF Grupal:</dt>
+    <dd *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Team')">{{ evaluacion.idEvaluacionGrupo.wfgrupo | number : '1.3-3'}}</dd>
+    <dt *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Self')">WF Individual:</dt>
+    <dd *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Self')">{{ evaluacion.wfestudiante | number : '1.3-3'}}</dd>
+
+
+  </dl>
+
+  <div *ngIf="(evaluacion.tipo=='Peer') || (evaluacion.tipo=='Team')" align="center">
+<h1 class="center">Retroalimentación</h1>  </div>
+
+<table *ngIf="evaluacion.tipo=='Peer'" class="table" >
+  <thead>
+    <tr>
+      <th># de Estudiante</th>
+      <th>Feedback</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comentario of evaluacion.comentarios;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{ comentario}}</td>
+
+
+    </tr>
+  </tbody>
+</table>
+
+<table *ngIf="evaluacion.tipo=='Team'" class="table" >
+  <thead>
+    <tr>
+      <th># de Estudiante</th>
+      <th>Feedback</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let comentario of evaluacion.idEvaluacionGrupo.comentarios;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{comentario}}</td>
+
+
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <!--  <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>-->
+
+    <a [routerLink]="['/evaluacion-details',evaluacion.idEvaluacion._id]" class="btn btn-info">VOLVER</a>
+
+  </div>
+</div>

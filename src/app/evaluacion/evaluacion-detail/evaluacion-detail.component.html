@@ -1,7 +1,4 @@
-<div>
 
-<button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">BORRAR EVALUACIÓN</button>
-</div>
 <div class="container">
   <h1>{{ evaluacion.title }}</h1>
   <dl class="grid-dl">
@@ -19,12 +16,18 @@
     <dt>Fecha de Finalización:</dt>    <dd>{{ evaluacion.fechaTerminada |  date: "dd MMM y hh:mm a" }}</dd>
 
   </dl>
+  <a (click)="recargar()" class="btn btn-default btn-lg">Recargar Resultados
+    <span class="	glyphicon glyphicon-refresh" aria-hidden="true"></span>
+  </a>
+  <div  class="col-md-6">
 
+  <button *ngIf="!evaluacion.finalizo" class="btn btn-warning" type="button" (click)="finalizarEvaluacion(evaluacion._id)">FINALIZAR EVALUACIÓN</button>
+  </div>
   <div align="center">
 <h1 class="center">Resultados</h1>  </div>
 
 
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading && (evaluacion.tipo=='Peer' || evaluacion.tipo=='Team')">
 <table datatable [dtOptions]="dtOptionsEval" class="row-border hover">
   <thead>
     <tr>
@@ -48,15 +51,49 @@
       <td >{{ resul.idGrupo }}</td>
       <td> <a *ngIf=(resul.finalizo) >{{ resul.wfgrupo | number : '1.3-3'}}</a></td>
       <td *ngIf="resul.finalizo== true && resul.wfestudiante > 0" > <a  >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
-      <td *ngIf="resul.finalizo== true && resul.wfestudiante == 0" bgcolor="#FF0000"> <a   >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
+      <td *ngIf="resul.finalizo== true && resul.haevaluado==false" bgcolor="#FF0000"> <a  >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
+      <td *ngIf="resul.finalizo== true && resul.haevaluado==true && resul.wfestudiante == 0 && resul.hanrealizado == 0" bgcolor="#FF0000"> <a   >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
+      <td *ngIf="resul.finalizo== true && resul.haevaluado==true && resul.wfestudiante == 0 && resul.hanrealizado > 0 " bgcolor="#9E5B9A"> <a   >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
 
+
+      <td><a *ngIf=(resul.finalizo) [routerLink]="['/estudiante-detalles', resul._id]">Detalles</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div *ngIf="!isLoading && evaluacion.tipo=='Self'">
+
+<table datatable [dtOptions]="dtOptionsEval" class="row-border hover">
+  <thead>
+    <tr>
+      <th>Nombres</th>
+      <th>Evaluó?</th>
+      <th>Grupo</th>
+      <th>Wf Individual</th>
+      <th>Acción</th>
+
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resul of evals">
+      <td *ngIf="resul.evaluaste>0 && resul.evaluaste<resul.numGrupo" bgcolor="#F6F92B"><a   >{{ resul.nombres }}</a></td>
+      <td *ngIf="resul.evaluaste==0 || resul.evaluaste==resul.numGrupo" bgcolor="#FFFFFF"><a   >{{ resul.nombres }}</a></td>
+      <td class="glyphicon glyphicon-ok" *ngIf="resul.haevaluado"></td>
+      <td class="glyphicon glyphicon-remove" *ngIf="!resul.haevaluado"></td>
+      <td >{{ resul.idGrupo }}</td>
+      <td *ngIf="resul.finalizo== true && resul.wfestudiante > 0" > <a  >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
+      <td *ngIf="resul.finalizo== true && resul.wfestudiante == 0 && resul.hanrealizado == 0" bgcolor="#FF0000"> <a   >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
+      <td *ngIf="resul.finalizo== true && resul.wfestudiante == 0 && resul.hanrealizado > 0" bgcolor="#9E5B9A"> <a   >{{ resul.wfestudiante | number : '1.3-3'}}</a></td>
       <td><a *ngIf=(resul.finalizo) [routerLink]="['/estudiante-detail', resul._id]">Detalles</a></td>
     </tr>
   </tbody>
 </table>
 </div>
 
-<button (click)="exportAsXLSX()" class="fa fa-file-excel-o" >Exportar a Excel</button>
+<button *ngIf="evaluacion.finalizo== true" (click)="exportAsXLSX()" class="fa fa-file-excel-o" >Exportar a Excel</button>
 
 
 
@@ -67,6 +104,11 @@
   <!--  <a [routerLink]="['/evaluacion-edit', evaluacion._id]" class="btn btn-success">EDITAR</a>-->
     <a [routerLink]="['/evaluaciones']" class="btn btn-info">VOLVER</a>
 
+  </div>
+
+  <div  class="col-md-6">
+
+  <button class="btn btn-danger" type="button" (click)="deleteEvaluacion(evaluacion._id)">BORRAR EVALUACIÓN</button>
   </div>
 
 </div>

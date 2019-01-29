@@ -1,3 +1,33 @@
-<p>
-  estudiante works!
-</p>
+<div class="container">
+  <h1>Estudiantes
+
+  </h1>
+  <div *ngIf="!isLoading">
+  <table datatable [dtOptions]="dtOptionsEst" class="row-border hover">
+    <thead>
+      <tr>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Email</th>
+        <th>Identificación</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of estudiantes">
+        <td>{{ usuario.nombres }}</td>
+        <td>{{ usuario.apellidos }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.identificacion }}</td>
+        <td>{{ usuario.tipo }}</td>
+
+
+        <td><a [routerLink]="['/estudiante-details', usuario._id]">Detalles</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

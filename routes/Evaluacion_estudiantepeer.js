@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 router.get('/pendientes/:idUser', function(req, res, next) {
 
   Evaluacion_estudiantepeer.find({idEstudiante:req.params.idUser, finalizo:false})
-  .populate('idEstudiante') .populate('idEstudianteEvaluar').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso')
+  .populate('idEstudiante') .populate('idEstudianteEvaluar').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso').populate('idGrupo')
   .exec(function (err, products) {
     if (err) return next(err);
     res.json(products);
@@ -27,7 +27,7 @@ router.get('/pendientes/:idUser', function(req, res, next) {
 /* GET SINGLE Evaluacion-estudiante BY ID */
 router.get('/:id', function(req, res, next) {
   Evaluacion_estudiantepeer.findById(req.params.id)
-  .populate('idEstudiante') .populate('idEstudianteEvaluar').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso')
+  .populate('idEstudiante') .populate('idEstudianteEvaluar').populate('idEvaluacionGrupo').populate('idEvaluacion').populate('idCurso').populate('idGrupo')
 .exec( function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -53,13 +53,25 @@ router.put('/:id', function(req, res, next) {
 /* UPDATE Evaluacion-estudiante Peer */
 router.put('/peer/:id', function(req, res, next) {
   var evaluacion_estudiantepeer;
+
+  Evaluacion_estudiantepeer.findOne({_id:req.params.id,finalizo:false},   function (err, post) {
+    if (err) return next(err);
+
+
+    console.log(post);
+    if(post==null){
+      console.log("NO HARE NADAAAAAAAAAAAAAAAAAAAAAAAAAAAA JUM");
+
+    }
+    else{
   Evaluacion_estudiantepeer.findOneAndUpdate({_id:req.params.id,finalizo:false}, req.body, function (err, post) {
     if (err) return next(err);
     evaluacion_estudiantepeer=(post);
     console.log(post);
+
     //let wfsumar=post.wfestudianteevaluar;
     //console.log(wfsumar);
-
+if(req.body.tipo=="Peer"){
 
     Evaluacion_grupo.findOneAndUpdate({_id:req.body.idEvaluacionGrupo,finalizo:false},
 
@@ -113,10 +125,119 @@ router.put('/peer/:id', function(req, res, next) {
     });
   });
       });
-      res.json(evaluacion_estudiantepeer);
+
+    }
+
+
+    else if(req.body.tipo=="Team"){
+
+        Evaluacion_grupo.findOneAndUpdate({_id:req.body.idEvaluacionGrupo,finalizo:false},
+
+          { $inc: { hanrealizado: 1, wfgrupo: req.body.wfestudianteevaluar },
+          $push: { comentarios:  req.body.comentarios}
+        },          {safe: true, upsert: true}
+
+
+
+          , function (err, post) {
+          console.log(post);
+          Evaluacion_estudiante.findOneAndUpdate({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false},
+          {
+            $inc: { hanrealizado: 1}
+                                }
+
+        //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+            , function (err, post) {
+              console.log("esta debe ser la eval estudiante XD");
+
+            console.log(post);
+            Evaluacion_estudiante.findOne({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false}
+              ,
+          //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+               function (err, post) {
+                 var evalu=post;
+                 evalu.evaluaste=evalu.evaluaste+1;
+                 if(evalu.evaluaste==evalu.numGrupo){
+                   evalu.haevaluado=true;
+                 }
+                console.log("esta debe ser la eval estudiante XD");
+                Evaluacion_estudiante.findOneAndUpdate({idEvaluacionGrupo: req.body.idEvaluacionGrupo,idEstudiante:req.body.idEstudiante,finalizo:false},evalu
+                  ,
+              //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+                   function (err, post) {
+                    console.log("esta debe ser la eval estudiante XD");
+
+                  console.log(post);
+            });
+              console.log(post);
+        });
+      });
+          });
+
+        }
+
+    //else {
+      else if(req.body.tipo=="Self"){
+        Evaluacion_estudiante.findOneAndUpdate({idEvaluacion: req.body.idEvaluacion,idEstudiante: req.body.idEstudiante,finalizo:false},
+
+
+        {
+          $inc: { hanrealizado: 1, wfestudiante:  req.body.wfestudianteevaluar  }
+                    }
+
+      //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+          , function (err, post) {
+            console.log("esta debe ser la eval estudiante");
+
+          console.log(post);
+          Evaluacion_estudiante.findOne({idEvaluacion: req.body.idEvaluacion,idEstudiante:req.body.idEstudiante,finalizo:false}
+            ,
+        //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+             function (err, post) {
+               var evalu=post;
+               evalu.evaluaste=evalu.evaluaste+1;
+               if(evalu.evaluaste==evalu.numGrupo){
+                 evalu.haevaluado=true;
+               }
+              console.log("esta debe ser la eval estudiante XD");
+              Evaluacion_estudiante.findOneAndUpdate({idEvaluacion: req.body.idEvaluacion,idEstudiante:req.body.idEstudiante,finalizo:false},evalu
+                ,
+            //  {$push: {"comentarios": req.body.comentarios}},
+
+
+
+                 function (err, post) {
+                  console.log("esta debe ser la eval estudiante XD");
+
+                console.log(post);
+          });
+            console.log(post);
+      });
+    });
+      }
+
+
 
   });
-  //res.json(evaluacion_estudiantepeer);
+  res.json(evaluacion_estudiantepeer);
+}
+  });
+  res.json(evaluacion_estudiantepeer);
 
 });
 

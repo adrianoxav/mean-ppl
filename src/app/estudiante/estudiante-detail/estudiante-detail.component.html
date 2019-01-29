@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>{{ usuario.title }}</h1>
+  <dl class="list">
+    <dt>Nombres</dt>
+    <dd>{{ usuario.nombres }}</dd>
+    <dt>Apellidos</dt>
+    <dd>{{ usuario.apellidos }}</dd>
+    <dt>Email</dt>
+    <dd>{{ usuario.email }}</dd>
+    <dt>Identificación</dt>
+    <dd>{{ usuario.identificacion }}</dd>
+    <dt>Tipo</dt>
+    <dd>{{ usuario.tipo }}</dd>
+
+  </dl>
+  <table  class="table">
+    <thead>
+      <tr>
+        <th>Curso</th>
+        <th>Paralelo</th>
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of cursos">
+        <td>{{ curso.nombre }}</td>
+        <td>{{ curso.paralelo }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/estudiante-edit', usuario._id]" class="btn btn-success">EDITAR</a>
+    <button *ngIf=(esadmin) class="btn btn-danger" type="button" (click)="deletePersona(usuario._id)">BORRAR</button>
+    <a [routerLink]="['/estudiante']" class="btn btn-info">VOLVER</a>
+
+  </div>
+</div>

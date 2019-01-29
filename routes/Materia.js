@@ -11,6 +11,14 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
+router.get('/getporcurso/:idMateria', function(req, res, next) {
+  Materia.findById(req.params.idMateria,function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
 /* GET SINGLE Cateria BY ID */
 router.get('/:id', function(req, res, next) {
   Materia.findById(req.params.id, function (err, post) {

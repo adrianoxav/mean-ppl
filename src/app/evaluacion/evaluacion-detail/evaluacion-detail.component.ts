@@ -78,12 +78,24 @@ console.log(this.evaluacion);
                       this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiante/poreval/'+this.evaluacion._id,httpOptions).subscribe(data => {
                         this.evaluacionestudiantes = data;
                         console.log(this.evaluacionestudiantes);
+                        if(this.evaluacion.tipo=="Peer" || this.evaluacion.tipo=="Team"){
                         for(let e of this.evaluacionestudiantes){
-                          let evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,email:e.idEstudiante.email,nombres:e.idEstudiante.apellidos + " " +e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfgrupo:e.idEvaluacionGrupo.wfgrupo,wfestudiante:e.wfestudiante}
+                          let evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,hanrealizado:e.hanrealizado,email:e.idEstudiante.email,nombres:e.idEstudiante.apellidos + " " +e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfgrupo:e.idEvaluacionGrupo.wfgrupo,wfestudiante:e.wfestudiante}
                           this.evals.push(evalua);
 
                         }
                         console.log(this.evals);
+
+                        }
+                        else if(this.evaluacion.tipo=="Self"){
+                        for(let e of this.evaluacionestudiantes){
+                          let evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,hanrealizado:e.hanrealizado,email:e.idEstudiante.email,nombres:e.idEstudiante.apellidos + " " +e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfestudiante:e.wfestudiante}
+                          this.evals.push(evalua);
+
+                        }
+                        console.log(this.evals);
+
+                        }
                       },
                       error => console.log(error),
                       () => this.isLoading = false
@@ -168,5 +180,23 @@ console.log(this.evaluacion);
 
    this.excelService.exportAsExcelFile(toexcel, this.evaluacion.nombre + "-" + this.evaluacion.capitulo);
 }
+
+recargar(){
+  this.evals=[];
+  this.ngOnInit();
+
+
+}
+
+finalizarEvaluacion(id) {
+  this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/terminarevaluacion/'+id,id,httpOptions)
+    .subscribe(res => {
+        this.recargar();
+      }, (err) => {
+        console.log(err);
+      }
+    );
+}
+
 
 }

@@ -10,6 +10,7 @@
       <tr>
         <th>Nombre</th>
         <th>Materia</th>
+        <th>Paralelo</th>
         <th>Tipo</th>
         <th>Capítulo</th>
         <th>Fecha de Inicio</th>
@@ -26,6 +27,7 @@
       <tr *ngFor="let evaluacion of evaluaciones">
         <td>{{ evaluacion.nombre }}</td>
         <td>{{ evaluacion.idCurso }}</td>
+        <td>{{ evaluacion.paralelo }}</td>
         <td>{{ evaluacion.tipo }}</td>
         <td>{{ evaluacion.capitulo }}</td>
         <td>{{ evaluacion.fechaInicioTomada | date: "dd MMM y"}}</td>

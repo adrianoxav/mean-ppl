@@ -9,8 +9,8 @@
         <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="signupData.nombres" name="nombres" required/>
         <label for="apellidos" class="sr-only">Apellidos</label>
         <input type="text" class="form-control" placeholder="Apellidos" [(ngModel)]="signupData.apellidos" name="apellidos" required/>
-        <label for="identificacion" class="sr-only">Identificación</label>
-        <input type="text" class="form-control" placeholder="Cédula Pre / Mátricula Espol" [(ngModel)]="signupData.identificacion" name="identificacion" required/>
+        <label for="identificacion" class="sr-only">Matrícula</label>
+        <input type="text" class="form-control" placeholder="Cédula" [(ngModel)]="signupData.identificacion" name="identificacion" required/>
         <div class="form-control">
           <label for="tipo">Tipo</label>
           <select  name="tipo" [(ngModel)]="signupData.tipo" required>
@@ -30,7 +30,7 @@
 
                   <!-- evento change y atributo por defecto checked false, se agrega como id el id de la persona
                 para luego saber que checkbox le pertenece a cada persona-->
-                  <input  [checked]="false" (change)="select(c._id)" id="{{c._id}}" type="checkbox" class="filled-in"/>
+                  <input  [checked]="false" (change)="select(c._id)" id="{{c._id}}" type="checkbox" class="filled-in" required />
 
                   <label  attr.for="{{c._id}}"></label>
 
@@ -45,7 +45,7 @@
 
 
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" class="form-control" placeholder="Correo" [(ngModel)]="signupData.email" name="email" required/>
+        <input type="email" class="form-control" placeholder="Correo Personal" [(ngModel)]="signupData.email" name="email" required/>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="signupData.password" name="password" required/>
         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.form.valid">Registrarse</button>

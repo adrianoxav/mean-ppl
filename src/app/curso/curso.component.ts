@@ -35,8 +35,8 @@ private options = new RequestOptions({ headers: this.headers });
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.admin = localStorage.getItem('nombres');
-    if(this.admin=="admin"){
+    this.admin = localStorage.getItem('email');
+    if(this.admin=="adminfisica"){
       this.esadmin=true;
     }
   let httpOptions = {

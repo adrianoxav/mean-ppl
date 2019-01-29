@@ -14,7 +14,6 @@ let httpOptions = {
 export class CursoDetailComponent implements OnInit {
 
 
-
       curso = {};
 
       constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) { }

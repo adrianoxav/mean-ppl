@@ -25,13 +25,15 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 var originsWhitelist = [
-  'http://aprendizajeactivo.espol.edu.ec'
+  'http://aprendizajeactivo.espol.edu.ec',
+  'http://ppl.espol.edu.ec'
 ];
 
 app.use(bodyParser.json());
 
 var originsWhitelist = [
-  'http://aprendizajeactivo.espol.edu.ec'
+  'http://aprendizajeactivo.espol.edu.ec',
+  'http://ppl.espol.edu.ec'
 ];
 var corsOptions = {
   origin: function(origin, callback){
