@@ -33,6 +33,8 @@
   </div>
 
   <div class="container">
+    <button  *ngIf="!esProfesor" type="button"  class="btn btn-success"  (click)="aniadirsecomoProfesor()" >Añadirse a este curso como Profesor</button>
+
     <h2>Profesores</h2>
     <!--  <a [routerLink]="['/curso-create']" class="btn btn-default btn-lg">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

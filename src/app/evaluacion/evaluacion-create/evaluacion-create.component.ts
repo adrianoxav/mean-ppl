@@ -11,7 +11,7 @@ let httpOptions = {
 })
 export class EvaluacionCreateComponent implements OnInit {
 
-  evaluacion = {idCuestionario:"",idCurso:""};
+  evaluacion = {idCuestionario:"",idCurso:"", tipo:"",profesorcreador:""};
 fechaTerminada :Date;
 fechaInicioTomada : Date;
   cuestionarios={};
@@ -55,11 +55,18 @@ fechaInicioTomada : Date;
   }
 
   saveEvaluacion() {
+    let us : any;
+    us=this.user;
 
     this.evaluacion.idCurso=this.idCurso;
     this.evaluacion.idCuestionario=this.idCuestionario;
-
-
+    console.log(this.idCurso);
+    console.log(this.idCuestionario);
+    console.log(this.evaluacion.tipo);
+    this.evaluacion.profesorcreador= us.nombres + " " + us.apellidos;
+console.log(this.evaluacion);
+if(this.idCurso==undefined || this.idCuestionario==undefined || this.evaluacion.tipo==""){}
+else{
         this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion', this.evaluacion,httpOptions)
       .toPromise().then(res => {
           let id = res['_id'];
@@ -69,7 +76,7 @@ fechaInicioTomada : Date;
         }
       );
   }
-
+}
   onChange(newValue) {
       console.log(newValue);
       this.evaluacion.idCuestionario = newValue;

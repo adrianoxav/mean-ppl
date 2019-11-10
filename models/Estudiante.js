@@ -12,6 +12,7 @@ var EstudianteSchema = new Schema({
   apellidos: String,
   identificacion: String,
   tipo: String,
+  grupo: String,
   activo: Boolean,
   email: {
         type: String,

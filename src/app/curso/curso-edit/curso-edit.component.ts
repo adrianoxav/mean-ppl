@@ -31,10 +31,12 @@ dtOptionsEstu: any = {};
 tables:Boolean;
 selected: String[]=[];
 cursos = {};
-
+idUser:String;
 admin:any;
 esadmin:Boolean;
 isLoading = true;
+esProfesor = false;
+
 cursoactual
   incomingfile(event)
    {
@@ -87,6 +89,8 @@ datos=data;
       constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
       ngOnInit() {
+        this.idUser=localStorage.getItem('idUser');
+
         this.admin = localStorage.getItem('email');
 
         if(this.admin=="adminfisica"){
@@ -101,8 +105,33 @@ datos=data;
 
         this.getCurso(this.route.snapshot.params['id']);
         this.id=this.route.snapshot.params['id'];
-        console.log(this.id);
+        let cur:any;
+        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
+          cur=data;
+          console.log(this.curso);
 
+          for (let j of cur.profesores){
+
+
+
+                 if(j==this.idUser){
+                   this.esProfesor=true;
+                 }
+
+               }
+
+
+             console.log(this.esProfesor);
+
+
+
+      });
+
+
+
+
+        console.log(this.id);
+        console.log(this.curso);
         let httpOptions = {
           headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         };
@@ -185,15 +214,25 @@ datos=data;
 
          }
           for (let j of curs.profesores){
+
             let ver:any;
           this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+j,httpOptions).subscribe(data => {
                console.log(data);
+               console.log(this.idUser);
+
                ver=data;
                if(ver.email=="adminfisica"){}
                else{
-               this.profesores.push(data);}
-             });}
+                 if(ver._id==this.idUser){
+                   this.esProfesor=true;
+                 }
 
+               this.profesores.push(data);}
+
+             });
+             console.log(this.esProfesor);
+
+           }
 
       });
     }
@@ -329,6 +368,39 @@ cargarEstudiantes(curso){
    );
 
  }
+}
+
+aniadirsecomoProfesor(){
+
+  let cursoactual:any;
+  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
+    cursoactual=data;
+    console.log(cursoactual);
+
+
+
+cursoactual.profesores.push(this.idUser);
+
+this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id,cursoactual).subscribe(data => {
+  console.log(data);
+});
+
+let profesoractual:any;
+this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
+  profesoractual=data;
+  console.log(profesoractual);
+  profesoractual.curso.push(this.id);
+
+this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,profesoractual,httpOptions).subscribe(data => {
+  console.log(data);
+  window.location.reload();
+
+
+});
+}
+);
+});
+
 }
 
 

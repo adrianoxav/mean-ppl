@@ -16,6 +16,7 @@ ref: 'Curso'
    type: String,
   ref: 'Cuestionario'
   },
+  profesorcreador: String,
   nombre: String,
   tipo: String,
   capitulo: String,

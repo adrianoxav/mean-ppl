@@ -182,7 +182,8 @@ this.buttonactDisabled = true;
         this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
              console.log(data);
              noom=data;
-             this.estudiantes.push(data);
+             delete noom.grupo;
+             this.estudiantes.push(noom);
            },
            error => console.log(error),
            () => this.isLoading = false

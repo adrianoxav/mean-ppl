@@ -45,6 +45,8 @@ export class AppNavbarComponent implements OnInit {
     let aValue = localStorage.getItem('jwtToken');
     this.nombres = localStorage.getItem('nombres');
     this.apellidos = localStorage.getItem('apellidos');
+    if(this.apellidos=="undefined")
+    this.apellidos=" ";
     this.tip = localStorage.getItem('tipo');
     console.log(this.tip);
     let identificacion = localStorage.getItem('identificacion');

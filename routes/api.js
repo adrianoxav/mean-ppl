@@ -9,6 +9,7 @@ var User = require("../models/User");
 var Estudiante = require("../models/Estudiante");
 var bcrypt = require('bcrypt-nodejs');
 var Curso = require('../models/Curso.js');
+var Grupo = require('../models/Grupo.js');
 
 
 /* GET home page. */
@@ -180,14 +181,14 @@ router.post('/suestudiante', function(req, res) {
 router.post('/register/', function(req, res) {
   console.log(req.body[0]);
   console.log(req.body[1]);
-  let cursos=req.body[0];
-  let lista=req.body[1];
-
+  let cursos=[ ];
+  let lista=[ ];
+  cursos=req.body[0];
+  lista=req.body[1];
 
   for (l of lista)
   {
     console.log(l);
-
       var newEstudiante = new Estudiante({
         email: l.email,
         password: l.identificacion,
@@ -195,18 +196,26 @@ router.post('/register/', function(req, res) {
         apellidos: l.apellidos,
         identificacion: l.identificacion,
         tipo: l.tipo,
-        curso: cursos
+        curso: cursos,
+        grupo:l.grupo
 
 
       });
       // save the user
       newEstudiante.save(function(err,post) {
-        console.log("EEEEEEEERRRRRRRRRROOOOORRRRRRRRRRRRRRR");
-        console.log(err);
+        console.log("GRUPO ACTUUUUUUUUUUUALLLLLLLLLLLLLLLLLLLLLLLL");
+        var grupoact=l.grupo;
 
+        console.log(err);
+        var estudiante=post;
             if (post==null){}
             else {
+              var newest= post._id;
+              console.log("IMPRIMO AL ESTUDIANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE ACTUALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+              console.log(estudiante);
               for (let curso of cursos){
+                var grupotraido;
+
                 console.log(curso);
                   Curso.findByIdAndUpdate(curso, {$push: { estudiantes:  post._id}
                             }
@@ -220,7 +229,21 @@ router.post('/register/', function(req, res) {
                     console.log("POST AL CURSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 
                     console.log(post);
-                  });
+                    var cursoact= post;
+
+
+                      Grupo.findOneAndUpdate({nombre: estudiante.grupo, curso:cursoact._id}, {$push: { estudiantes:  newest}
+                                }
+                   ,
+             function (err, post) {
+                        if (err)         console.log(err);
+                        console.log("ACTUALIZA EL GRUPOOOOOOOOOOOO YAAAAAAAAAAAAAAAAAAAAAAA");
+                        console.log(post);
+
+
+  });
+                    });
+
 
               }
         }
@@ -232,6 +255,7 @@ router.post('/register/', function(req, res) {
 
 
   }
+
 });
 
 

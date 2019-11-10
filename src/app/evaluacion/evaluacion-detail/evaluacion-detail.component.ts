@@ -80,8 +80,13 @@ console.log(this.evaluacion);
                         console.log(this.evaluacionestudiantes);
                         if(this.evaluacion.tipo=="Peer" || this.evaluacion.tipo=="Team"){
                         for(let e of this.evaluacionestudiantes){
-                          let evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,hanrealizado:e.hanrealizado,email:e.idEstudiante.email,nombres:e.idEstudiante.apellidos + " " +e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfgrupo:e.idEvaluacionGrupo.wfgrupo,wfestudiante:e.wfestudiante}
-                          this.evals.push(evalua);
+                          let ape=e.idEstudiante.apellidos;
+                          console.log(ape)
+                          let evalua:any;
+                          if (ape==undefined) {                          evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,hanrealizado:e.hanrealizado,email:e.idEstudiante.email,nombres:e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfgrupo:e.idEvaluacionGrupo.wfgrupo,wfestudiante:e.wfestudiante}
+}else {
+                          evalua={_id:e._id,identificacion:e.idEstudiante.identificacion,hanrealizado:e.hanrealizado,email:e.idEstudiante.email,nombres:e.idEstudiante.apellidos + " " +e.idEstudiante.nombres,finalizo:e.finalizo,evaluaste:e.evaluaste,numGrupo:e.numGrupo,haevaluado:e.haevaluado,idGrupo:e.idGrupo.nombre,wfgrupo:e.idEvaluacionGrupo.wfgrupo,wfestudiante:e.wfestudiante}
+      }                    this.evals.push(evalua);
 
                         }
                         console.log(this.evals);
