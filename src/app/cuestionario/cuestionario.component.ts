@@ -23,7 +23,7 @@ export class CuestionarioComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cuestionario',httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/cuestionario',httpOptions).subscribe(data => {
       console.log(data);
       this.cuestionarios = data;
     });

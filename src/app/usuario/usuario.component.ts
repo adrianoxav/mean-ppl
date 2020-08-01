@@ -25,7 +25,7 @@ export class UsuarioComponent implements OnInit {
     if(this.admin=="adminfisica"){
       this.esadmin=true;
     }
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user',httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/user',httpOptions).subscribe(data => {
       console.log(data);
       this.usuarios = data },
       error => console.log(error),
@@ -66,18 +66,18 @@ export class UsuarioComponent implements OnInit {
    }
 
 limpiarProfesores(){
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user',httpOptions).subscribe(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/user',httpOptions).subscribe(data => {
     console.log(data);
     this.usuarios = data;
 
     for(let user of this.usuarios){
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+user._id,httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/user/'+user._id,httpOptions).subscribe(data => {
         let profesoractual:any;
         profesoractual=data;
         console.log(profesoractual);
         profesoractual.curso=[];
 
-      this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+profesoractual._id,profesoractual,httpOptions).subscribe(data => {
+      this.http.put('http://www.ppl.espol.edu.ec:443/user/'+profesoractual._id,profesoractual,httpOptions).subscribe(data => {
         console.log(data);
 
       });
@@ -92,12 +92,12 @@ limpiarProfesores(){
 limpiarSemestre(){
 //limpiar cursos
 let cursos:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso',httpOptions).subscribe(data => {
+this.http.get('http://www.ppl.espol.edu.ec:443/curso',httpOptions).subscribe(data => {
   console.log(data);
   cursos = data;
 
   for(let curso of cursos){
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso._id,httpOptions).subscribe(data => {
+    this.http.delete('http://www.ppl.espol.edu.ec:443/curso/'+curso._id,httpOptions).subscribe(data => {
       console.log(data)
     });
   }
@@ -105,12 +105,12 @@ this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso',httpOptions)
 )
 //limpiar grupos
 let grupos:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/grupo',httpOptions).subscribe(data => {
+this.http.get('http://www.ppl.espol.edu.ec:443/grupo',httpOptions).subscribe(data => {
   console.log(data);
   grupos = data;
 
   for(let grupo of grupos){
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+grupo._id,httpOptions).subscribe(data => {
+    this.http.delete('http://www.ppl.espol.edu.ec:443/grupo/'+grupo._id,httpOptions).subscribe(data => {
       console.log(data)
     });
   }
@@ -118,12 +118,12 @@ this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/grupo',httpOptions)
 )
 //limpiar evaluaciones
 let evaluaciones:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion',httpOptions).subscribe(data => {
+this.http.get('http://www.ppl.espol.edu.ec:443/evaluacion',httpOptions).subscribe(data => {
   console.log(data);
   evaluaciones = data;
 
   for(let evaluacione of evaluaciones){
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/'+evaluacione._id,httpOptions).subscribe(data => {
+    this.http.delete('http://www.ppl.espol.edu.ec:443/evaluacion/'+evaluacione._id,httpOptions).subscribe(data => {
       console.log(data)
     });
   }
@@ -132,12 +132,12 @@ this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion',httpOpt
 
 //limpiar estudiantes
 let estudiantes:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante',httpOptions).subscribe(data => {
+this.http.get('http://www.ppl.espol.edu.ec:443/estudiante',httpOptions).subscribe(data => {
   console.log(data);
   estudiantes = data;
 
   for(let estudiante of estudiantes){
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+estudiante._id,httpOptions).subscribe(data => {
+    this.http.delete('http://www.ppl.espol.edu.ec:443/estudiante/'+estudiante._id,httpOptions).subscribe(data => {
       console.log(data)
     });
   }

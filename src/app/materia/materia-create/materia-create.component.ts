@@ -29,7 +29,7 @@ export class MateriaCreateComponent implements OnInit {
 
   saveCurso() {
 
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/materia', this.materia,httpOptions)
+    this.http.post('http://www.ppl.espol.edu.ec:443/materia', this.materia,httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this._service.success(

@@ -21,7 +21,7 @@ export class EstudianteEditComponent implements OnInit {
     let httpOptions = {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/estudiante/'+id, httpOptions).subscribe(data => {
       this.usuario = data;
       console.log(data);
     });
@@ -32,7 +32,7 @@ export class EstudianteEditComponent implements OnInit {
       headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
     };
 //    this.usuario.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+id, this.usuario, httpOptions)
+    this.http.put('http://www.ppl.espol.edu.ec:443/estudiante/'+id, this.usuario, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/estudiante-details', id]);

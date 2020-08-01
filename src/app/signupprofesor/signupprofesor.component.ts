@@ -23,7 +23,7 @@ export class SignupprofesorComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos').subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/cursos').subscribe(data => {
       console.log(data);
       this.cursos = data;
     });
@@ -41,7 +41,7 @@ export class SignupprofesorComponent implements OnInit {
 
   let res:any;
 
-this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signup',this.signupData).subscribe(resp => {
+this.http.post('http://www.ppl.espol.edu.ec:443/api/signup',this.signupData).subscribe(resp => {
   console.log(resp);
   res=resp;
   let idUser = resp['_id'];
@@ -49,20 +49,20 @@ this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signup',this.s
   if(res.msg=="email already exists."){
     let dat:any;
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/users/email/'+this.signupData.email).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/users/email/'+this.signupData.email).subscribe(data => {
       console.log(data);dat=data;
       idUser=dat._id;
 
       for (let cursosel of this.cursosSeleccionados){
         let cursoactual:any;
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
           cursoactual=data;
 
 
 
       cursoactual.profesores.push(idUser);
 
-      this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
+      this.http.put('http://www.ppl.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
         console.log(data);
     });
       }
@@ -75,14 +75,14 @@ this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signup',this.s
   else{
     for (let cursosel of this.cursosSeleccionados){
       let cursoactual:any;
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/cursos/'+cursosel).subscribe(data => {
         cursoactual=data;
 
 
 
 cursoactual.profesores.push(idUser);
 
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
+    this.http.put('http://www.ppl.espol.edu.ec:443/cursos/'+cursosel,cursoactual).subscribe(data => {
       console.log(data);
   });
     }

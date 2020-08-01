@@ -21,14 +21,14 @@ export class PreguntaAssessmentEditComponent implements OnInit {
   }
 
   getPregunta_assessment(id) {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta_assessment/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/pregunta_assessment/'+id, httpOptions).subscribe(data => {
       this.pregunta_assessment = data;
     });
   }
 
   updatePregunta_assessment(id) {
   //    this.pregunta_assessment.updated_date = Date.now();
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/pregunta_assessment/'+id, this.pregunta_assessment, httpOptions)
+    this.http.put('http://www.ppl.espol.edu.ec:443/pregunta_assessment/'+id, this.pregunta_assessment, httpOptions)
       .subscribe(res => {
           let id = res['_id'];
           this.router.navigate(['/pregunta_assessment-details', id]);

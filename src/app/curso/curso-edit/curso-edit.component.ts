@@ -51,7 +51,7 @@ cursoactual
  this.materia=newValue;
  let datos:any;
 
- this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia/'+this.materia,httpOptions).subscribe(data => {
+ this.http.get('http://www.ppl.espol.edu.ec:443/materia/'+this.materia,httpOptions).subscribe(data => {
    console.log(data);
 datos=data;
    this.curso.nombre = datos.nombre;
@@ -96,7 +96,7 @@ datos=data;
         if(this.admin=="adminfisica"){
           this.esadmin=true;
         }
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos').subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/cursos').subscribe(data => {
           console.log(data);
           this.cursos = data;
         });
@@ -106,7 +106,7 @@ datos=data;
         this.getCurso(this.route.snapshot.params['id']);
         this.id=this.route.snapshot.params['id'];
         let cur:any;
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
           cur=data;
           console.log(this.curso);
 
@@ -135,7 +135,7 @@ datos=data;
         let httpOptions = {
           headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         };
-    /*    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia',httpOptions).subscribe(data => {
+    /*    this.http.get('http://www.ppl.espol.edu.ec:443/materia',httpOptions).subscribe(data => {
           console.log(data);
           this.materias = data;
         });*/
@@ -196,14 +196,14 @@ datos=data;
         this.profesores=[];
         this.curso = {_id:"",idMateria: String,numgrupos: Number,nombre:String,cod_materia:String,profesores:[ ],estudiantes:[ ],grupos:[ ]};
         let curs:any;
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+id,httpOptions).subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+id,httpOptions).subscribe(data => {
           curs=data;
           this.curso = curs;
           console.log(this.curso);
           for (let i of curs.estudiantes){
             let noom:any;
 
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
                console.log(data);
                noom=data;
                this.estudiantes.push(data);
@@ -216,7 +216,7 @@ datos=data;
           for (let j of curs.profesores){
 
             let ver:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+j,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/user/'+j,httpOptions).subscribe(data => {
                console.log(data);
                console.log(this.idUser);
 
@@ -240,7 +240,7 @@ datos=data;
 
       updateCurso(id) {
     //    this.curso.updated_date = Date.now();
-        this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+id, this.curso,httpOptions)
+        this.http.put('http://www.ppl.espol.edu.ec:443/curso/'+id, this.curso,httpOptions)
           .subscribe(res => {
               let id = res['_id'];
               this.router.navigate(['/curso-details', id]);
@@ -254,7 +254,7 @@ datos=data;
         let httpOptions = {
           headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
         };
-        this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/asignacion', asig,httpOptions)
+        this.http.post('http://www.ppl.espol.edu.ec:443/asignacion', asig,httpOptions)
           .subscribe(res => {
               let id = res['_id'];
               this.router.navigate(['/assignation-details', id]);
@@ -277,7 +277,7 @@ let nuevalista=[ ];
 let l=[];
 nuevalista.push(this.cursosSeleccionados, this.lista);
 console.log(nuevalista);
-      this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/register/', nuevalista, httpOptions)
+      this.http.post('http://www.ppl.espol.edu.ec:443/api/register/', nuevalista, httpOptions)
         .subscribe(res => {
             console.log(res);
 
@@ -294,12 +294,12 @@ eliminarEstudiante(id){
   console.log(id);
   console.log(this.curso);
 var estu:any;
-/*  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+id,httpOptions).subscribe(data => {
+/*  this.http.get('http://www.ppl.espol.edu.ec:443/estudiantes/'+id,httpOptions).subscribe(data => {
        console.log(data);
        estu=data;
        var j= estu.curso.indexOf( this.curso._id );
            estu.curso.splice( j, 1 );
-           this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+id, estu,httpOptions)
+           this.http.put('http://www.ppl.espol.edu.ec:443/estudiantes/'+id, estu,httpOptions)
              .subscribe(res => {
                  console.log(res);
                }, (err) => {
@@ -312,7 +312,7 @@ var estu:any;
       this.curso.estudiantes.splice( i, 1 );
 
 
-  this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+this.curso._id, this.curso,httpOptions)
+  this.http.put('http://www.ppl.espol.edu.ec:443/curso/'+this.curso._id, this.curso,httpOptions)
     .subscribe(res => {
         console.log(res);
       }, (err) => {
@@ -322,7 +322,7 @@ var estu:any;
     for(let grup of this.curso.grupos){
       let ver:any;
 
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+grup,httpOptions).toPromise().then(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/grupo/'+grup,httpOptions).toPromise().then(data => {
            console.log(data);
            ver=data;
            var i = ver.estudiantes.indexOf( id );
@@ -331,7 +331,7 @@ var estu:any;
                ver.estudiantes.splice( i, 1 );
                console.log(ver);
 
-               this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+grup, ver,httpOptions)
+               this.http.put('http://www.ppl.espol.edu.ec:443/grupo/'+grup, ver,httpOptions)
                  .subscribe(res => {
                      console.log(res);
                    }, (err) => {
@@ -358,7 +358,7 @@ cargarEstudiantes(curso){
   for (let i of curso.estudiantes){
     let noom:any;
 
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
        console.log(data);
        noom=data;
        this.estudiantes.push(data);
@@ -373,7 +373,7 @@ cargarEstudiantes(curso){
 aniadirsecomoProfesor(){
 
   let cursoactual:any;
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/cursos/'+this.id).subscribe(data => {
     cursoactual=data;
     console.log(cursoactual);
 
@@ -381,17 +381,17 @@ aniadirsecomoProfesor(){
 
 cursoactual.profesores.push(this.idUser);
 
-this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/cursos/'+this.id,cursoactual).subscribe(data => {
+this.http.put('http://www.ppl.espol.edu.ec:443/cursos/'+this.id,cursoactual).subscribe(data => {
   console.log(data);
 });
 
 let profesoractual:any;
-this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
+this.http.get('http://www.ppl.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
   profesoractual=data;
   console.log(profesoractual);
   profesoractual.curso.push(this.id);
 
-this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,profesoractual,httpOptions).subscribe(data => {
+this.http.put('http://www.ppl.espol.edu.ec:443/user/'+this.idUser,profesoractual,httpOptions).subscribe(data => {
   console.log(data);
   window.location.reload();
 

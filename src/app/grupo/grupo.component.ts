@@ -41,13 +41,13 @@ export class GrupoComponent implements OnInit {
     };
     this.idUser=localStorage.getItem('idUser');
 let datos:any
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
         datos=data;
         this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+i,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+i,httpOptions).subscribe(data => {
             this.cursos.push(data);
           });
         //  console.log(this.cursos);
@@ -114,7 +114,7 @@ saveGrupos(){
 
     for(let grup of this.grupos){
 
-    this.http.put('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/actualizargrupos/',grup,httpOptions).toPromise().then(data => {
+    this.http.put('http://www.ppl.espol.edu.ec:443/grupo/actualizargrupos/',grup,httpOptions).toPromise().then(data => {
       console.log(data);
   });
 
@@ -172,14 +172,14 @@ this.buttonactDisabled = true;
     this.estudiantes=[];
       console.log(newValue);
       let nom:any;
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+newValue,httpOptions).toPromise().then(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+newValue,httpOptions).toPromise().then(data => {
         nom=data;
         this.numgrupos=nom.numgrupos;
         console.log(nom.estudiantes)
         for (let i of nom.estudiantes){
           let noom:any;
 
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/estudiantes/'+i,httpOptions).subscribe(data => {
              console.log(data);
              noom=data;
              delete noom.grupo;
@@ -192,7 +192,7 @@ this.buttonactDisabled = true;
        }
 
            for (let j of nom.grupos){
-             this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/grupo/'+j,httpOptions).toPromise().then(data => {
+             this.http.get('http://www.ppl.espol.edu.ec:443/grupo/'+j,httpOptions).toPromise().then(data => {
                   //console.log(data);
                   this.grupos.push(data);
                 });

@@ -33,20 +33,20 @@ fechaInicioTomada : Date;
     console.log(this.fechaTerminada);
   //  this.fechaInicioTomada = new Date();
     console.log(this.fechaInicioTomada);
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cuestionario',httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/cuestionario',httpOptions).subscribe(data => {
       console.log(data);
       this.cuestionarios = data;
     });
     console.log(this.cuestionarios);
     this.idUser=localStorage.getItem('idUser');
     let datos:any;
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
         datos=data;
         this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+i,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+i,httpOptions).subscribe(data => {
             this.cursos.push(data);
           });
         //  console.log(this.cursos);
@@ -67,7 +67,7 @@ fechaInicioTomada : Date;
 console.log(this.evaluacion);
 if(this.idCurso==undefined || this.idCuestionario==undefined || this.evaluacion.tipo==""){}
 else{
-        this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion', this.evaluacion,httpOptions)
+        this.http.post('http://www.ppl.espol.edu.ec:443/evaluacion', this.evaluacion,httpOptions)
       .toPromise().then(res => {
           let id = res['_id'];
           this.router.navigate(['/evaluacion-details', id]);

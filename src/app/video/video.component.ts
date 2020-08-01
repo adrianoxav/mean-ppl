@@ -37,14 +37,14 @@ isLoading = true;
     console.log(this.tipo);
 let datos:any
 if(this.tipo=="Profesor"){
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/user/'+this.idUser,httpOptions).subscribe(data => {
         datos=data;
         this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){
           let c:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+i,httpOptions).toPromise().then(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+i,httpOptions).toPromise().then(data => {
             c=data;
             this.cursos.push(data);
             console.log(this.cursos);
@@ -66,14 +66,14 @@ if(this.tipo=="Profesor"){
       }
 
       else if(this.tipo=="Estudiante"){
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+this.idUser,httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/estudiante/'+this.idUser,httpOptions).subscribe(data => {
         datos=data;
         this.user=datos;
         console.log(this.user);
 
         for(let i of this.user.curso){
           let c:any;
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+i,httpOptions).toPromise().then(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+i,httpOptions).toPromise().then(data => {
             c=data;
             this.cursos.push(data);
             console.log(this.cursos);
@@ -97,7 +97,7 @@ if(this.tipo=="Profesor"){
 else if(this.tipo==null){
   console.log("videos");
   let d:any;
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/videos/').toPromise().then(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/videos/').toPromise().then(data => {
     console.log(data);
     d=data;
     for(let i=0;i<d.length;i++)
@@ -125,11 +125,11 @@ getvideos(materia){
 
     let d:any;
     let mate:any;
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/materia/'+materia,httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/materia/'+materia,httpOptions).subscribe(data => {
       mate = data;
       console.log(mate);
 
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/video/getpormateria/'+mate._id, httpOptions).toPromise().then(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/video/getpormateria/'+mate._id, httpOptions).toPromise().then(data => {
     console.log(data);
     d=data;
     for(let i=0;i<d.length;i++)
@@ -157,7 +157,7 @@ getvideos(materia){
 
 
   eliminarVideo(id) {
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/video/'+id,httpOptions)
+    this.http.delete('http://www.ppl.espol.edu.ec:443/video/'+id,httpOptions)
       .subscribe(res => {
 
 //  window.location.reload();

@@ -31,7 +31,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
   reset() {
     if(this.restaurar.tipo=="Estudiante"){
-  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/resetPasswordEstudiante',this.restaurar).toPromise().then(resp => {
+  this.http.post('http://www.ppl.espol.edu.ec:443/api/resetPasswordEstudiante',this.restaurar).toPromise().then(resp => {
     this.data = resp;
     console.log(resp);
 
@@ -43,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
 else if(this.restaurar.tipo=="Profesor"){
 
 //    console.log(err);
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/resetPassword',this.restaurar).toPromise().then(resp => {
+    this.http.post('http://www.ppl.espol.edu.ec:443/api/resetPassword',this.restaurar).toPromise().then(resp => {
       this.data = resp;
       console.log(resp);
 

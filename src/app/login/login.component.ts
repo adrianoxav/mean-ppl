@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
   }
   login() {
-  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signinEstudiante',this.loginData).toPromise().then(resp => {
+  this.http.post('http://www.ppl.espol.edu.ec:443/api/signinEstudiante',this.loginData).toPromise().then(resp => {
     this.data = resp;
     console.log(resp);
     localStorage.setItem('jwtToken', this.data.token);
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
 });
 //    console.log(err);
-    this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/signin',this.loginData).toPromise().then(resp => {
+    this.http.post('http://www.ppl.espol.edu.ec:443/api/signin',this.loginData).toPromise().then(resp => {
       this.data = resp;
       console.log(resp);
       localStorage.setItem('jwtToken', this.data.token);

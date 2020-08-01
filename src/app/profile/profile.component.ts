@@ -26,12 +26,12 @@ export class ProfileComponent implements OnInit {
         headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken') })
       };
       if(this.tipo=="Estudiante"){
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+this.idUser, httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/estudiante/'+this.idUser, httpOptions).subscribe(data => {
         this.usuario = data;
         let est:any;
         est=data;
         for(let curso of est.curso){
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
             console.log(data);
             this.cursos.push(data);
           });
@@ -39,12 +39,12 @@ export class ProfileComponent implements OnInit {
       });
     }
     else{
-      this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+this.idUser, httpOptions).subscribe(data => {
+      this.http.get('http://www.ppl.espol.edu.ec:443/user/'+this.idUser, httpOptions).subscribe(data => {
         this.usuario = data;
         let est:any;
         est=data;
         for(let curso of est.curso){
-          this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
+          this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
             console.log(data);
             this.cursos.push(data);
       });

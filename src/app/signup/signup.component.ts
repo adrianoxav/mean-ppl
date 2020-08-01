@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/cursos').subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/cursos').subscribe(data => {
       console.log(data);
       this.cursos = data;
     });
@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   this.signupData.curso=this.cursosSeleccionados;
   if(this.signupData.tipo=="Estudiante"){
     let res:any;
-  this.http.post('http://www.aprendizajeactivo.espol.edu.ec:443/api/suestudiante',this.signupData).subscribe(resp => {
+  this.http.post('http://www.ppl.espol.edu.ec:443/api/suestudiante',this.signupData).subscribe(resp => {
     console.log(resp);
     res=resp;
     let idUser = resp['_id'];

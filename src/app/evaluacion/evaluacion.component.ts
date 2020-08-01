@@ -52,10 +52,10 @@ export class EvaluacionComponent implements OnInit {
      }
 
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/user/'+localStorage.getItem("idUser"), httpOptions).subscribe(data => {
       this.usuario = data;
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/evaluacion/getporprofesor/',httpOptions).subscribe(data => {
       this.allevaluaciones = data;
       console.log(data);
       for(let curso of this.usuario.curso){
@@ -65,7 +65,7 @@ export class EvaluacionComponent implements OnInit {
           if(curso==evalu.idCurso._id){
             evalu.idCurso=evalu.idCurso.nombre;
             var l:any;
-            this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
+            this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
               l=data;
               evalu.paralelo=l.paralelo;
             });

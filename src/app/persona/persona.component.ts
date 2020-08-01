@@ -16,7 +16,7 @@ export class PersonaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/persona',httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/persona',httpOptions).subscribe(data => {
       console.log(data);
       this.personas = data;
     });

@@ -29,13 +29,13 @@ export class EstudianteDetailComponent implements OnInit {
 
   getUsuarioDetail(id) {
     let us:any;
-    this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+id, httpOptions).subscribe(data => {
+    this.http.get('http://www.ppl.espol.edu.ec:443/estudiante/'+id, httpOptions).subscribe(data => {
       this.usuario = data;
       us=data;
       console.log(data);
 
       for(let curso of us.curso){
-        this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
+        this.http.get('http://www.ppl.espol.edu.ec:443/curso/'+curso,httpOptions).subscribe(data => {
           console.log(data);
           this.cursos.push(data);
         });
@@ -46,7 +46,7 @@ export class EstudianteDetailComponent implements OnInit {
   }
 
   deletePersona(id) {
-    this.http.delete('http://www.aprendizajeactivo.espol.edu.ec:443/estudiante/'+id, httpOptions)
+    this.http.delete('http://www.ppl.espol.edu.ec:443/estudiante/'+id, httpOptions)
       .subscribe(res => {
           this.router.navigate(['/estudiante']);
         }, (err) => {

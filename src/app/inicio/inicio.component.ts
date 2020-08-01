@@ -57,7 +57,7 @@ this.validacion();
 
 
 cargarAssessments(){
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).toPromise().then(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).toPromise().then(data => {
     console.log(data);
 
 
@@ -85,7 +85,7 @@ cargarAssessments(){
 
 validacion(){
   var dat:any;
-  this.http.get('http://www.aprendizajeactivo.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
+  this.http.get('http://www.ppl.espol.edu.ec:443/evaluacion_estudiantepeer/pendientes/'+this.idUser).subscribe(data => {
     console.log(data);
     dat=data;
     if(dat.length==0){
