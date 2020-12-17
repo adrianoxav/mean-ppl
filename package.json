@@ -53,7 +53,7 @@
     "cordova-android": "^8.1.0",
     "core-js": "^2.6.11",
     "cors": "^2.8.5",
-    "datatables.net": "^1.10.21",
+    "datatables.net": "^1.10.22",
     "datatables.net-dt": "^1.10.21",
     "dateformat": "^3.0.3",
     "express": "^4.17.1",
